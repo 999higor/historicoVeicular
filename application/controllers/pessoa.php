@@ -5,6 +5,6 @@ class pessoa extends CI_Controller
 {
     public function index()
         {
-            
+            //testetetteatetaehlkjlç,~;]
         }
 }
