@@ -29,17 +29,17 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
+      <form method="POST" action="<?php echo base_url()?>loginController/verificaLogin">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
-              <label for="inputEmail">Email address</label>
+              <input type="text" id="cpfLogin" class="form-control" placeholder="Digite seu CPF" autofocus="autofocus">
+              <label for="cpfLogin">CPF</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-              <label for="inputPassword">Password</label>
+              <input type="password" id="passwrd" class="form-control" placeholder="Digite a senha">
+              <label for="passwrd">Senha</label>
             </div>
           </div>
           <div class="form-group">
@@ -50,7 +50,8 @@
               </label>
             </div>
           </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+          <input class="btn btn-primary btn-block" type="submit">Login
+          <?php echo '<label class="text-danger">'.$this->session->flashdata("error").'</flash>'?>
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="register.html">Register an Account</a>
