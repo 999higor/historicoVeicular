@@ -1,6 +1,6 @@
 <?php
 	//echo base_url();
-	defined('BASEPATH') OR exit('No direct script access allowed');
+  defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,8 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-      <form method="POST" action="<?php echo base_url()?>loginController/verificaLogin">
+      <?php if(isset($mensagens)) echo $mensagens; ?>
+      <form method="POST" action="<?php echo base_url();?>index.php/LoginController/verificaLogin">
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="cpfLogin" class="form-control" placeholder="Digite seu CPF" autofocus="autofocus">
@@ -50,7 +51,7 @@
               </label>
             </div>
           </div>
-          <input class="btn btn-primary btn-block" type="submit">Login
+          <input class="btn btn-primary btn-block" type="submit" value="Enviar">
           <?php echo '<label class="text-danger">'.$this->session->flashdata("error").'</flash>'?>
         </form>
         <div class="text-center">

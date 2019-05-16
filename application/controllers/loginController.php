@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class loginController extends CI_Controller {
+class LoginController extends CI_Controller {
 
 	public function __construct()
 	{
@@ -13,41 +13,26 @@ class loginController extends CI_Controller {
 		$this->load->view('loginView');
 	}
 
-	function verificaLogin(){
+	public function verificaLogin(){
 		/* https://www.youtube.com/watch?v=pG1rOs8vz1Q */
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('cpfLogin','CPF','required');
-		$this->form_validation->set_rules('passwrd','Senha','required');
 
-		if($this->form_validation->run()){
-			//validou certo
-			$cpf = $this->input->post('cpfLogin');
-			$senha = $this->input->post('passwrd');
+		/* passos -> validar formulario
+				  -> se for valido chama função do banco para comparar as senhas
+						  -> se estiver ok abre uma session com o cpf
+						  		-> redireciona pra pagina principal
+						  -> se der erro retorna uma mensagem com erro na autenticação
+						  		-> redireciona pra pagina de login com as mensagens
+				  -> se for invalido retorna mensagem de erro de validação (senha/cpf devem ser preenchidos...)
+				  		  		-> redireciona pra tela de login
+		*/
 
-			$this->load->model('loginModel');
-			if($this->loginModel->verificaLogin($cpf, $senha)){
-				$session_data = array(
-					'cpf' => $cpf
-				);
-				$this->session->set_userdata($session_data);
-				
-				/* chama a função login aqui no mesmo controller */
-				redirect(base_url(). 'login');
-			}else{
-				$this->session->set_flashdata('error', 'CPF ou Senha incorretos.');
-				redirect(base_url(). 'loginView');
-			}
-		}else{
-			//deu erro na validação/regras
-			$this->index();
-		}
 	}
 
 	function login(){
 		if($this->session->userdata('cpf') != ''){
 			redirect(base_url().'mainView');
 		}else{
-			redirect(base_url().'loginController/index');
+			redirect(base_url().'index');
 		}
 	}
 }
