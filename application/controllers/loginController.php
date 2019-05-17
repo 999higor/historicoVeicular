@@ -33,7 +33,11 @@ class LoginController extends CI_Controller {
 			/* se for valido chama função do banco para comparar as senhas */
 			if($this->loginModel->verificaLogin($cpf,$senha)){
 				/* -> se estiver ok abre uma session com o cpf */
-				$SESSION = array('cpf' => $cpf);
+
+				//salvar idcliente na session
+				$id = $this->loginModel->getID($cpf);
+				
+				$SESSION = array('cpf' => $cpf , 'idcliente' => $id );
 				$this->session->set_userdata($SESSION);
 
 				/* redireciona pra pagina principal */
@@ -62,9 +66,9 @@ class LoginController extends CI_Controller {
 		}
 	}
 
-	function logout(){
-		$this->session->unset_userdata('cpf');
-		redirect(base_url().'index');
-	}
+	// function logout(){
+	// 	$this->session->unset_userdata('cpf');
+	// 	redirect(base_url().'index');
+	// }
 }
 

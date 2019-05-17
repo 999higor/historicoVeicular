@@ -13,7 +13,7 @@ class LoginModel extends CI_Model {
         $query = $this->db->get('cliente');
     /*  Corresponde a consulta SELECT * FROM cliente WHERE cpf = $cpf AND senha = $senha */
 
-     /* Se o numero de linhas retornadas na função num_rows
+    /*  Se o numero de linhas retornadas na função num_rows
         for maior que 0, significa que existe um usuário 
         com as senhas enviadas na tela de login      */   
         if($query->num_rows() > 0){
@@ -22,4 +22,18 @@ class LoginModel extends CI_Model {
         }else
             return false;
     }
+
+    public function getID($cpf){
+        $this->db->select('id');
+        $this->db->from('cliente');
+        $this->db->where('cpf', $cpf);
+        $query = $this->db->get();
+    /*  SELECT id FROM cliente WHERE cpf = $cpf; */
+
+        if($query->num_rows()>0) {
+            $value = $query->row()->id;
+            return $value;
+        }else            
+            return false;
+        }
 }
