@@ -1,10 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mainController extends CI_Controller {
+class MainController extends CI_Controller {
 
+	public function __construct()
+	{
+		parent:: __construct();
+		$this->load->helper('url');
+	}
+	
 	public function index()
 	{
-		$this->load->view('loginView');
+		$this->load->view('MainView');
 	}
 }

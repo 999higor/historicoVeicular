@@ -1,6 +1,6 @@
 <?php
 
-class News_model extends CI_Model {
+class LoginModel extends CI_Model {
 
     /* Método para conectar ao banco */
     public function __construct(){
