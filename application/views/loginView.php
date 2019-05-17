@@ -1,6 +1,5 @@
 <?php
-  echo $this->session->userdata('cpf');
-  defined('BASEPATH') OR exit('No direct script access allowed');
+    defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <html lang="en">

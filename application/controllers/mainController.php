@@ -20,10 +20,14 @@ class MainController extends CI_Controller {
 		}
 	}
 
+/*	
+	estava fazendo a mesma coisa que o populaDataTable
+
 	public function verificaVeiculo($id)
 	{ 
 		return $this->mainModel->verificaVeiculo($id);
 	}
+*/
 
 	function logout()
 	{
@@ -33,11 +37,11 @@ class MainController extends CI_Controller {
 
 	public function populaDataTable($id)
 	{
-		if($this->verificaVeiculo($id))
+		$data['veiculo'] = $this->mainModel->populaTabela($id);
+		if(!empty($data['veiculo']))
 		{
-			$data['veiculo'] = $this->mainModel->populaTabela($id);
 			$this->load->view('MainView', $data);
 		}else
-			$this->load->view('MainView', $data);
+			$this->load->view('MainView');
 	}
 }
