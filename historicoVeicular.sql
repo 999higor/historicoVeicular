@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 16-Maio-2019 às 01:14
+-- Generation Time: 18-Maio-2019 às 00:24
 -- Versão do servidor: 5.7.24
 -- versão do PHP: 7.2.14
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_rg` (`rg`),
   UNIQUE KEY `unique_cpf` (`cpf`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `cliente`
@@ -68,8 +68,8 @@ CREATE TABLE IF NOT EXISTS `veiculo` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_placa` (`placa`),
   UNIQUE KEY `unique_renavam` (`renavam`),
-  KEY `fk_veiculo_idCliente_cliente` (`idCliente`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  KEY `fk_veiculo_idCliente` (`idCliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `veiculo`
@@ -77,7 +77,17 @@ CREATE TABLE IF NOT EXISTS `veiculo` (
 
 INSERT INTO `veiculo` (`id`, `placa`, `renavam`, `marca`, `modelo`, `anoModelo`, `anoFabricacao`, `idCliente`) VALUES
 (1, '123abcd', '12345678900', 'marca bolada', 'carrao', '2000', '2000', 1),
-(3, 'ddd1234', '00987654321', 'forde', 'fffff', '2000', '2000', 2);
+(3, 'ddd1234', '00987654321', 'forde', 'fffff', '2000', '2000', 1);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `veiculo`
+--
+ALTER TABLE `veiculo`
+  ADD CONSTRAINT `fk_veiculo_idCliente` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
