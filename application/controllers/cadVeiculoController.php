@@ -10,7 +10,12 @@ class cadVeiculoController extends CI_Controller {
 	}
 	public function index()
 	{	
-		$this->load->view('cadVeiculoView');
+		if(!empty($this->session->userdata('cpf'))){
+			$this->load->view('cadVeiculoView');
+		}else{
+			$data = array("message" => "Você precisa estar logado para acessar o cadastro.", "status" => 2);
+			$this->load->view('loginView', $data);
+		}
 	}
 
 	public function CadastraVeiculo(){
@@ -41,7 +46,6 @@ class cadVeiculoController extends CI_Controller {
 					$data = array("message" => "Erro ao cadastrar veículo.", "status" => 2);
 					$this->load->view('MainView', $data);
 				}
-
-        }
+      }
 }
 

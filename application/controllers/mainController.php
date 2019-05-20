@@ -13,7 +13,8 @@ class MainController extends CI_Controller {
 	public function index()
 	{ 
 		if(empty($this->session->userdata('cpf'))){
-			$this->load->view('loginView');
+			$data = array("message" => "Você precisa estar logado.", "status" => 2);
+			$this->load->view('loginView', $data);
 		}else{			
 			$id = $this->session->userdata('idcliente');
 			$this->populaDataTable($id);

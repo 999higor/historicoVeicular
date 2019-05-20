@@ -23,13 +23,10 @@
       var p2 = document.getElementById('confirmPassword').value;
 
       if(p1 != p2){
-        $("erro").html = "As senhas não conferem.";
         alert("As senhas não conferem.");
       }
     }
   </script>
-
-
 </head>
 
 <body class="bg-dark">
@@ -88,17 +85,13 @@
                 <div class="form-label-group">
                   <input type="password" id="confirmPassword" class="form-control" onblur="validaCampos();" placeholder="Confirmar senha" name="confirmPassword" required>
                   <label for="confirmPassword">Confirmar Senha</label>
-                  <label id="erro"></label>	
                 </div>
               </div>
             </div>
           </div>
+          <hr>
           <input class="btn btn-primary" type="submit" name="input">
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
-        </div>
       </div>
     </div>
   </div>

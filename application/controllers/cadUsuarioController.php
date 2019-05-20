@@ -29,8 +29,8 @@ class cadUsuarioController extends CI_Controller {
 				$dados = array(
 					'nome' => $nome ,
 					'sobrenome' => $sobrenome,
-					'rg' => $cpf,
-					'cpf' => $rg,
+					'rg' => $rg,
+					'cpf' => $cpf,
 					'senha' => $email,
 					'email' => $password
 				);  
