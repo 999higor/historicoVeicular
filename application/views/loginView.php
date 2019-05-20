@@ -27,16 +27,14 @@
       <form method="POST" action="<?php echo base_url();?>index.php/LoginController/verificaLogin">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="cpfLogin" name="cpfLogin" class="form-control" placeholder="Digite seu CPF" autofocus="autofocus">
+              <input type="text" id="cpfLogin" name="cpfLogin" class="form-control" placeholder="Digite seu CPF" autofocus="autofocus" required>
               <label for="cpfLogin">CPF</label>
-              <!--<span class="text-danger"><?php /*echo form_error('cpfLogin'); */?>-->
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" id="passwrd" name="passwrd" class="form-control" placeholder="Digite a senha">
+              <input type="password" id="passwrd" name="passwrd" class="form-control" placeholder="Digite a senha" required>
               <label for="passwrd">Senha</label>
-              <!--<span class="text-danger"><?php /*echo form_error('senha'); */?>-->
             </div>
           </div>
           <div class="form-group">
@@ -49,12 +47,26 @@
           </div>
           <input class="btn btn-primary btn-block" type="submit" value="Enviar">
 
-          <?php /*echo '<label class="text-danger">'.$this->session->flashdata("error").'</flash>'*/?>
+          <?php echo $this->session->flashdata("error") ?>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="<?php echo base_url();?>index.php/cadUsuarioController/index">Registrar um usuário</a>
         </div>
+        <hr>
+          <?php
+            if(isset($message)){
+              if($status == 1){
+                echo "<div class='alert alert-success' role='alert'>";
+                      echo "<label text-align='center'>".$message."</label>";
+                echo "</div>";
+
+              }else if($status == 2){
+                echo "<div class='alert alert-danger' role='alert'>";
+                      echo "<label text-align='center'>".$message."</label>";
+                echo "</div>";
+              }
+            }
+          ?>
       </div>
     </div>
   </div>

@@ -9,28 +9,18 @@ class LoginController extends CI_Controller {
 		$this->load->helper('url');
 	}
 	public function index()
-	{
+	{	
 		$this->load->view('loginView');
 	}
 
 	public function verificaLogin(){
 		/* https://www.youtube.com/watch?v=pG1rOs8vz1Q */
 
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('cpfLogin','CPF','required');
-		$this->form_validation->set_rules('passwrd','Senha','required');
-
-		$cpf = $this->input->post('cpfLogin', TRUE);
-		$senha = $this->input->post('passwrd', TRUE);
-		/* validar formulario */
-		if($this->form_validation->run()){
 			$cpf = $this->input->post('cpfLogin', TRUE);
 			$senha = $this->input->post('passwrd', TRUE);
 			
 			$this->load->model('loginModel');
 
-			/* se for valido chama função do banco para comparar as senhas */
 			if($this->loginModel->verificaLogin($cpf,$senha)){
 				/* -> se estiver ok abre uma session com o cpf */
 
@@ -50,11 +40,6 @@ class LoginController extends CI_Controller {
 				/* redireciona pra pagina de login com as mensagens */
 				redirect(base_url() . 'index.php/LoginController/login');
 			}
-		}else{
-			/* se os campos digitados forem invalidos retorna uma mensagem de erro de validação (senha/cpf devem ser preenchidos, somente números, etc...) */
-			/*redireciona pra tela de login */
-			redirect(base_url().'index.php/LoginController/login');
-		}
 	}
 
 	function login(){
