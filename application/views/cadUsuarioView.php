@@ -1,7 +1,3 @@
-<?php
-	//echo base_url();
-	defined('BASEPATH') OR exit('No direct script access allowed');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +12,7 @@
   <title>SB Admin - Register</title>
 
   <!-- Custom fonts for this template-->
-  <link href= "<?php echo base_url()?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<?php echo base_url()?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet">
@@ -27,66 +23,64 @@
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registrar Conta</div>
+      <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
-        <form>
+        <form method="POST" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
-                  <label for="firstName">Nome</label>
+                  <input type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" autofocus="autofocus">
+                  <label for="nome">Nome</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
-                  <label for="lastName">Sobrenome</label>
+                  <input type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" required="required">
+                  <label for="sobrenome">Sobrenome</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" required="required" autofocus="autofocus">
+                  <label for="cpfUser">CPF</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" required="required">
+                  <label for="rgUser">RG</label>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
-              <label for="inputEmail">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" required="required">
+              <label for="email">E-mail</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="password" id="inputCpf" class="form-control" placeholder="Password" required="required">
-                  <label for="inputCpf">CPF</label>
+                  <input type="password" id="password" class="form-control" name="password" placeholder="Senha" required="required">
+                  <label for="password">Senha</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="password" id="inputRG" class="form-control" placeholder="Confirm password" required="required">
-                  <label for="inputRG">RG</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
-                  <label for="inputPassword">Senha</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-label-group">
-                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required">
+                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar senha" name="confirmPassword" required="required">
                   <label for="confirmPassword">Confirmar Senha</label>
                 </div>
               </div>
             </div>
           </div>
-
-          <a class="btn btn-primary btn-block" href="login.html">Registrar</a>
+          <input type="submit" name="input">
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="login.html">Login Page</a>
