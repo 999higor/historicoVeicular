@@ -38,7 +38,7 @@ class cadVeiculoController extends CI_Controller {
 					$data = array("message" => "Veículo cadastrado com sucesso.","status" => 1);
 					$this->load->view('MainView', $data);
 				}else{
-					$data = array("message" => "Erro ao criar usuário.", "status" => 2);
+					$data = array("message" => "Erro ao cadastrar veículo.", "status" => 2);
 					$this->load->view('MainView', $data);
 				}
 
