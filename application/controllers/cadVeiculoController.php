@@ -15,14 +15,14 @@ class cadVeiculoController extends CI_Controller {
 
 	public function CadastraVeiculo(){
 
-			$marca = $this->input->post('marcas', TRUE);
-            $veiculo = $this->input->post('veiculos', TRUE);
-            $ano = $this->input->post('ano', TRUE);
+			$marca = $this->input->post('marca_', TRUE);
+            $veiculo = $this->input->post('modelo_', TRUE);
+            $ano = $this->input->post('anof', TRUE);
             $anoModelo = $this->input->post('anoMod', TRUE);
             $renavam = $this->input->post('renavam', TRUE);
 			$placa = $this->input->post('placa', TRUE);
-			
-			echo $marca;
+
+			echo $marca, $veiculo, $ano,$anoModelo,$renavam,$placa;
 			
 			// $this->load->model('cadVeiculoModel');
 

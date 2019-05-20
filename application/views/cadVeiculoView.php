@@ -52,7 +52,7 @@
 	    });
 	  });
 
-      
+
     $("#ano").change(function() {
         if(cont == 1){
             var comboAno = document.getElementById("anoMod");
@@ -61,7 +61,7 @@
             }
         }
         cont = 1;
-        
+
         var ano = $('#ano :selected').text();
         var comboAno = document.getElementById("anoMod");
 
@@ -77,25 +77,38 @@
             comboAno.add(opt0, comboAno.options[0]);
 
             var opt0 = document.createElement("option");
-            opt0.value = "0";
+            opt0.value = parseInt(ano.substring(-20,4))- 2;
             opt0.text = parseInt(ano.substring(-20,4))- 2;
             comboAno.add(opt0, comboAno.options[0]);
 
             var opt1 = document.createElement("option");
-            opt1.value = "1";
+            opt1.value = parseInt(ano.substring(-20,4)) - 1;
             opt1.text = parseInt(ano.substring(-20,4)) - 1;
             comboAno.add(opt1, comboAno.options[1]);
 
             var opt2 = document.createElement("option");
-            opt2.value = "2";
+            opt2.value = ano.substring(-20,4);
             opt2.text = ano.substring(-20,4);
             comboAno.add(opt2, comboAno.options[2]);
 
             var opt3 = document.createElement("option");
-            opt3.value = "3";
+            opt3.value = parseInt(ano.substring(-20,4)) + 1;
             opt3.text = parseInt(ano.substring(-20,4)) + 1;
             comboAno.add(opt3, comboAno.options[3]);
         }
+    });
+
+    //altera o valor do campo hidden para ser enviado ao controller
+    $("#ano").change(function() {
+        var marca = $('#marcas :selected').text();
+        var modelo = $('#modelos :selected').text();
+        var ano = $('#ano :selected').text();
+        //var anoMod = $('#anoMod :selected').text();
+        $('#marca_').val(marca);
+        $('#modelo_').val(modelo);
+        $('#anof').val(ano);
+      //  $('#anom').val(anoMod);
+
     });
 });
 </script>
@@ -107,6 +120,11 @@
       <div class="card-header">Registrar um Veículo</div>
       <div class="card-body">
         <form method="POST" action="<?php echo base_url();?>index.php/cadVeiculoController/CadastraVeiculo">
+          <input type="hidden" id="id" name="id" value="php...">
+          <input type="hidden" id="marca_" name="marca_" value="#">
+          <input type="hidden" id="modelo_" name="modelo_" value="#">
+          <input type="hidden" id="anof" name="anof" value="#">
+          <input type="hidden" id="anom" name="anom" value="#">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -130,7 +148,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-label-group">
-                    <select id="anoMod" class="form-control" name="anoMod" required="required"></select>          
+                    <select id="anoMod" class="form-control" name="anoMod" required="required"></select>
                     </div>
                 </div>
             </div>
@@ -139,8 +157,8 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="renavan" class="form-control" placeholder="RENAVAN" name="renavan" required="required">
-                  <label for="renavan">Código de RENAVAN</label>
+                  <input type="text" id="renavam" class="form-control" placeholder="RENAVAM" name="renavam" required="required">
+                  <label for="renavam">Código de RENAVAM</label>
                 </div>
               </div>
               <div class="col-md-6">
@@ -151,7 +169,7 @@
               </div>
             </div>
           </div>
-          <button type="button" name="button" class="btn btn-primary">Cadastrar</button>
+          <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
         </form>
       </div>
     </div>
