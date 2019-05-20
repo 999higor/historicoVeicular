@@ -18,7 +18,7 @@ class LoginController extends CI_Controller {
 
 			$cpf = $this->input->post('cpfLogin', TRUE);
 			$senha = $this->input->post('passwrd', TRUE);
-			
+
 			$this->load->model('loginModel');
 
 			if($this->loginModel->verificaLogin($cpf,$senha)){
@@ -35,7 +35,8 @@ class LoginController extends CI_Controller {
 
 			}else{
 				/* se der erro retorna uma mensagem com erro na autenticação */
-				$this->session->set_flashdata('error','CPF ou Senha inválidos.');
+				$erro=  $this->db->last_query();
+				$this->session->set_flashdata('error',$erro);
 
 				/* redireciona pra pagina de login com as mensagens */
 				redirect(base_url() . 'index.php/LoginController/login');

@@ -20,15 +20,6 @@ class MainController extends CI_Controller {
 		}
 	}
 
-/*	
-	estava fazendo a mesma coisa que o populaDataTable
-
-	public function verificaVeiculo($id)
-	{ 
-		return $this->mainModel->verificaVeiculo($id);
-	}
-*/
-
 	function logout()
 	{
 		$this->session->unset_userdata('cpf');

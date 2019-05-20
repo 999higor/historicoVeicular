@@ -25,7 +25,7 @@ class cadUsuarioController extends CI_Controller {
 			
 			$this->load->model('cadUsuarioModel');
 
-			if($password == $confirmPassword){
+			if(strcmp($password, $confirmPassword) == 0){
 				$dados = array(
 					'nome' => $nome ,
 					'sobrenome' => $sobrenome,
@@ -42,6 +42,9 @@ class cadUsuarioController extends CI_Controller {
 					$data = array("message" => "Erro ao criar usuário.", "status" => 2);
 					$this->load->view('loginView', $data);
 				}
+			}else{
+				$data = array("message" => "Erro ao criar usuário.", "status" => 2);
+				$this->load->view('loginView', $data);
 			}
         }
 }

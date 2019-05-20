@@ -101,14 +101,11 @@
     //altera o valor do campo hidden para ser enviado ao controller
     $("#ano").change(function() {
         var marca = $('#marcas :selected').text();
-        var modelo = $('#modelos :selected').text();
+        var modelo = $('#veiculos :selected').text();
         var ano = $('#ano :selected').text();
-        //var anoMod = $('#anoMod :selected').text();
         $('#marca_').val(marca);
         $('#modelo_').val(modelo);
         $('#anof').val(ano);
-      //  $('#anom').val(anoMod);
-
     });
 });
 </script>
@@ -120,7 +117,8 @@
       <div class="card-header">Registrar um Veículo</div>
       <div class="card-body">
         <form method="POST" action="<?php echo base_url();?>index.php/cadVeiculoController/CadastraVeiculo">
-          <input type="hidden" id="id" name="id" value="php...">
+
+          <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('idcliente');?>">
           <input type="hidden" id="marca_" name="marca_" value="#">
           <input type="hidden" id="modelo_" name="modelo_" value="#">
           <input type="hidden" id="anof" name="anof" value="#">
