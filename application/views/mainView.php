@@ -64,6 +64,12 @@
   <div id="wrapper">
     <!-- Sidebar  -->
     <ul class="sidebar navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/cadVeiculoController/index">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Cadastrar Veículo</span>
+        </a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>

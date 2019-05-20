@@ -50,7 +50,7 @@
           <?php echo $this->session->flashdata("error") ?>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="<?php echo base_url();?>index.php/cadUsuarioController/index">Registrar um usuário</a>
+          <a class="d-block small mt-3" href="<?php echo base_url();?>index.php/cadUsuarioController">Registrar um usuário</a>
         </div>
         <hr>
           <?php
