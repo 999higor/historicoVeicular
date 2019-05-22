@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 18-Maio-2019 às 00:24
+-- Generation Time: 22-Maio-2019 às 20:56
 -- Versão do servidor: 5.7.24
 -- versão do PHP: 7.2.14
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `histveicular`
+-- Database: `historicoveicular`
 --
 
 -- --------------------------------------------------------
@@ -48,6 +48,88 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 INSERT INTO `cliente` (`id`, `nome`, `sobrenome`, `email`, `rg`, `cpf`, `senha`) VALUES
 (1, 'joao', 'aaa', '2222@gmail.com', '1234567890', '12345678900', 'coxinha');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `empresa`
+--
+
+DROP TABLE IF EXISTS `empresa`;
+CREATE TABLE IF NOT EXISTS `empresa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `razaoSocial` varchar(64) NOT NULL,
+  `nomeFantasia` varchar(128) NOT NULL,
+  `cnpj` varchar(15) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `manutencao`
+--
+
+DROP TABLE IF EXISTS `manutencao`;
+CREATE TABLE IF NOT EXISTS `manutencao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `km` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `idProduto` int(11) NOT NULL,
+  `idVeiculo` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_empresa_idEmpresa_manutencao` (`idEmpresa`),
+  KEY `fk_produto_idProduto_manutencao` (`idProduto`),
+  KEY `fk_veiculo_idVeiculo_manutencao` (`idVeiculo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `manutencao_servico`
+--
+
+DROP TABLE IF EXISTS `manutencao_servico`;
+CREATE TABLE IF NOT EXISTS `manutencao_servico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idManutencao` int(11) NOT NULL,
+  `idServico` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_servico_idServico_manutencaoServico` (`idServico`),
+  KEY `fk_manutencao_idManutencao_manutencaoServico` (`idManutencao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produto`
+--
+
+DROP TABLE IF EXISTS `produto`;
+CREATE TABLE IF NOT EXISTS `produto` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `marca` varchar(128) NOT NULL,
+  `nome` varchar(256) NOT NULL,
+  `quantidade` int(11) NOT NULL,
+  `valor` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `servico`
+--
+
+DROP TABLE IF EXISTS `servico`;
+CREATE TABLE IF NOT EXISTS `servico` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(128) NOT NULL,
+  `valor` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -82,6 +164,21 @@ INSERT INTO `veiculo` (`id`, `placa`, `renavam`, `marca`, `modelo`, `anoModelo`,
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `manutencao`
+--
+ALTER TABLE `manutencao`
+  ADD CONSTRAINT `fk_empresa_idEmpresa_manutencao` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_produto_idProduto_manutencao` FOREIGN KEY (`idProduto`) REFERENCES `produto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_veiculo_idVeiculo_manutencao` FOREIGN KEY (`idVeiculo`) REFERENCES `veiculo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `manutencao_servico`
+--
+ALTER TABLE `manutencao_servico`
+  ADD CONSTRAINT `fk_manutencao_idManutencao_manutencaoServico` FOREIGN KEY (`idManutencao`) REFERENCES `manutencao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_servico_idServico_manutencaoServico` FOREIGN KEY (`idServico`) REFERENCES `servico` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `veiculo`
