@@ -71,6 +71,12 @@
         </a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/cadEmpresaController/index">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Cadastrar Empresa</span>
+        </a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
