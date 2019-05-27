@@ -9,7 +9,7 @@ class cadUsuarioController extends CI_Controller {
 		$this->load->helper('url');
 	}
 	public function index()
-	{	
+	{
 		$this->load->view('cadUsuarioView');
 	}
 
@@ -22,7 +22,7 @@ class cadUsuarioController extends CI_Controller {
             $email = $this->input->post('email', TRUE);
             $password = $this->input->post('password', TRUE);
             $confirmPassword = $this->input->post('confirmPassword', TRUE);
-			
+
 			$this->load->model('cadUsuarioModel');
 
 			if(strcmp($password, $confirmPassword) == 0){
@@ -31,9 +31,9 @@ class cadUsuarioController extends CI_Controller {
 					'sobrenome' => $sobrenome,
 					'rg' => $rg,
 					'cpf' => $cpf,
-					'senha' => $email,
-					'email' => $password
-				);  
+					'senha' => $password,
+					'email' => $email
+				);
 
 				if($this->cadUsuarioModel->EfetuaRegistro($dados)){
 					$data = array("message" => "Usuário criado com sucesso.","status" => 1);
@@ -48,4 +48,3 @@ class cadUsuarioController extends CI_Controller {
 			}
         }
 }
-
