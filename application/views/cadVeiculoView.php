@@ -107,7 +107,7 @@
         $('#modelo_').val(modelo);
         $('#anof').val(ano);
     });
-});
+  });
 </script>
 
 </head>

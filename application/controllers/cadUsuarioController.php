@@ -21,15 +21,15 @@ class cadUsuarioController extends CI_Controller {
 		/* Define as regras de validação do formulário */
 		$this->form_validation->set_rules('nome', 'Nome', 'alpha');
 		$this->form_validation->set_rules('sobrenome', 'Sobrenome', 'alpha');
-		$this->form_validation->set_rules('cpfUser', 'CPF', 'numeric');
-		$this->form_validation->set_rules('rguser', 'RG', 'numeric');
+		$this->form_validation->set_rules('cpfUserHidden', 'CPF', 'numeric');
+		$this->form_validation->set_rules('cpfUserHidden', 'RG', 'numeric');
 		$this->form_validation->set_rules('password', 'Senha', 'min_length[8]');
 		$this->form_validation->set_rules('confirmPassword', 'Password Confirmation', 'trim|matches[password]');
 
 		/*
 				Efetua a validação do formulário
 				   - Se retornar valor falso significa que existe algo errado, retorna para a View e mostra mensagem de alerta
-					 - Se retornar valor verdadeiro entra no processo de cadastro
+				   - Se retornar valor verdadeiro entra no processo de cadastro
 		*/
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -40,8 +40,8 @@ class cadUsuarioController extends CI_Controller {
 				/* Coleta os dados do formulário por POST */
 				$nome = $this->input->post('nome', TRUE);
 				$sobrenome = $this->input->post('sobrenome', TRUE);
-				$cpf = $this->input->post('cpfUser', TRUE);
-				$rg = $this->input->post('rgUser', TRUE);
+				$cpf = $this->input->post('cpfUserHidden', TRUE); /* cpfUserHidden pois está sem a máscara */
+				$rg = $this->input->post('rgUserHidden', TRUE); /* rgUserHidden pois está sem a máscara */
 				$email = $this->input->post('email', TRUE);
 				$password = $this->input->post('password', TRUE);
 				$confirmPassword = $this->input->post('confirmPassword', TRUE);
