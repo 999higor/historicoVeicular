@@ -33,11 +33,11 @@ class cadEmpresaController extends CI_Controller {
 				);  
 
 				if($this->cadEmpresaModel->Registro($dados)){
-					$data = array("message" => "Usuário criado com sucesso.","status" => 1);
-					$this->load->view('loginView', $data);
+					$data = array("message" => "Empresa criada com sucesso.","status" => 1);
+					$this->load->view('MainView', $data);
 				}else{
-					$data = array("message" => "Erro ao criar usuário.", "status" => 2);
-					$this->load->view('loginView', $data);
+					$data = array("message" => "Erro ao criar a Empresa.", "status" => 2);
+					$this->load->view('cadEmpresaView', $data);
 				}
 			
         }
