@@ -53,13 +53,13 @@
           <a class="d-block small mt-3" href="<?php echo base_url();?>index.php/cadUsuarioController">Registrar um usuário</a>
         </div>
         <hr>
+        <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
           <?php
             if(isset($message)){
               if($status == 1){
                 echo "<div class='alert alert-success' role='alert'>";
                       echo "<label text-align='center'>".$message."</label>";
                 echo "</div>";
-
               }else if($status == 2){
                 echo "<div class='alert alert-danger' role='alert'>";
                       echo "<label text-align='center'>".$message."</label>";
@@ -77,7 +77,5 @@
 
   <!-- Core plugin JavaScript-->
   <script src="<?php echo base_url()?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
 </body>
-
 </html>

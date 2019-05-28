@@ -25,6 +25,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
+
         <form method="POST" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
           <div class="form-group">
             <div class="form-row">
@@ -46,13 +47,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" required="required" autofocus="autofocus">
+                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" required="required">
+                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" required>
                   <label for="rgUser">RG</label>
                 </div>
               </div>
@@ -60,7 +61,7 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" required="required">
+              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" required>
               <label for="email">E-mail</label>
             </div>
           </div>
@@ -68,24 +69,22 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="password" id="password" class="form-control" name="password" placeholder="Senha" required="required">
+                  <input type="password" id="password" class="form-control" name="password" placeholder="Senha" required>
                   <label for="password">Senha</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar senha" name="confirmPassword" required="required">
+                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar senha" name="confirmPassword" required>
                   <label for="confirmPassword">Confirmar Senha</label>
                 </div>
               </div>
             </div>
           </div>
-          <input type="submit" name="input">
+          <hr>
+          <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+          <input class="btn btn-primary" type="submit" name="input">
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="login.html">Login Page</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
-        </div>
       </div>
     </div>
   </div>
@@ -98,5 +97,4 @@
   <script src="<?php echo base_url()?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 </body>
-
 </html>

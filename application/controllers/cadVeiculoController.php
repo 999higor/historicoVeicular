@@ -9,41 +9,42 @@ class cadVeiculoController extends CI_Controller {
 		$this->load->helper('url');
 	}
 	public function index()
-	{	
-		$this->load->view('cadVeiculoView');
+	{
+		if(!empty($this->session->userdata('cpf'))){
+			$this->load->view('cadVeiculoView');
+		}else{
+			$data = array("message" => "Você precisa estar logado para acessar o cadastro.", "status" => 2);
+			$this->load->view('loginView', $data);
+		}
 	}
 
 	public function CadastraVeiculo(){
-
+			$id = $this->input->post('id', TRUE);
 			$marca = $this->input->post('marca_', TRUE);
-            $veiculo = $this->input->post('modelo_', TRUE);
-            $ano = $this->input->post('anof', TRUE);
-            $anoModelo = $this->input->post('anoMod', TRUE);
-            $renavam = $this->input->post('renavam', TRUE);
+      $modelo = $this->input->post('modelo_', TRUE);
+      $ano = $this->input->post('anof', TRUE);
+      $anoModelo = $this->input->post('anoMod', TRUE);
+      $renavam = $this->input->post('renavam', TRUE);
 			$placa = $this->input->post('placa', TRUE);
 
-			echo $marca, $veiculo, $ano,$anoModelo,$renavam,$placa;
-			
-			// $this->load->model('cadVeiculoModel');
+			$this->load->model('cadVeiculoModel');
 
-			// if($password == $confirmPassword){
-			// 	$dados = array(
-			// 		'nome' => $nome ,
-			// 		'sobrenome' => $sobrenome,
-			// 		'rg' => $cpf,
-			// 		'cpf' => $rg,
-			// 		'senha' => $email,
-			// 		'email' => $password
-			// 	);  
+			$dados = array(
+				'placa' => $placa,
+				'renavam' => $renavam,
+				'marca' => $marca,
+				'modelo' => $modelo,
+				'anoModelo' => $anoModelo,
+				'anoFabricacao' => $ano,
+				'idCliente' => $id
+			);
 
-			// 	if($this->cadUsuarioModel->EfetuaRegistro($dados)){
-			// 		$data = array("message" => "Usuário criado com sucesso.","status" => 1);
-			// 		$this->load->view('loginView', $data);
-			// 	}else{
-			// 		$data = array("message" => "Erro ao criar usuário.", "status" => 2);
-			// 		$this->load->view('loginView', $data);
-			// 	}
-			// }
-        }
+			if($this->cadVeiculoModel->EfetuaRegistroVeiculo($dados)){
+					$data = array("message" => "Veículo cadastrado com sucesso.","status" => 1);
+					$this->load->view('MainView', $data);
+				}else{
+					$data = array("message" => "Erro ao cadastrar veículo.", "status" => 2);
+					$this->load->view('MainView', $data);
+				}
+      }
 }
-

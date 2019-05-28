@@ -1,5 +1,5 @@
 <?php
-/* echo $this->session->userdata('');*/
+// echo $this->session->userdata('idcliente');
    defined('BASEPATH') OR exit('No direct script access allowed');
    date_default_timezone_set('America/Sao_Paulo');
 ?>
@@ -66,24 +66,28 @@
     <ul class="sidebar navbar-nav">
     <li class="nav-item active">
         <a class="nav-link" href="<?php echo base_url();?>index.php/cadVeiculoController/index">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fa fa-car"></i>
           <span>Cadastrar Veículo</span>
         </a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
       </li>
     </ul>
     <div id="content-wrapper">
       <div class="container-fluid">
+
+      <?php
+            if(isset($message)){
+              if($status == 1){
+                echo "<div class='alert alert-success' role='alert'>";
+                      echo "<label text-align='center'>".$message."</label>";
+                echo "</div>";
+
+              }else if($status == 2){
+                echo "<div class='alert alert-danger' role='alert'>";
+                      echo "<label text-align='center'>".$message."</label>";
+                echo "</div>";
+              }
+            }
+      ?>
 
    <!-- Se o cliente tiver algum veiculo cadastrado no nome dele entrará nesse if,
         ali dentro o servidor irá escrever a DataTable -->
