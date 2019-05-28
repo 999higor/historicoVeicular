@@ -25,7 +25,6 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar uma Empresa</div>
       <div class="card-body">
-
         <form method="POST" action="<?php echo base_url();?>index.php/cadEmpresaController/CadastrarEmpresa">
           <div class="form-group">
             <div class="form-row">
@@ -58,10 +57,10 @@
             </div>            
         </div>
                  
-              
+        <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="input" class="text-center">   
         </form>
         <div class="text-center">
-        <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="input" class="text-center">      
+           
 
         </div>
       </div>

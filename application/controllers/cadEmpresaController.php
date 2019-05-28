@@ -21,7 +21,7 @@ class cadEmpresaController extends CI_Controller {
             $email = $this->input->post('email', TRUE);
             
 			
-			$this->load->model('cadUsuarioModel');
+			$this->load->model('cadEmpresaModel');
 
 
 				$dados = array(
@@ -32,7 +32,7 @@ class cadEmpresaController extends CI_Controller {
 					
 				);  
 
-				if($this->cadUsuarioModel->Registro($dados)){
+				if($this->cadEmpresaModel->Registro($dados)){
 					$data = array("message" => "Usuário criado com sucesso.","status" => 1);
 					$this->load->view('loginView', $data);
 				}else{

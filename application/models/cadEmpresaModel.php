@@ -6,7 +6,7 @@ class cadEmpresaModel extends CI_Model {
         $this->load->database();
     }
 
-    public function Cadastro($dados){
+    public function Registro($dados){
         if($this->db->insert('empresa', $dados)){
             return TRUE;
         }else
