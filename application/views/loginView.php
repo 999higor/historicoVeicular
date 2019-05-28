@@ -53,7 +53,7 @@
           <a class="d-block small mt-3" href="<?php echo base_url();?>index.php/cadUsuarioController">Registrar um usuário</a>
         </div>
         <hr>
-        <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+        <?php //echo validation_errors('<div class="alert alert-danger">', '</div>');?>
           <?php
             if(isset($message)){
               if($status == 1){
