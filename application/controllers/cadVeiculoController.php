@@ -9,7 +9,7 @@ class cadVeiculoController extends CI_Controller {
 		$this->load->helper('url');
 	}
 	public function index()
-	{	
+	{
 		if(!empty($this->session->userdata('cpf'))){
 			$this->load->view('cadVeiculoView');
 		}else{
@@ -21,10 +21,10 @@ class cadVeiculoController extends CI_Controller {
 	public function CadastraVeiculo(){
 			$id = $this->input->post('id', TRUE);
 			$marca = $this->input->post('marca_', TRUE);
-            $modelo = $this->input->post('modelo_', TRUE);
-            $ano = $this->input->post('anof', TRUE);
-            $anoModelo = $this->input->post('anoMod', TRUE);
-            $renavam = $this->input->post('renavam', TRUE);
+      $modelo = $this->input->post('modelo_', TRUE);
+      $ano = $this->input->post('anof', TRUE);
+      $anoModelo = $this->input->post('anoMod', TRUE);
+      $renavam = $this->input->post('renavam', TRUE);
 			$placa = $this->input->post('placa', TRUE);
 
 			$this->load->model('cadVeiculoModel');
@@ -37,7 +37,7 @@ class cadVeiculoController extends CI_Controller {
 				'anoModelo' => $anoModelo,
 				'anoFabricacao' => $ano,
 				'idCliente' => $id
-			); 
+			);
 
 			if($this->cadVeiculoModel->EfetuaRegistroVeiculo($dados)){
 					$data = array("message" => "Veículo cadastrado com sucesso.","status" => 1);
@@ -48,4 +48,3 @@ class cadVeiculoController extends CI_Controller {
 				}
       }
 }
-
