@@ -77,6 +77,12 @@
         </a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/cadProdutoController/index">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Cadastrar Produto</span>
+        </a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
