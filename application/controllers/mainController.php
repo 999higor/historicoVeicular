@@ -34,6 +34,7 @@ class MainController extends CI_Controller {
 		{
 			$this->load->view('MainView', $data);
 		}else
-			$this->load->view('MainView');
+			$data = array("message" => "Nenhum veículo cadastrado", "status" => 3);
+			$this->load->view('MainView', $data);
 	}
 }

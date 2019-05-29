@@ -3,10 +3,8 @@
    defined('BASEPATH') OR exit('No direct script access allowed');
    date_default_timezone_set('America/Sao_Paulo');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
   <meta charset="utf-8">
@@ -15,7 +13,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Dashboard</title>
+  <title>SB Admin - Página Inicial</title>
 
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url()?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -72,26 +70,15 @@
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo base_url();?>index.php/cadEmpresaController/index">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-building"></i>
           <span>Cadastrar Empresa</span>
         </a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo base_url();?>index.php/cadProdutoController/index">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-dolly-flatbed"></i>
           <span>Cadastrar Produto</span>
         </a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
       </li>
 
     </ul>
@@ -107,6 +94,10 @@
 
               }else if($status == 2){
                 echo "<div class='alert alert-danger' role='alert'>";
+                      echo "<label text-align='center'>".$message."</label>";
+                echo "</div>";
+              }else if($status == 3){
+                echo "<div class='alert alert-secondary' role='alert'>";
                       echo "<label text-align='center'>".$message."</label>";
                 echo "</div>";
               }

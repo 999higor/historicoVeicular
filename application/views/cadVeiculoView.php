@@ -114,7 +114,7 @@
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registrar um Veículo</div>
+      <div class="card-header">Cadastro de Veículo</div>
       <div class="card-body">
         <form method="POST" action="<?php echo base_url();?>index.php/cadVeiculoController/CadastraVeiculo">
 
