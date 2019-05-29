@@ -42,15 +42,15 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
+              <input type="hidden" name="cpfUserHidden" id="cpfUserHidden" value="#">
                 <div class="form-label-group">
-                  <input type="hidden" name="cpfUserHidden" id="cpfUserHidden" value="#">
                   <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
+              <input type="hidden" name="rgUserHidden" id="rgUserHidden" value="#">
                 <div class="form-label-group">
-                  <input type="hidden" name="rgUserHidden" id="rgUserHidden" value="#">
                   <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" required>
                   <label for="rgUser">RG</label>
                 </div>
@@ -109,8 +109,6 @@
           $('#rgUser').mask('00.000.000-0', {reverse: true});
           $('#nome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
           $('#sobrenome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
-          // $("#btn").prop("disabled", true);
-          // $("#confirmPassword").prop("disabled", true);
       });
 
       /* Define um campo oculto com o valor de CPF sem a Máscara (removendo os pontos) */
@@ -121,18 +119,6 @@
       /* Define um campo oculto com o valor de RG sem a Máscara (removendo os pontos) */
       $('#rgUser').focusout(function(){
           $('#rgUserHidden').val($('#rgUser').cleanVal());
-      });
-      
-      // $("#password").focusout(function(){
-      //   $("#confirmPassword").prop("disabled", false);
-      //     $("#confirmPassword").focusout(function(){
-      //         var password = document.getElementById("password").val();
-      //          var confirmPassword = document.getElementById("confirmPassword").val();
-      //           if(password.equals(confirmPassword)){
-      //               $("#btn").prop("disabled", false);
-      //           }else
-      //               $("#alert").prop("hidden", false);
-      //     })
       });
   </script>
 
