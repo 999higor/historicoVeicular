@@ -78,7 +78,7 @@
                 <div class="form-label-group">
                   <input type="password" id="confirmPassword" class="form-control" placeholder="Confirmar senha" name="confirmPassword" required>
                   <label for="confirmPassword">Confirmar Senha</label>
-                  <div id="alert" class="help-block with-errors" hidden>A senha precisa ser identica.</div>
+                  <span class="class-danger" id='error'></span>
                 </div>
               </div>
             </div>
@@ -112,6 +112,7 @@
           $('#rgUser').mask('00.000.000-0', {reverse: true});
           $('#nome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
           $('#sobrenome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
+          $('#btn').prop('disabled', true);
       });
 
       /* Define um campo oculto com o valor de CPF sem a Máscara (removendo os pontos) */
@@ -122,6 +123,17 @@
       /* Define um campo oculto com o valor de RG sem a Máscara (removendo os pontos) */
       $('#rgUser').focusout(function(){
           $('#rgUserHidden').val($('#rgUser').cleanVal());
+      });
+
+      $('#password, #confirmPassword').on('keyup', function () {
+          if ($('#password').val() != $('#confirmPassword').val()) {
+              $('#error').html('As senhas precisam ser idênticas.').css('color', 'red');
+              $
+          }else{
+              $('#error').html('').css('color', 'green');
+              $('#btn').prop('disabled', false);
+          }
+             
       });
   </script>
 
