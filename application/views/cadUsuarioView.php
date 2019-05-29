@@ -1,3 +1,6 @@
+<?php 
+    defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,13 +30,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" autofocus="autofocus">
+                  <input type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" value="<?php echo set_value('nome'); ?>" autofocus="autofocus">
                   <label for="nome">Nome</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" required="required">
+                  <input type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" value="<?php echo set_value('sobrenome'); ?>" required="required">
                   <label for="sobrenome">Sobrenome</label>
                 </div>
               </div>
@@ -44,14 +47,14 @@
               <div class="col-md-6">
               <input type="hidden" name="cpfUserHidden" id="cpfUserHidden" value="#">
                 <div class="form-label-group">
-                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" required>
+                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" value="<?php echo set_value('cpfUser'); ?>" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
               <input type="hidden" name="rgUserHidden" id="rgUserHidden" value="#">
                 <div class="form-label-group">
-                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" required>
+                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rgUser'); ?>" required>
                   <label for="rgUser">RG</label>
                 </div>
               </div>
@@ -59,7 +62,7 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" required>
+              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" value="<?php echo set_value('email'); ?>" required>
               <label for="email">E-mail</label>
             </div>
           </div>

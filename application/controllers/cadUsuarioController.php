@@ -6,6 +6,9 @@ class cadUsuarioController extends CI_Controller {
 		parent:: __construct();
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		
+		/* Carrega o Model */
+		$this->load->model('cadUsuarioModel');
 	}
 	public function index()
 	{
@@ -21,8 +24,8 @@ class cadUsuarioController extends CI_Controller {
 		/* Define as regras de validação do formulário */
 		$this->form_validation->set_rules('nome', 'Nome', 'alpha');
 		$this->form_validation->set_rules('sobrenome', 'Sobrenome', 'alpha');
-		$this->form_validation->set_rules('cpfUserHidden', 'CPF', 'numeric');
-		$this->form_validation->set_rules('cpfUserHidden', 'RG', 'numeric');
+		$this->form_validation->set_rules('cpfUserHidden', 'CPF', array('numeric', 'callback_VerificaCPF'));
+		$this->form_validation->set_rules('rgUserHidden', 'RG', array('numeric','callback_VerificaRG'));
 		$this->form_validation->set_rules('password', 'Senha', 'min_length[8]');
 		$this->form_validation->set_rules('confirmPassword', 'Password Confirmation', 'trim|matches[password]');
 
@@ -45,9 +48,6 @@ class cadUsuarioController extends CI_Controller {
 				$email = $this->input->post('email', TRUE);
 				$password = $this->input->post('password', TRUE);
 				$confirmPassword = $this->input->post('confirmPassword', TRUE);
-
-				/* Carrega o Model */
-				$this->load->model('cadUsuarioModel');
 
 				/* Gera array com os dados */
 				$dados = array(
@@ -74,16 +74,36 @@ class cadUsuarioController extends CI_Controller {
 		}
 	}
 
-	public function verificaRg(){
-			if($this->cadUsuarioModel->verificaRG($dados)){
-					$this->form_validation->set_message('username_check', 'O RG já está cadastrado.');
-					return FALSE;
-			}else
-					return true;
+	public function VerificaRG($str){
+			if($this->cadUsuarioModel->VerificaRG($str)){
+				/* existe cadastro */
+				$this->form_validation->set_message('VerificaRG', 'Já existe este RG cadastrado no banco de dados.');
+				return false;
+			}else{
+				/* não existe cadastro, retorna TRUE para validar o campo*/
+				return true;
+			}		
 	}
 
-	public function verificaCpf(){
+	public function VerificaCPF($str){
+			if($this->cadUsuarioModel->VerificaCPF($str)){
+				/* existe cadastro */
+				$this->form_validation->set_message('VerificaCPF', 'Já existe este CPF cadastrado no banco de dados.');
+				return false;
+			}else{
+				/* não existe cadastro, retorna TRUE para validar o campo*/
+				return true;
+			}
+	}
 
-
+	public function VerificaEmail($str){
+			if($this->cadUsuarioModel->VerificaEmail($str)){
+					/* existe cadastro */
+					$this->form_validation->set_message('VerificaEmail', 'Já existe este e-mail cadastrado no banco de dados.');
+					return false;
+				}else{
+					/* não existe cadastro, retorna TRUE para validar o campo*/
+					return true;
+				}
 	}
 }
