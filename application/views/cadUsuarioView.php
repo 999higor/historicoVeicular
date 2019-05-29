@@ -125,15 +125,17 @@
           $('#rgUserHidden').val($('#rgUser').cleanVal());
       });
 
+      /* Quando os inputs 'password' e 'confirmPassword' são digitados faz a verificação se eles são iguais */
       $('#password, #confirmPassword').on('keyup', function () {
           if ($('#password').val() != $('#confirmPassword').val()) {
+              /* se forem diferentes desabilita o botão e mostra alerta */
               $('#error').html('As senhas precisam ser idênticas.').css('color', 'red');
-              $
+              $('#btn').prop('disabled', true);
           }else{
+            /*se forem iguais retira o alerta e habilita o  botão de enviar */
               $('#error').html('').css('color', 'green');
               $('#btn').prop('disabled', false);
-          }
-             
+          } 
       });
   </script>
 
