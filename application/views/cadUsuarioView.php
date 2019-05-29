@@ -25,7 +25,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
+        <form method="get" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -115,15 +115,20 @@
           $('#btn').prop('disabled', true);
       });
 
-      /* Define um campo oculto com o valor de CPF sem a Máscara (removendo os pontos) */
-      $('#cpfUser').focusout(function(){
+      $('#cpfUser, #rgUser').on('keyup', function () {
           $('#cpfUserHidden').val($('#cpfUser').cleanVal());
-      });
-
-      /* Define um campo oculto com o valor de RG sem a Máscara (removendo os pontos) */
-      $('#rgUser').focusout(function(){
           $('#rgUserHidden').val($('#rgUser').cleanVal());
       });
+
+      /* Define um campo oculto com o valor de CPF sem a Máscara (removendo os pontos) */
+      // $('#cpfUser').focusout(function(){
+      //     $('#cpfUserHidden').val($('#cpfUser').cleanVal());
+      // });
+
+      /* Define um campo oculto com o valor de RG sem a Máscara (removendo os pontos) */
+      // $('#rgUser').focusout(function(){
+      //     $('#rgUserHidden').val($('#rgUser').cleanVal());
+      // });
 
       /* Quando os inputs 'password' e 'confirmPassword' são digitados faz a verificação se eles são iguais */
       $('#password, #confirmPassword').on('keyup', function () {
