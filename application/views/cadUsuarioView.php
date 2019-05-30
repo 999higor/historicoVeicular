@@ -17,7 +17,6 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet">
-
 </head>
 
 <body class="bg-dark">
@@ -25,7 +24,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
-        <form method="get" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
+        <form method="POST" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -86,7 +85,6 @@
           <hr>
           <!-- Caso o controller retornar algum erro irá aparecer uma div de alerta com a mensagem de erro -->
           <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
-
           <input class="btn btn-primary" type="submit" id="btn"  name="input">
         </form>
       </div>
@@ -115,27 +113,18 @@
           $('#btn').prop('disabled', true);
       });
 
+      /* Quando o botão enviar é clicado o texto do campo cpfUser e rgUser é copiado
+         para os campos ocultos/hidden sem a mascara e enviados para o controler pelo 
+         método .submit()
+      */
       $('#btn').click(function(){
+        /* .cleanVal() tira as pontuações de rg e cpf */
         $('#cpfUserHidden').val($('#cpfUser').cleanVal());
         $('#rgUserHidden').val($('#rgUser').cleanVal());
 
+        /* envia o formulário pro controller */
         $('#btn').submit();
       });
-
-      // $('#cpfUser, #rgUser').on('keyup', function () {
-      //     $('#cpfUserHidden').val($('#cpfUser').cleanVal());
-      //     $('#rgUserHidden').val($('#rgUser').cleanVal());
-      // });
-
-      /* Define um campo oculto com o valor de CPF sem a Máscara (removendo os pontos) */
-      // $('#cpfUser').focusout(function(){
-      //     $('#cpfUserHidden').val($('#cpfUser').cleanVal());
-      // });
-
-      /* Define um campo oculto com o valor de RG sem a Máscara (removendo os pontos) */
-      // $('#rgUser').focusout(function(){
-      //     $('#rgUserHidden').val($('#rgUser').cleanVal());
-      // });
 
       /* Quando os inputs 'password' e 'confirmPassword' são digitados faz a verificação se eles são iguais */
       $('#password, #confirmPassword').on('keyup', function () {
