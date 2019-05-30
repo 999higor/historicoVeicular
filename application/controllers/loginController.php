@@ -14,7 +14,7 @@ class LoginController extends CI_Controller {
 	public function verificaLogin(){
 		/* https://www.youtube.com/watch?v=pG1rOs8vz1Q */
 		$this->form_validation->set_message('numeric', 'Digite números inteiros.');
-		$this->form_validation->set_rules('cpfLogin', 'CPF', 'numeric');
+		$this->form_validation->set_rules('cpfUserHidden', 'CPF', 'numeric');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -22,7 +22,7 @@ class LoginController extends CI_Controller {
 		}
 		else
 		{
-			$cpf = $this->input->post('cpfLogin', TRUE);
+			$cpf = $this->input->post('cpfUserHidden', TRUE);
 			$senha = $this->input->post('passwrd', TRUE);
 
 			$this->load->model('loginModel');

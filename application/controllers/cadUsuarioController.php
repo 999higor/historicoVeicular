@@ -18,14 +18,15 @@ class cadUsuarioController extends CI_Controller {
 		/* Define as mensagens que aparecerão quando tiver erros */
 		$this->form_validation->set_message('alpha', 'Somente caracteres válidos. Digite letras.');
 		$this->form_validation->set_message('numeric', 'Digite números inteiros.');
-		$this->form_validation->set_message('min_length', 'O número mínimo de caracteres é 8.');
+		$this->form_validation->set_message('min_length', 'No campo {field} é obrigatório o número mínimo de {param} caracteres.');
+		$this->form_validation->set_message('max_length', 'O campo {field} suporta apenas {param} caracteres.');
 		$this->form_validation->set_message('matches', 'As senhas precisam ser identicas.');
 
 		/* Define as regras de validação do formulário */
 		$this->form_validation->set_rules('nome', 'Nome', 'alpha');
 		$this->form_validation->set_rules('sobrenome', 'Sobrenome', 'alpha');
-		$this->form_validation->set_rules('cpfUserHidden', 'CPF', array('numeric', 'callback_VerificaCPF'));
-		$this->form_validation->set_rules('rgUserHidden', 'RG', array('numeric','callback_VerificaRG'));
+		$this->form_validation->set_rules('cpfUserHidden', 'CPF', array('numeric', 'min_length[11]','max_length[11]','callback_VerificaCPF'));
+		$this->form_validation->set_rules('rgUserHidden', 'RG', array('numeric','min_length[11]','max_length[14]','callback_VerificaRG'));
 		$this->form_validation->set_rules('password', 'Senha', 'min_length[8]');
 		$this->form_validation->set_rules('confirmPassword', 'Password Confirmation', 'trim|matches[password]');
 

@@ -25,6 +25,7 @@
       <div class="card-header">Login</div>
       <div class="card-body">
       <form method="POST" action="<?php echo base_url();?>index.php/LoginController/verificaLogin">
+          <input type="hidden" id="cpfUserHidden" name="cpfUserHidden">
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="cpfLogin" name="cpfLogin" class="form-control" placeholder="Digite seu CPF" autofocus="autofocus" required>
@@ -77,5 +78,24 @@
 
   <!-- Core plugin JavaScript-->
   <script src="<?php echo base_url()?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- JQuery Mask -->
+  <script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>
+  <script>
+      /* Máscara que define CPF apenas números */
+      $(document).ready(function(){
+          $('#cpfUser').mask('000.000.000-00', {reverse: true});
+      });
+
+      /* Quando o botão enviar é clicado o texto do campo cpfUser é copiado para 
+         o campo oculto sem a mascara pela função .submit() */
+      $('#btn').click(function(){
+        /* .cleanVal() tira as pontuações de rg e cpf */
+        $('#cpfUserHidden').val($('#cpfLogin').cleanVal());
+
+        /* envia o formulário pro controller */
+        $('#btn').submit();
+      });
+      </script>
 </body>
 </html>
