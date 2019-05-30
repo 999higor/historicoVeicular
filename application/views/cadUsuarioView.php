@@ -45,14 +45,14 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-              <input type="hidden" name="cpfUserHidden" id="cpfUserHidden" value="#">
+              <input type="hidden" name="cpfUserHidden" id="cpfUserHidden">
                 <div class="form-label-group">
                   <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" value="<?php echo set_value('cpfUser'); ?>" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
-              <input type="hidden" name="rgUserHidden" id="rgUserHidden" value="#">
+              <input type="hidden" name="rgUserHidden" id="rgUserHidden">
                 <div class="form-label-group">
                   <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rgUser'); ?>" required>
                   <label for="rgUser">RG</label>
@@ -115,10 +115,17 @@
           $('#btn').prop('disabled', true);
       });
 
-      $('#cpfUser, #rgUser').on('keyup', function () {
-          $('#cpfUserHidden').val($('#cpfUser').cleanVal());
-          $('#rgUserHidden').val($('#rgUser').cleanVal());
+      $('#btn').click(function(){
+        $('#cpfUserHidden').val($('#cpfUser').cleanVal());
+        $('#rgUserHidden').val($('#rgUser').cleanVal());
+
+        $('#btn').submit();
       });
+
+      // $('#cpfUser, #rgUser').on('keyup', function () {
+      //     $('#cpfUserHidden').val($('#cpfUser').cleanVal());
+      //     $('#rgUserHidden').val($('#rgUser').cleanVal());
+      // });
 
       /* Define um campo oculto com o valor de CPF sem a Máscara (removendo os pontos) */
       // $('#cpfUser').focusout(function(){
