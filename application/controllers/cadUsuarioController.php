@@ -16,8 +16,8 @@ class cadUsuarioController extends CI_Controller {
 	}
 	public function CadastrarUsuario(){
 		/* Define as mensagens que aparecerão quando tiver erros */
-		$this->form_validation->set_message('alpha', 'Somente caracteres válidos. Digite letras.');
-		$this->form_validation->set_message('numeric', 'Digite números inteiros.');
+		$this->form_validation->set_message('alpha', 'Digite letras somente letras no campo {param}.');
+		$this->form_validation->set_message('numeric', 'Digite apenas números no campo {param}.');
 		$this->form_validation->set_message('min_length', 'No campo {field} é obrigatório o número mínimo de {param} caracteres.');
 		$this->form_validation->set_message('max_length', 'O campo {field} suporta apenas {param} caracteres.');
 		$this->form_validation->set_message('matches', 'As senhas precisam ser identicas.');
@@ -25,8 +25,8 @@ class cadUsuarioController extends CI_Controller {
 		/* Define as regras de validação do formulário */
 		$this->form_validation->set_rules('nome', 'Nome', 'alpha');
 		$this->form_validation->set_rules('sobrenome', 'Sobrenome', 'alpha');
-		$this->form_validation->set_rules('cpfUserHidden', 'CPF', array('numeric', 'min_length[11]','max_length[11]','callback_VerificaCPF'));
-		$this->form_validation->set_rules('rgUserHidden', 'RG', array('numeric','min_length[11]','max_length[14]','callback_VerificaRG'));
+		$this->form_validation->set_rules('cpfUser', 'CPF', array('numeric', 'min_length[11]','max_length[11]','callback_VerificaCPF'));
+		$this->form_validation->set_rules('rgUser', 'RG', array('numeric','min_length[11]','max_length[14]','callback_VerificaRG'));
 		$this->form_validation->set_rules('password', 'Senha', 'min_length[8]');
 		$this->form_validation->set_rules('confirmPassword', 'Password Confirmation', 'trim|matches[password]');
 
@@ -44,8 +44,8 @@ class cadUsuarioController extends CI_Controller {
 				/* Coleta os dados do formulário por POST */
 				$nome = $this->input->post('nome', TRUE);
 				$sobrenome = $this->input->post('sobrenome', TRUE);
-				$cpf = $this->input->post('cpfUserHidden', TRUE); /* cpfUserHidden pois está sem a máscara */
-				$rg = $this->input->post('rgUserHidden', TRUE); /* rgUserHidden pois está sem a máscara */
+				$cpf = $this->input->post('cpfUser', TRUE); /* cpfUserHidden pois está sem a máscara */
+				$rg = $this->input->post('rgUser', TRUE); /* rgUserHidden pois está sem a máscara */
 				$email = $this->input->post('email', TRUE);
 				$password = $this->input->post('password', TRUE);
 				$confirmPassword = $this->input->post('confirmPassword', TRUE);

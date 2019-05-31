@@ -37,4 +37,16 @@ class LoginModel extends CI_Model {
         }else            
             return false;
         }
+
+    public function getDados($cpf){
+        $this->db->from('cliente');
+        $this->db->where('cpf', $cpf);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0 ){
+            return $query->result_array();
+        }else
+            return false;
+    }
+
 }

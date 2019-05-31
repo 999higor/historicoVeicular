@@ -1,5 +1,8 @@
 <?php
-// echo $this->session->userdata('idcliente');
+   echo $this->session->userdata('id');
+   echo $this->session->userdata('nome');
+   echo $this->session->userdata('sobrenome');
+   echo $this->session->userdata('cpf');
    defined('BASEPATH') OR exit('No direct script access allowed');
    date_default_timezone_set('America/Sao_Paulo');
 ?>
@@ -45,18 +48,21 @@
     </form>
 
     <!-- Navbar -->
+    
     <ul class="navbar-nav ml-auto ml-md-0">
       <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">     
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
+          <h1 style="color:gray" class="dropdown-header">Você está logado como <b>Fulano</b>.</h1>
           <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Settings</a>
           <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/LoginController/logout" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
     </ul>
+
   </nav>
 
   <div id="wrapper">
