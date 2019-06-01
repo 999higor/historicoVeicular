@@ -27,14 +27,24 @@ class LoginController extends CI_Controller {
 
 			$this->load->model('loginModel');
 			if($this->loginModel->verificaLogin($cpf,$senha)){
-				//salvar idcliente na session
-				//$id = $this->loginModel->getID($cpf);
-				//$SESSION = array('cpf' => $cpf , 'idcliente' => $id );
+				
+				/* busca os dados para coolocar na session (nome, sobrenome e id) */
+				foreach ($this->loginModel->getDados($cpf) as $dados)
+				{
+					$nome = $dados['nome'];
+					$sobrenome = $dados['sobrenome'];
+					$id = $dados['id'];
+				}
 
-				$dados = $this->loginModel->getDados($cpf);
-				$SESSION = array('cpf'=> $dados['cpf'],'nome'=>$dados['nome'],'sobrenome'=>$dados['sobrenome'],'id'=>$dados['id']);
-
-				//$this->session->set_userdata($SESSION);
+				/* cria um array chamado SESSION para colocar os dados */
+				$SESSION = array( 'nome' => $nome,
+								  'sobrenome' => $sobrenome,
+								  'id' => $id,
+								  'cpf' => $cpf);
+	
+				/*insere o array na sessiona */
+				$this->session->set_userdata($SESSION);
+	
 				/* redireciona pra pagina principal */
 				redirect(base_url() . 'index.php/LoginController/login');
 			}else{
@@ -48,7 +58,7 @@ class LoginController extends CI_Controller {
 			redirect(base_url().'index.php/MainController');
 		}else{
 			/* se der erro retorna uma mensagem com erro na autenticação */
-			$data = array("message" => "Campo CPF ou Senha inválidos.", "status" => 2);
+			$data = array("message" => "Campo CPF ou Senha incorretos.", "status" => 2);
 			$this->load->view('LoginView', $data);
 		}
 	}
