@@ -13,8 +13,8 @@ class LoginController extends CI_Controller {
 	}
 	public function verificaLogin(){
 		/* https://www.youtube.com/watch?v=pG1rOs8vz1Q */
-		$this->form_validation->set_message('numeric', 'Digite números inteiros.');
-		$this->form_validation->set_rules('cpfUserHidden', 'CPF', 'numeric');
+		$this->form_validation->set_message('numeric', 'Digite apenas números.');
+		$this->form_validation->set_rules('cpfLogin', 'CPF', 'numeric');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -22,16 +22,29 @@ class LoginController extends CI_Controller {
 		}
 		else
 		{
-			$cpf = $this->input->post('cpfUserHidden', TRUE);
+			$cpf = $this->input->post('cpfLogin', TRUE);
 			$senha = $this->input->post('passwrd', TRUE);
 
 			$this->load->model('loginModel');
 			if($this->loginModel->verificaLogin($cpf,$senha)){
-				//salvar idcliente na session
-				$id = $this->loginModel->getID($cpf);
+				
+				/* busca os dados para coolocar na session (nome, sobrenome e id) */
+				foreach ($this->loginModel->getDados($cpf) as $dados)
+				{
+					$nome = $dados['nome'];
+					$sobrenome = $dados['sobrenome'];
+					$id = $dados['id'];
+				}
 
-				$SESSION = array('cpf' => $cpf , 'idcliente' => $id );
+				/* cria um array chamado SESSION para colocar os dados */
+				$SESSION = array( 'nome' => $nome,
+								  'sobrenome' => $sobrenome,
+								  'id' => $id,
+								  'cpf' => $cpf);
+	
+				/*insere o array na sessiona */
 				$this->session->set_userdata($SESSION);
+	
 				/* redireciona pra pagina principal */
 				redirect(base_url() . 'index.php/LoginController/login');
 			}else{
@@ -45,7 +58,7 @@ class LoginController extends CI_Controller {
 			redirect(base_url().'index.php/MainController');
 		}else{
 			/* se der erro retorna uma mensagem com erro na autenticação */
-			$data = array("message" => "CPF ou Senha inválidos.", "status" => 2);
+			$data = array("message" => "Campo CPF ou Senha incorretos.", "status" => 2);
 			$this->load->view('LoginView', $data);
 		}
 	}
