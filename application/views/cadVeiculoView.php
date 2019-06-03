@@ -118,7 +118,7 @@
       <div class="card-body">
         <form method="POST" action="<?php echo base_url();?>index.php/cadVeiculoController/CadastraVeiculo">
 
-          <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('idcliente');?>">
+          <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('id');?>">
           <input type="hidden" id="marca_" name="marca_" value="#">
           <input type="hidden" id="modelo_" name="modelo_" value="#">
           <input type="hidden" id="anof" name="anof" value="#">

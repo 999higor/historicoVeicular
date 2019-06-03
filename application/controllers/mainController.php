@@ -19,7 +19,7 @@ class MainController extends CI_Controller {
 			$this->load->view('loginView', $data);
 		}else{			
 			/* Chama método populaDataTable pra mostrar a tabela */
-			$id = $this->session->userdata('idcliente');
+			$id = $this->session->userdata('id');
 			$this->populaDataTable($id);
 		}
 	}
