@@ -83,6 +83,12 @@
           <span>Cadastrar Produto</span>
         </a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/cadServicoController/index">
+          <i class="fas fa-dolly-flatbed"></i>
+          <span>Cadastrar Serviço</span>
+        </a>
+      </li>
 
     </ul>
     <div id="content-wrapper">
