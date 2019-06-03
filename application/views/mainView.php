@@ -53,8 +53,8 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <h1 style="color:gray" class="dropdown-header">Você está logado como <b><?php echo $this->session->userdata('nome').' '.$this->session->userdata('sobrenome');?></b>.</h1>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/EditarUsuarioController/" >Editar conta</a>
+          <div class="dropdown-divider"></div>      
+          <a class="dropdown-item disabled" href="#" data-toggle="modal" data-target="#editModal">Editar conta</a>
           <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/LoginController/logout" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
@@ -127,37 +127,33 @@
               <table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>
                 <thead>
                   <tr>
-                    <th>ID do Veículo</th>
-                    <th>Placa</th>
-                    <th>Renavam</th>
-                    <th>Marca</th>
                     <th>Modelo</th>
-                    <th>Ano de Fabricação/Modelo</th>
+                    <th>Marca</th>
+                    <th>Placa</th>     
+                    <th>Ano de Fabricação/Modelo</th>               
+                    <th>Renavam</th>                  
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>ID do Veículo</th>
-                    <th>Placa</th>
-                    <th>Renavam</th>
-                    <th>Marca</th>
                     <th>Modelo</th>
-                    <th>Ano de Fabricação/Modelo</th>
+                    <th>Marca</th>
+                    <th>Placa</th>     
+                    <th>Ano de Fabricação/Modelo</th>               
+                    <th>Renavam</th>         
                   </tr>
                 </tfoot>
                 <tbody> 
                 ";                
                 foreach($veiculo as $info):
                       echo '<tr>';
-                         echo '<td>'.$info['id'].'</td>';
-                         echo '<td>'.$info['placa'].'</td>';
-                         echo '<td>'.$info['renavam'].'</td>';
-                         echo '<td>'.$info['marca'].'</td>';
-                         echo '<td>'.$info['modelo'].'</td>';
+                         echo '<td style="text-transform:uppercase">'.$info['modelo'].'</td>';
+                         echo '<td style="text-transform:uppercase">'.$info['marca'].'</td>';
+                         echo '<td style="text-transform:uppercase">'.$info['placa'].'</td>';
                          echo '<td>'.$info['anoFabricacao'].'/'.$info['anoModelo'].'</td>';
+                         echo '<td>'.$info['renavam'].'</td>';
                       echo '<tr>';
-                endforeach;
-                  
+                endforeach;                  
                 echo "
                 </tbody>
                 </table>

@@ -155,13 +155,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="renavam" class="form-control" placeholder="RENAVAM" name="renavam" required="required">
+                  <input type="text" id="renavam" class="form-control" placeholder="RENAVAM" name="renavam" maxlength="11" required="required">
                   <label for="renavam">Código de RENAVAM</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="placa" class="form-control" placeholder="Placa" name="placa" required="required">
+                  <input type="text" id="placa" class="form-control" placeholder="Placa" name="placa" maxlength="7" required="required">
                   <label for="placa">Placa do Veículo</label>
                 </div>
               </div>
