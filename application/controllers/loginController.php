@@ -34,13 +34,16 @@ class LoginController extends CI_Controller {
 					$nome = $dados['nome'];
 					$sobrenome = $dados['sobrenome'];
 					$id = $dados['id'];
+					$email = $dados['email'];
 				}
 
 				/* cria um array chamado SESSION para colocar os dados */
 				$SESSION = array( 'nome' => $nome,
 								  'sobrenome' => $sobrenome,
 								  'id' => $id,
-								  'cpf' => $cpf);
+								  'cpf' => $cpf,
+								  'email' => $email
+								);
 	
 				/*insere o array na sessiona */
 				$this->session->set_userdata($SESSION);
