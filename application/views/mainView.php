@@ -151,7 +151,7 @@
                          echo '<td style="text-transform:uppercase">'.$info['marca'].'</td>';
                          echo '<td style="text-transform:uppercase">'.$info['placa'].'</td>';
                          echo '<td>'.$info['anoFabricacao'].'/'.$info['anoModelo'].'</td>';
-                         echo '<td>'.$info['renavam'].'</td>';
+                         echo '<td style="text-transform:uppercase">'.$info['renavam'].'</td>';
                       echo '<tr>';
                 endforeach;                  
                 echo "

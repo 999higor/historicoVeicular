@@ -57,6 +57,18 @@
 
   <!-- Core plugin JavaScript-->
   <script src="<?php echo base_url()?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+     <!-- JQuery Mask -->
+     <script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>
+  <script>
+      /* Máscaras que definem:
+            - CPF e RG: somente números
+            - Nome e Sobrenome: somente letras
+      */
+      $(document).ready(function(){
+         $('#valor').mask("###0.00", {reverse: true});
+      });
+
+    </script>
 
 </body>
 
