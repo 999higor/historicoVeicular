@@ -66,25 +66,25 @@
     <!-- Sidebar  -->
     <ul class="sidebar navbar-nav">
     <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url();?>index.php/cadVeiculoController/index">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/VeiculoController/loadCadastraVeiculo">
           <i class="fa fa-car"></i>
           <span>Cadastrar Veículo</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url();?>index.php/cadEmpresaController/index">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/EmpresaController/loadCadastraEmpresa">
           <i class="fas fa-building"></i>
           <span>Cadastrar Empresa</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url();?>index.php/cadProdutoController/index">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/ProdutoController/loadCadastraProduto">
           <i class="fas fa-dolly-flatbed"></i>
           <span>Cadastrar Produto</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url();?>index.php/cadServicoController/index">
+        <a class="nav-link" href="<?php echo base_url();?>index.php/ServicoController/loadCadastraServico">
           <i class="fas fa-dolly-flatbed"></i>
           <span>Cadastrar Serviço</span>
         </a>
@@ -95,6 +95,8 @@
       <div class="container-fluid">
 
       <?php
+            $message = $this->session->flashdata('message');
+            $status = $this->session->flashdata('status');
             if(isset($message)){
               if($status == 1){
                 echo "<div class='alert alert-success' role='alert'>";

@@ -52,7 +52,6 @@
 	    });
 	  });
 
-
     $("#ano").change(function() {
         if(cont == 1){
             var comboAno = document.getElementById("anoMod");
@@ -116,7 +115,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Cadastro de Veículo</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/cadVeiculoController/CadastraVeiculo">
+        <form method="POST" action="<?php echo base_url();?>index.php/VeiculoController/CadastrarVeiculo">
 
           <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('id');?>">
           <input type="hidden" id="marca_" name="marca_" value="#">

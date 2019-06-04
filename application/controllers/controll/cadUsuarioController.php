@@ -14,6 +14,7 @@ class cadUsuarioController extends CI_Controller {
 	{
 		$this->load->view('cadUsuarioView');
 	}
+
 	public function CadastrarUsuario(){
 		/* Define as mensagens que aparecerão quando tiver erros */
 		$this->form_validation->set_message('alpha', 'Digite letras somente letras no campo {field}.');

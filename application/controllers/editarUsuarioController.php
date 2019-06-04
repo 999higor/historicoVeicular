@@ -10,12 +10,14 @@ class EditarUsuarioController extends CI_Controller {
 		/* Carrega o Model */
 		$this->load->model('EditaUsuarioModel');
 	}
+	
 	public function index()
 	{
         $id = $this->session->userdata('id');
         $data = $this->preencheCampos($id);
 		$this->load->view('editarUsuarioView', $data);
 	}
+
 	public function EditarUsuario(){
 		/* Define as mensagens que aparecerão quando tiver erros */
         $this->form_validation->set_message('alpha', 'Digite letras somente letras no campo {field}.');

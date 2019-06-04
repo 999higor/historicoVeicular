@@ -25,7 +25,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um tipo de Serviço</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/cadServicoController/CadastrarServico">
+        <form method="POST" action="<?php echo base_url();?>index.php/ServicoController/CadastrarServico">
 
           <div class="form-group">
             <div class="form-label-group">

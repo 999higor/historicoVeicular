@@ -18,14 +18,12 @@
   <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet">
 
 </head>
-
 <body class="bg-dark">
-
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar uma Empresa</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/cadEmpresaController/CadastrarEmpresa">
+        <form method="POST" action="<?php echo base_url();?>index.php/EmpresaController/CadastrarEmpresa">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -42,25 +40,21 @@
               </div>
             </div>
           </div>
-         
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="cnpj" class="form-control" placeholder="CNPJ" name="cnpj" required="required">
               <label for="cnpj">CNPJ</label>
             </div>
           </div>
-
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" id="email" class="form-control" placeholder="email" name="email" required="required">
               <label for="email">E-mail</label>
             </div>            
-        </div>
-                 
+        </div>                
         <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="input" class="text-center">   
         </form>
         <div class="text-center">
-
         </div>
       </div>
     </div>
@@ -97,7 +91,6 @@
       });
 
       </script>
-
 </body>
 
 </html>

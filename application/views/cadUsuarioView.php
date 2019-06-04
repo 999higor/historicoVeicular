@@ -24,7 +24,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/cadUsuarioController/CadastrarUsuario">
+        <form method="POST" action="<?php echo base_url();?>index.php/UsuarioController/CadastrarUsuario">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
