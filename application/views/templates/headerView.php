@@ -53,7 +53,7 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <h1 style="color:gray" class="dropdown-header">Você está logado como <b><?php echo $this->session->userdata('nome').' '.$this->session->userdata('sobrenome');?></b>.</h1>
           <div class="dropdown-divider"></div>      
-          <a class="dropdown-item disabled" href="#" data-toggle="modal" data-target="#editModal">Editar conta</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/UsuarioController/loadEditaUsuario" >Editar conta</a>
           <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/LoginController/logout" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>
@@ -94,19 +94,19 @@
             <span>Veículos</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownVeiculos">
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/VeiculoController/loadCadastraVeiculo">Cadastrar Veiculo</a>
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/VeiculoController/loadVisualizaVeiculos">Visualizar Veiculo</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/VeiculoController/loadCadastraVeiculo">Cadastrar Veiculo</a>
           </div>
       </li>
 
       <li class="nav-item active">
-          <a class="nav-link dropdown-toggle" id="dropdownEmpresas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"" >
+          <a class="nav-link dropdown-toggle" id="dropdownEmpresas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-building"></i>
             <span>Empresas</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownEmpresas">
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/EmpresaController/loadCadastraEmpresa">Cadastrar Empresa</a>
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/EmpresaController/loadVisualizaEmpresa">Visualizar Empresas</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/EmpresaController/loadCadastraEmpresa">Cadastrar Empresa</a>
           </div>
       </li>
 
@@ -116,8 +116,8 @@
             <span>Produtos</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownProduto">
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ProdutoController/loadCadastraProduto">Cadastrar Produto</a>
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ProdutoController/loadVisualizaProduto">Visualizar Produtos</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ProdutoController/loadCadastraProduto">Cadastrar Produto</a>
           </div>
       </li>
 
@@ -127,8 +127,8 @@
             <span>Serviços</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownServicos">
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ServicoController/loadVisualizaServico">Visualizar Serviços</a>
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ServicoController/loadCadastraServico">Cadastrar Serviço</a>
-            <a class="dropdown-item" href="#">Visualizar Serviços</a>
           </div>
       </li>
 

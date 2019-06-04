@@ -12,19 +12,22 @@
 
         public function VerificaSessao(){
             if(empty($this->session->userdata('cpf'))){
-                $data = array("message" => "Você precisa estar logado para acessar o cadastro.", "status" => 2);
-                $this->load->view('loginView', $data);
+                $this->session->set_flashdata('message', 'Você precisa estar logado para acessar o sistema.');
+                $this->session->set_flashdata('status', 2);
+                redirect("LoginController/index");
             }
         }
 
         public function loadCadastraUsuario(){
-            $this->VerificaSessao(); 
             $this->load->view('cadUsuarioView');
         }
 
         public function loadEditaUsuario(){
             $this->VerificaSessao(); 
-            $this->load->view('editarUsuarioView');
+
+            $id = $this->session->userdata('id');
+            $dados = $this->CarregaDadosViewEditar($id);
+            $this->load->view('editarUsuarioView', $dados);
         }
 
         public function loadVisualizaUsuario(){
@@ -57,8 +60,7 @@
             {
                 $this->load->view('cadUsuarioView');
             }
-            else
-            {
+            else{
                     /* Coleta os dados do formulário por POST */
                     $nome = $this->input->post('nome', TRUE);
                     $sobrenome = $this->input->post('sobrenome', TRUE);
@@ -84,13 +86,33 @@
                                 - Se retornar falso significa que houve algo de errado
                     */
                     if($this->UsuarioModel->EfetuaRegistro($dados)){
-                        $data = array("message" => "Usuário criado com sucesso.","status" => 1);
-                        $this->load->view('loginView', $data);
+                        $this->session->set_flashdata('message', 'Usuário criado com sucesso.');
+                        $this->session->set_flashdata('status', 1);
+                        redirect("LoginController/index");
                     }else{
-                        $data = array("message" => "Erro ao criar usuário.", "status" => 2);
-                        $this->load->view('loginView', $data);
+                        $this->session->set_flashdata('message', 'Erro ao criar usuário.');
+                        $this->session->set_flashdata('status', 2);
+                        redirect("LoginController/index");
                     }
             }
+        }
+
+        public function CarregaDadosViewEditar($id){
+            foreach ($this->UsuarioModel->pegaDados($id) as $dados){
+                $nome = $dados['nome'];
+                $sobrenome = $dados['sobrenome'];
+                $id = $dados['id'];
+                $email = $dados['email'];
+                $rg = $dados['rg'];
+                $cpf = $dados['cpf'];
+            } 
+            $data = array('nome' => $nome, 
+                          'sobrenome' => $sobrenome ,
+                          'email' => $email ,
+                          'rg' => $rg ,
+                          'cpf' => $cpf   
+                         );
+            return $data;
         }
 
         /* 

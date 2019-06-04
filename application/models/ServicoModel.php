@@ -12,4 +12,14 @@ class ServicoModel extends CI_Model {
         }else
             return FALSE;
     }
+
+    public function PopulaTabelaServico(){
+        $this->db->from('servico');
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
 }

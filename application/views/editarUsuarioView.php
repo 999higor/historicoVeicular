@@ -24,18 +24,18 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/editarUsuarioController/EditarUsuario">
+        <form method="POST" action="<?php echo base_url();?>index.php/UsuarioController/EditarUsuario">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input style="text-transform: uppercase;" type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" value="<?php echo $nome ;?>" autofocus="autofocus">
+                  <input style="text-transform: uppercase;" type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" value="<?php echo set_value('nome', $nome);?>" autofocus="autofocus">
                   <label for="nome">Nome</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input style="text-transform: uppercase;" type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" value="<?php echo $sobrenome ;?>" required="required">
+                  <input style="text-transform: uppercase;" type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" value="<?php echo set_value('sobrenome', $sobrenome);?>" required="required">
                   <label for="sobrenome">Sobrenome</label>
                 </div>
               </div>
@@ -45,13 +45,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" disabled value="<?php echo $cpf ;?>" required>
+                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" disabled value="<?php echo set_value('cpf', $cpf);?>" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo $rg ;?>" disabled required>
+                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rg', $rg);?>" disabled required>
                   <label for="rgUser">RG</label>
                 </div>
               </div>
@@ -59,7 +59,7 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" value="<?php echo $email ;?>" required>
+              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" value="<?php echo set_value('email', $email);?>" required>
               <label for="email">E-mail</label>
             </div>
           </div>

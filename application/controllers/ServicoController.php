@@ -7,14 +7,16 @@ class ServicoController extends CI_Controller {
 	{
 		parent:: __construct();
         $this->load->helper('url');
-        $this->VerificaSessao(); 
         $this->load->model('ServicoModel');
+        $this->load->library('form_validation');
+        $this->VerificaSessao();  
     }
 
     public function VerificaSessao(){
         if(empty($this->session->userdata('cpf'))){
-            $data = array("message" => "Você precisa estar logado para acessar o cadastro.", "status" => 2);
-			$this->load->view('loginView', $data);
+            $this->session->set_flashdata('message', 'Você precisa estar logado para acessar o sistema.');
+            $this->session->set_flashdata('status', 2);
+            redirect("LoginController/index");
         }
     }
     
@@ -27,7 +29,7 @@ class ServicoController extends CI_Controller {
     }
     
     public function loadVisualizaServico(){	
-
+        $this->PopulaTabelaServico();
 	}
    
 	public function CadastrarServico(){
@@ -49,5 +51,22 @@ class ServicoController extends CI_Controller {
                 redirect("mainController/index");
             }
         }
+
+        public function PopulaTabelaServico(){
+            $data['servico'] = $this->ServicoModel->PopulaTabelaServico();
+            /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
+            if(!empty($data['servico']))
+            {
+                $this->load->view('templates/headerView');
+                $this->load->view('DataTables/VisualizaServicoView', $data);
+                $this->load->view('templates/footerView');
+            }else{
+                /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                        - Retorna mensagem para a tela principal                                                   */
+                $data = array("message" => "Nenhum produto cadastrado", "status" => 3);
+                $this->load->view('templates/headerView', $data);
+                $this->load->view('templates/footerView');
+            }
+    }
 }
 

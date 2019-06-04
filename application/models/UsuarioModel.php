@@ -43,4 +43,14 @@ class UsuarioModel extends CI_Model {
         }else
             return false;
     }
+
+    public function pegaDados($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('cliente');
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
 }

@@ -7,14 +7,16 @@ class ProdutoController extends CI_Controller {
 	{
 		parent:: __construct();
         $this->load->helper('url');
-        $this->VerificaSessao(); 
         $this->load->model('ProdutoModel');
+        $this->load->library('form_validation');
+        $this->VerificaSessao();  
     }
     
     public function VerificaSessao(){
         if(empty($this->session->userdata('cpf'))){
-            $data = array("message" => "Você precisa estar logado para acessar o cadastro.", "status" => 2);
-			$this->load->view('loginView', $data);
+            $this->session->set_flashdata('message', 'Você precisa estar logado para acessar o sistema.');
+            $this->session->set_flashdata('status', 2);
+            redirect("LoginController/index");
         }
     }
     

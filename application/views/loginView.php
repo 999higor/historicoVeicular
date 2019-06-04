@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
   <title>Login</title>
 
   <!-- Custom fonts for this template-->
@@ -46,24 +45,23 @@
             </div>
           </div>
           <input id="btn" class="btn btn-primary btn-block" type="submit" value="Enviar">
-
-          <?php //echo $this->session->flashdata("error") ?>
         </form>
         <div class="text-center">
           <a class="d-block small mt-3" href="<?php echo base_url();?>index.php/UsuarioController/loadCadastraUsuario">Registrar um usuário</a>
         </div>
         <hr>
-        <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
-          <?php
-            if(isset($message)){
-              if($status == 1){
-                echo "<div class='alert alert-success' role='alert'>";
-                      echo "<label text-align='center'>".$message."</label>";
-                echo "</div>";
-              }else if($status == 2){
-                echo "<div class='alert alert-danger' role='alert'>";
-                      echo "<label text-align='center'>".$message."</label>";
-                echo "</div>";
+        <?php 
+              $message = $this->session->flashdata("message");
+              $status  = $this->session->flashdata("status");
+              if(isset($message)){
+                if($status == 1){
+                  echo "<div class='alert alert-success' role='alert'>";
+                        echo "<label text-align='center'>".$message."</label>";
+                  echo "</div>";
+                }else if($status == 2){
+                  echo "<div class='alert alert-danger' role='alert'>";
+                        echo "<label text-align='center'>".$message."</label>";
+                  echo "</div>";
               }
             }
           ?>
