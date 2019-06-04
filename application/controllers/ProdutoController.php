@@ -27,7 +27,7 @@ class ProdutoController extends CI_Controller {
     }
 
     public function loadVisualizaProduto(){
-
+        $this->PopulaTabelaProduto();
     }
 
 	public function CadastrarProduto(){
@@ -46,12 +46,29 @@ class ProdutoController extends CI_Controller {
             if($this->ProdutoModel->CadastrarProduto($dados)){
                 $this->session->set_flashdata('message', 'Produto cadastrado com sucesso.');
                 $this->session->set_flashdata('status', 1);
-                redirect("mainController/index");
+                redirect("ProdutoController/loadVisualizaProduto");
             }else{
                 $this->session->set_flashdata('message', 'Erro ao cadastrar Produto.');
                 $this->session->set_flashdata('status', 2);
-                redirect("mainController/index");
+                redirect("ProdutoController/loadVisualizaProduto");
             }    
         }
+
+        public function PopulaTabelaProduto(){
+            $data['produto'] = $this->ProdutoModel->PopulaTabelaProduto();
+            /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
+            if(!empty($data['produto']))
+            {
+                $this->load->view('templates/headerView');
+                $this->load->view('DataTables/VisualizaProdutoView', $data);
+                $this->load->view('templates/footerView');
+            }else{
+                /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                        - Retorna mensagem para a tela principal                                                   */
+                $data = array("message" => "Nenhum produto cadastrado", "status" => 3);
+                $this->load->view('templates/headerView', $data);
+                $this->load->view('templates/footerView');
+            }
+    }
 }
 

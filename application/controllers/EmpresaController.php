@@ -46,11 +46,11 @@ class EmpresaController extends CI_Controller {
             if($this->EmpresaModel->CadastrarEmpresa($dados)){
                 $this->session->set_flashdata('message', 'Empresa cadastrada com sucesso.');
                 $this->session->set_flashdata('status', 1);
-                redirect("mainController/index");
+                redirect("EmpresaController/loadVisualizaEmpresa");
             }else{
                 $this->session->set_flashdata('message', 'Erro ao cadastrar empresa.');
                 $this->session->set_flashdata('status', 2);
-                redirect("mainController/index");
+                redirect("EmpresaController/loadVisualizaEmpresa");
             }
     }
 
@@ -66,8 +66,8 @@ class EmpresaController extends CI_Controller {
                 /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                         - Retorna mensagem para a tela principal                                                   */
                 $data = array("message" => "Nenhuma empresa cadastrada", "status" => 3);
-                $this->load->view('headerView', $data);
-                $this->load->view('footerView');
+                $this->load->view('templates/headerView', $data);
+                $this->load->view('templates/footerView');
             }
     }
 }

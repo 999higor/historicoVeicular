@@ -79,7 +79,7 @@
         <div class="modal-body">Selecione "Logout" se desejas mesmo sair.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/MainController/logout">Logout</a>
+          <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/LoginController/logout">Logout</a>
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownVeiculos">
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/VeiculoController/loadCadastraVeiculo">Cadastrar Veiculo</a>
-            <a class="dropdown-item" href="#">Visualizar Veiculo</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/VeiculoController/loadVisualizaVeiculos">Visualizar Veiculo</a>
           </div>
       </li>
 
@@ -117,7 +117,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownProduto">
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ProdutoController/loadCadastraProduto">Cadastrar Produto</a>
-            <a class="dropdown-item" href="#">Visualizar Produtos</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ProdutoController/loadVisualizaProduto">Visualizar Produtos</a>
           </div>
       </li>
 
@@ -137,8 +137,11 @@
       <div class="container-fluid">
 
       <?php
-            $message = $this->session->flashdata('message');
-            $status = $this->session->flashdata('status');
+            if(empty($message)){
+              $message = $this->session->flashdata('message');
+              $status = $this->session->flashdata('status');
+            }
+
             if(isset($message)){
               if($status == 1){
                 echo "<div class='alert alert-success' role='alert'>";
