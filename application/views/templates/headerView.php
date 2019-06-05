@@ -21,7 +21,7 @@
   <link href="<?php echo base_url()?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet">
+  <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet"> 
 
 </head>
 <body id="page-top">
@@ -34,7 +34,7 @@
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button">
             <i class="fas fa-search"></i>
@@ -176,8 +176,7 @@
   <script src="<?php echo base_url()?>assets/js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="<?php echo base_url()?>assets/js/demo/datatables-demo.js"></script>
-  <script src="<?php echo base_url()?>assets/js/demo/chart-area-demo.js"></script>
+  <!-- <script src="<?php //echo base_url()?>assets/js/demo/datatables-demo.js"></script> -->
 
 </body>
 </html>
