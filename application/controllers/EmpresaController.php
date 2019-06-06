@@ -21,7 +21,10 @@ class EmpresaController extends CI_Controller {
     }
     
     public function loadCadastraEmpresa(){
+        //$this->load->view('cadEmpresaView');
+        $this->load->view('templates/headerView');
         $this->load->view('cadEmpresaView');
+        $this->load->view('templates/footerView');
     }
 
     public function loadEditaEmpresa(){

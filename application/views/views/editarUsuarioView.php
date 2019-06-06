@@ -45,13 +45,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" disabled value="<?php echo set_value('cpf', $cpf);?>" required>
+                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" disabled value="<?php echo set_value('cpfUser', $cpf);?>" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rg', $rg);?>" disabled required>
+                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rgUser', $rg);?>" disabled required>
                   <label for="rgUser">RG</label>
                 </div>
               </div>

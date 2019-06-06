@@ -1,5 +1,4 @@
-<script type="text/javascript">
-    var cont = 0;
+  var cont = 0;
 	$(document).ready(function() {
 	  var urlBase = "http://fipeapi.appspot.com/api/1/carros/";
 	  $.getJSON(urlBase + "marcas.json", function(data) {
@@ -85,65 +84,3 @@
         $('#anof').val(ano);
     });
   });
-</script>
-
-<div class="container">
-<div class="card card-register mx-auto mt-5">
-    <div class="card-header">Cadastro de Veículo</div>
-    <div class="card-body">
-    <form method="POST" action="<?php echo base_url();?>index.php/VeiculoController/CadastrarVeiculo">
-        <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('id');?>">
-        <input type="hidden" id="marca_" name="marca_" value="#">
-        <input type="hidden" id="modelo_" name="modelo_" value="#">
-        <input type="hidden" id="anof" name="anof" value="#">
-        <input type="hidden" id="anom" name="anom" value="#">
-        <div class="form-group">
-        <div class="form-row">
-            <div class="col-md-6">
-            <div class="form-label-group">
-                <select id="marcas" class="form-control" name="marcas" required="required" autofocus="autofocus"></select>
-            </div>
-            </div>
-            <div class="col-md-6">
-            <div class="form-label-group">
-                <select id="veiculos" class="form-control" required="required" name="veiculos" autofocus="autofocus"></select>
-            </div>
-            </div>
-        </div>
-        </div>
-        <div class="form-group">
-        <div class="form-row">
-            <div class="col-md-6">
-                <div class="form-label-group">
-                    <select id="ano" class="form-control"name="ano" required="required"></select>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-label-group">
-                <select id="anoMod" class="form-control" name="anoMod" required="required"></select>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="form-group">
-        <div class="form-row">
-            <div class="col-md-6">
-            <div class="form-label-group">
-                <input type="text" id="renavam" class="form-control" placeholder="RENAVAM" name="renavam" maxlength="11" required="required">
-                <label for="renavam">Código de RENAVAM</label>
-            </div>
-            </div>
-            <div class="col-md-6">
-            <div class="form-label-group">
-                <input type="text" id="placa" class="form-control" placeholder="Placa" name="placa" maxlength="7" required="required">
-                <label for="placa">Placa do Veículo</label>
-            </div>
-            </div>
-        </div>
-        </div>
-        <button type="submit" name="button" class="btn btn-primary">Cadastrar</button>
-    </form>
-    </div>
-  </div>
-</div>
-

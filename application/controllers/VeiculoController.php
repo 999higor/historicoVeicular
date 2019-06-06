@@ -21,7 +21,9 @@ class VeiculoController extends CI_Controller {
     }
     
     public function loadCadastraVeiculo(){
+        $this->load->view('templates/headerView');
         $this->load->view('cadVeiculoView');
+        $this->load->view('templates/footerView');
     }
 
     public function loadEditaVeiculo(){

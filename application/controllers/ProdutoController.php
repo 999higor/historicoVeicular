@@ -21,7 +21,9 @@ class ProdutoController extends CI_Controller {
     }
     
     public function loadCadastraProduto(){
+        $this->load->view('templates/headerView');
         $this->load->view('cadProdutoView');
+        $this->load->view('templates/footerView');
     }
 
     public function loadEditaProduto(){

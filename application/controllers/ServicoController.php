@@ -21,7 +21,9 @@ class ServicoController extends CI_Controller {
     }
     
 	public function loadCadastraServico(){	
+        $this->load->view('templates/headerView');
 		$this->load->view('cadServicoView');
+        $this->load->view('templates/footerView');
     }
     
     public function loadEditaServico(){	
@@ -44,11 +46,11 @@ class ServicoController extends CI_Controller {
             if($this->ServicoModel->CadastrarServico($dados)){
                 $this->session->set_flashdata('message', 'Serviço criado com sucesso.');
                 $this->session->set_flashdata('status', 1);
-                redirect("mainController/index");
+                redirect("ServicoController/loadVisualizaServico");
             }else{
                 $this->session->set_flashdata('message', 'Erro ao criar o Serviço.');
                 $this->session->set_flashdata('status', 2);
-                redirect("mainController/index");
+                redirect("ServicoController/loadVisualizaServico");
             }
         }
 
