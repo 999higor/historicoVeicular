@@ -1,17 +1,18 @@
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registrar um tipo de Serviço</div>
+      <div class="card-header">Editar um tipo de Serviço</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/ServicoController/CadastrarServico">
+      <form method="POST" action="<?php echo base_url();?>index.php/ServicoController/EditarServico">
             <div class="form-group">
+                <input value="<?php set_value('id', @$servico['id']);?>" id="id" hidden>
                 <div class="form-label-group">
-                    <input type="text" id="nome" class="form-control" placeholder="Nome do Serviço" name="nome" required>
+                    <input type="text" id="nome" class="form-control" placeholder="Nome do Serviço" name="nome" value="<?php set_value('nome', @$servico['nome']);?>" required>
                     <label for="nome">Nome do Serviço</label>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-label-group">
-                    <input type="text" id="valor" class="form-control" placeholder="Valor" name="valor" required>
+                    <input type="text" id="valor" class="form-control" placeholder="Valor" name="valor" <?php set_value('valor', @$servico['valor']);?> required>
                     <label for="valor">Valor</label>
                 </div>            
             </div>
@@ -22,6 +23,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 <!-- JQuery Mask -->
 <script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>

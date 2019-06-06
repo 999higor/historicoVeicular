@@ -34,7 +34,7 @@
                     echo '<tr>
                             <td>'.$dados['nome'].'</td>
                             <td>'.$dados['valor'].'</td>
-                            <td><a href="'.base_url().'index.php/ProdutoController/loadVisualizaProduto"><i class="fa fa-edit"></i></a></td>                              
+                            <td><a href="'.base_url().'index.php/ServicoController/loadEditaServico?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
                             <td><a href="'.base_url().'"><i class="fa fa-trash"></i></a></td>
                           </tr>';
                   }
@@ -49,8 +49,7 @@
 
           <script>
               $(document).ready(function() {
-                    $('#dataTable').dataTable({   
-                      searching: false,                           
+                    $('#dataTable').dataTable({                           
                       oLanguage: {
                         sLengthMenu: "Mostrar _MENU_ registros por página",
                         sZeroRecords: "Nenhum registro encontrado",
@@ -64,7 +63,17 @@
                             sNext: "Próximo",
                             sLast: "Último"
                           }
-                      }
+                      }                    
                     })
               });
+
+               //
+
+              function metodoPost(){
+                var idservico = document.getElementById("idservico").value;
+                alert(idservico);
+                //$.post( "test.php", { name: "John", time: "2pm" } );
+              }
           </script>
+
+         

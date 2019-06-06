@@ -97,6 +97,10 @@
             }
         }
 
+        public function EditarUsuario(){
+            
+        }
+
         public function CarregaDadosViewEditar($id){
             foreach ($this->UsuarioModel->pegaDados($id) as $dados){
                 $nome = $dados['nome'];
