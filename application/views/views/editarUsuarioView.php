@@ -1,5 +1,15 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
+	
+    //https://stackoverflow.com/questions/17335774/codeigniter-using-set-value-to-populate-a-form-for-editing-with-no-post-inv
+	
+	/*
+		You try this code
+			set_value('<field_name>', @$field_from_db);
+     	@ is used to skipps errors if field is not set
+	
+	*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
