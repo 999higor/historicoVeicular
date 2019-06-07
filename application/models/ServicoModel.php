@@ -25,8 +25,7 @@ class ServicoModel extends CI_Model {
 
     public function PopulaCamposViewEditar($id){
         $this->db->where('id', $id);
-        $this->db->from('servico');
-        $query = $this->db->get();
+        $query = $this->db->get('servico');
 
         if($query->num_rows() > 0){
             return $query->result_array();
@@ -35,10 +34,8 @@ class ServicoModel extends CI_Model {
 
     }
 
-    public function EditarUsuario($id, $nome, $valor){
-        $dados= array('nome'=>$nome,'valor'=>$valor);
+    public function EditarServico($dados, $id){
         $this->db->where('id',$id);
-
         if($this->db->update('servico',$dados)){
             return true;
         }else

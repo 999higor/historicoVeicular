@@ -27,14 +27,33 @@ class ServicoController extends CI_Controller {
     }
     
     public function loadEditaServico(){
+        /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         $idServico = $this->input->get('id');
-        $this->PopulaCamposViewEditar($idServico);
+        $data = $this->PopulaCamposViewEditar($idServico);
+
+        if(!empty($data))
+        {    
+            $this->load->view('templates/headerView');
+            $this->load->view('editaServicoView', $data);
+            $this->load->view('templates/footerView');
+        }else
+        {
+            /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                    - Retorna mensagem para a tela principal      */
+            $data = array("message" => "Erro ao encontrar serviço.", "status" => 2);
+            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/footerView');
+        }
 
     }
     
     public function loadVisualizaServico(){	
         $this->PopulaTabelaServico();
-	}
+    }
+    
+    public function DeletarServico(){
+
+    }
 
     /* 
     *
@@ -67,21 +86,20 @@ class ServicoController extends CI_Controller {
         *
         */
         public function PopulaCamposViewEditar($id){
-            $data ['servico'] = $this->ServicoModel->PopulaCamposViewEditar($id);
-            /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
-            if(!empty($data['servico']))
-            {    
-                $this->load->view('templates/headerView');
-                $this->load->view('editaServicoView', $data);
-                $this->load->view('templates/footerView');
-            }else
+            /*  Faz a busca no banco e coloca em um array */
+            foreach ($this->ServicoModel->PopulaCamposViewEditar($id) as $dados)
             {
-                /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
-                        - Retorna mensagem para a tela principal      */
-                $data = array("message" => "Erro ao encontrar serviço.", "status" => 2);
-                $this->load->view('templates/headerView', $data);
-                $this->load->view('templates/footerView');
+                $id = $dados['id'];
+                $valor = $dados['valor'];
+                $nome = $dados['nome'];
             }
+ 
+            $data = array('id' => $id, 
+                          'valor' => $valor ,
+                          'nome' => $nome , 
+                          );
+ 
+            return $data;
         }
 
         public function EditarServico(){
@@ -89,17 +107,20 @@ class ServicoController extends CI_Controller {
             $nome = $this->input->post('nome');
             $valor = $this->input->post('valor');
 
-            if($this->ServicoModel->EditarServico($id, $nome, $valor)){
-                $data = array("message" => "O serviço de ID ".$id." foi alterado com sucesso .", "status" => 1);
-                $this->load->view('templates/headerView', $data);
-                $this->load->view('visualizaServicoView');
-                $this->load->view('templates/footerView');
-            }else{
-                $data = array("message" => "Houve um erro ao alterar o serviço de ID ".$id.".", "status" => 3);
-                $this->load->view('templates/headerView', $data);
-                $this->load->view('visualizaServicoView');
-                $this->load->view('templates/footerView');
-            }
+            $dados = array(
+                          'nome' => $nome,
+                          'valor' => $valor
+            );
+
+            if($this->ServicoModel->EditarServico($dados, $id)){
+                    $this->session->set_flashdata('message', 'O serviço de ID '.$id.' foi alterado com sucesso .');
+                    $this->session->set_flashdata('status', 1);
+                    redirect("ServicoController/loadVisualizaServico");
+                }else{
+                    $this->session->set_flashdata('message', 'Houve um erro ao alterar o serviço de ID '.$id.'.');
+                    $this->session->set_flashdata('status', 3);
+                    redirect("ServicoController/loadVisualizaServico");
+                }
         }
 
         /* 
@@ -118,7 +139,8 @@ class ServicoController extends CI_Controller {
             }else{
                 /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                         - Retorna mensagem para a tela principal                                                   */
-                $data = array("message" => "Nenhum serviço cadastrado", "status" => 3);
+                $this->session->set_flashdata('message', 'Nenhum serviço cadastrado');
+                $this->session->set_flashdata('status', 3);
                 $this->load->view('templates/headerView', $data);
                 $this->load->view('templates/footerView');
             }

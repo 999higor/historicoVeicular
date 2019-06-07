@@ -2,17 +2,17 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Editar um tipo de Serviço</div>
       <div class="card-body">
-      <form method="POST" action="<?php echo base_url();?>index.php/ServicoController/EditarServico">
+      <form method="post" action="<?php echo base_url();?>index.php/ServicoController/EditarServico">
             <div class="form-group">
-                <input value="<?php set_value('id', @$servico['id']);?>" id="id" hidden>
+                <input value="<?php echo set_value('id', @$id);?>" name="id" hidden>
                 <div class="form-label-group">
-                    <input type="text" id="nome" class="form-control" placeholder="Nome do Serviço" name="nome" value="<?php set_value('nome', @$servico['nome']);?>" required>
+                    <input type="text" id="nome" class="form-control" placeholder="Nome do Serviço" name="nome" value="<?php echo set_value('nome', @$nome);?>" required>
                     <label for="nome">Nome do Serviço</label>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-label-group">
-                    <input type="text" id="valor" class="form-control" placeholder="Valor" name="valor" <?php set_value('valor', @$servico['valor']);?> required>
+                    <input type="text" id="valor" class="form-control" placeholder="Valor" name="valor" value="<?php echo set_value('valor', @$valor);?>" required>
                     <label for="valor">Valor</label>
                 </div>            
             </div>
@@ -24,18 +24,14 @@
   </div>
 </div>
 
-
-
-
 <!-- JQuery Mask -->
 <script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>
-  <script>
-      /* Máscaras que definem:
-            - CPF e RG: somente números
-            - Nome e Sobrenome: somente letras
-      */
-      $(document).ready(function(){
-         $('#valor').mask("###0.00", {reverse: true});
-      });
-
-    </script>
+<script>
+    /* Máscaras que definem:
+          - CPF e RG: somente números
+          - Nome e Sobrenome: somente letras
+    */
+    $(document).ready(function(){
+        $('#valor').mask("###0.00", {reverse: true});
+    });
+  </script>
