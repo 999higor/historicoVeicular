@@ -47,7 +47,7 @@
         </div>
       </div>        
 
-      <a class="dropdown-item" data-toggle="modal" data-target="#deleteModal">Logout</a>
+      <!--<a class="dropdown-item" data-toggle="modal" data-target="#deleteModal">Logout</a> -->
 
       <!-- Modal de Deletar Servico-->
       <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
