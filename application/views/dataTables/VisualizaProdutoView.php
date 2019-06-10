@@ -65,7 +65,7 @@
                   </div>
                   <div class="modal-body">
                     <form method="POST" action="<?php echo base_url(); ?>index.php/ProdutoController/DeletarProduto">
-                        <label>Clique em "Confirmar" para deletar o serviço.</label>
+                        <label>Clique em "Confirmar" para deletar o produto.</label>
                         <input type="hidden" id="id" name="id" value="#">
                         <div class="modal-footer">
                           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>

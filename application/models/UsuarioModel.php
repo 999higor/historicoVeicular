@@ -44,7 +44,7 @@ class UsuarioModel extends CI_Model {
             return false;
     }
 
-    public function pegaDados($id){
+    public function CarregaDadosViewEditarUsuario($id){
         $this->db->where('id', $id);
         $query = $this->db->get('cliente');
 

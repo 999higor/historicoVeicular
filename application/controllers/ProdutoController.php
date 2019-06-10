@@ -69,18 +69,17 @@ class ProdutoController extends CI_Controller {
     public function EditarProduto(){
         $id = $this->input->post('id', TRUE);
         $nome = $this->input->post('nome', TRUE);
-        $quantidade = $this->input->post('nome', TRUE);
+        $quantidade = $this->input->post('quantidade', TRUE);
         $marca = $this->input->post('marca', TRUE);
         $valor = $this->input->post('valor', TRUE);
 
-        $dados = array('id' => $id,
-                       'marca' => $marca ,
+        $dados = array('marca' => $marca ,
                        'nome' => $nome,
                        'quantidade' => $quantidade,
                        'valor' => $valor,        
         );  
 
-        if($this->ProdutoModel->EditarProduto($dados)){
+        if($this->ProdutoModel->EditarProduto($dados, $id)){
             $this->session->set_flashdata('message', 'Produto alterado com sucesso.');
             $this->session->set_flashdata('status', 1);
             redirect("ProdutoController/loadVisualizaProduto");

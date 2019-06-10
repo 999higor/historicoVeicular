@@ -26,8 +26,22 @@
             $this->VerificaSessao(); 
 
             $id = $this->session->userdata('id');
-            $dados = $this->CarregaDadosViewEditar($id);
-            $this->load->view('editarUsuarioView', $dados);
+            $data = $this->CarregaDadosViewEditarUsuario($id);
+           
+            if(!empty($data))
+            {    
+                $this->load->view('templates/HeaderView');
+                $this->load->view('editarUsuarioView', $data);
+                $this->load->view('templates/FooterView');    
+            }else
+            {
+                /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                        - Retorna mensagem para a tela principal      */
+                $data = array("message" => "Erro ao encontrar usuario.", "status" => 2);
+                echo("<script>console.log('PHP: ".$id."');</script>");
+                $this->load->view('templates/headerView', $data);
+                $this->load->view('templates/footerView');
+            }
         }
 
         public function loadVisualizaUsuario(){
@@ -101,8 +115,8 @@
             
         }
 
-        public function CarregaDadosViewEditar($id){
-            foreach ($this->UsuarioModel->pegaDados($id) as $dados){
+        public function CarregaDadosViewEditarUsuario($id){
+            foreach ($this->UsuarioModel->CarregaDadosViewEditarUsuario($id) as $dados){
                 $nome = $dados['nome'];
                 $sobrenome = $dados['sobrenome'];
                 $id = $dados['id'];
@@ -110,7 +124,8 @@
                 $rg = $dados['rg'];
                 $cpf = $dados['cpf'];
             } 
-            $data = array('nome' => $nome, 
+            $data = array('id' => $id,
+                          'nome' => $nome, 
                           'sobrenome' => $sobrenome ,
                           'email' => $email ,
                           'rg' => $rg ,

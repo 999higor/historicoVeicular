@@ -42,7 +42,11 @@ class ProdutoModel extends CI_Model {
             return false;
     }
 
-    public function EditarProduto($dados){
-        
+    public function EditarProduto($dados, $id){
+        $this->db->where('id',$id);
+        if($this->db->update('produto',$dados)){
+            return true;
+        }else
+            return false;
     }
 }
