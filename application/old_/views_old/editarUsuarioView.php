@@ -1,5 +1,15 @@
 <?php 
     defined('BASEPATH') OR exit('No direct script access allowed');
+	
+    //https://stackoverflow.com/questions/17335774/codeigniter-using-set-value-to-populate-a-form-for-editing-with-no-post-inv
+	
+	/*
+		You try this code
+			set_value('<field_name>', @$field_from_db);
+     	@ is used to skipps errors if field is not set
+	
+	*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,18 +34,18 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Usuário</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/UsuarioController/CadastrarUsuario">
+        <form method="POST" action="<?php echo base_url();?>index.php/UsuarioController/EditarUsuario">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" value="<?php echo set_value('nome'); ?>" autofocus="autofocus">
+                  <input style="text-transform: uppercase;" type="text" id="nome" class="form-control" placeholder="Nome" required="required" name="nome" value="<?php echo set_value('nome', $nome);?>" autofocus="autofocus">
                   <label for="nome">Nome</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" value="<?php echo set_value('sobrenome'); ?>" required="required">
+                  <input style="text-transform: uppercase;" type="text" id="sobrenome" class="form-control" placeholder="Sobrenome" name="sobrenome" value="<?php echo set_value('sobrenome', $sobrenome);?>" required="required">
                   <label for="sobrenome">Sobrenome</label>
                 </div>
               </div>
@@ -45,13 +55,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" value="<?php echo set_value('cpfUser'); ?>" required>
+                  <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" disabled value="<?php echo set_value('cpfUser', $cpf);?>" required>
                   <label for="cpfUser">CPF</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rgUser'); ?>" required>
+                  <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rgUser', $rg);?>" disabled required>
                   <label for="rgUser">RG</label>
                 </div>
               </div>
@@ -59,9 +69,12 @@
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" value="<?php echo set_value('email'); ?>" required>
+              <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" value="<?php echo set_value('email', $email);?>" required>
               <label for="email">E-mail</label>
             </div>
+          </div>
+          <div class="form-group">
+            <input type="checkbox" id="cbConfirma">Confirmar alteração
           </div>
           <div class="form-group">
             <div class="form-row">
@@ -108,8 +121,24 @@
           $('#rgUser').mask('00.000.000-0', {reverse: true});
           $('#nome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
           $('#sobrenome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
+          
           $('#btn').prop('disabled', true);
+          $('#password').prop('disabled',true);
+          $('#confirmPassword').prop('disabled',true);
       });
+
+      $(document).ready(function(){
+        $('#cbConfirma').click(function(){
+            if($(this).prop("checked") == true){
+                $('#password').prop('disabled',false);
+                $('#confirmPassword').prop('disabled',false);
+            }
+            else if($(this).prop("checked") == false){
+                $('#password').prop('disabled',true);
+                $('#confirmPassword').prop('disabled',true);
+            }
+        });
+    });
 
       /* Quando o botão enviar é clicado o texto do campo cpfUser e rgUser é copiado
          para os campos ocultos/hidden sem a mascara e enviados para o controler pelo 

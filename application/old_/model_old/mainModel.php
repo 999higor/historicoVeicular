@@ -18,12 +18,10 @@ class MainModel extends CI_Model {
         }else
             return false;
     }
-
 /* 
     MOSTRAR CONSULTA QUE ESTÁ SENDO EXECUTADA PELO BD
         return $this->db->last_query();
 */
-
     public function verificaVeiculo($id){
         $this->db->where('idcliente',$id);
         $query = $this->db->get('veiculo');

@@ -7,10 +7,19 @@ class LoginController extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('form_validation');
 	}
+
 	public function index()
 	{
 		$this->load->view('loginView');
 	}
+
+	function logout()
+	{
+		/* Destroi a session e redireciona pra tela de login */
+		$this->session->unset_userdata('cpf');
+		redirect(base_url().'index.php/LoginController');
+	}
+
 	public function verificaLogin(){
 		/* https://www.youtube.com/watch?v=pG1rOs8vz1Q */
 		$this->form_validation->set_message('numeric', 'Digite apenas números.');
@@ -58,7 +67,9 @@ class LoginController extends CI_Controller {
 	}
 	function login(){
 		if($this->session->userdata('cpf') != ''){
-			redirect(base_url().'index.php/MainController');
+			//redirect(base_url().'index.php/MainController');
+			$this->load->view('templates/headerView');
+			$this->load->view('templates/footerView');
 		}else{
 			/* se der erro retorna uma mensagem com erro na autenticação */
 			$data = array("message" => "Campo CPF ou Senha incorretos.", "status" => 2);

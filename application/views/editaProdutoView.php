@@ -1,17 +1,18 @@
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registrar um Produto</div>
+      <div class="card-header">Alterar um Produto</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/ProdutoController/CadastrarProduto">   
+        <form method="POST" action="<?php echo base_url();?>index.php/ProdutoController/EditarProduto">   
           <div class="form-group">
+          <input value="<?php echo set_value('id', @$id);?>" name="id" hidden>
             <div class="form-label-group">
-              <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" required="required">
+              <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" value="<?php echo set_value('marca', @$marca);?>" required>
               <label for="marca">Marca</label>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="nome" class="form-control" placeholder="Nome" name="nome" required="required">
+              <input type="text" id="nome" class="form-control" placeholder="Nome" name="nome" value="<?php echo set_value('nome', @$nome);?>" required>
               <label for="nome">Nome</label>
             </div>            
         </div>
@@ -19,13 +20,13 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="quantidade" class="form-control" placeholder="Quantidade" required="required" name="quantidade" autofocus="autofocus">
+                  <input type="text" id="quantidade" class="form-control" placeholder="Quantidade" value="<?php echo set_value('quantidade', @$quantidade);?>" name="quantidade" autofocus="autofocus" required>
                   <label for="quantidade">Quantidade</label>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="valor" class="form-control" placeholder="Preço" name="valor" required="required">
+                  <input type="text" id="valor" class="form-control" placeholder="Preço" name="valor" value="<?php echo set_value('valor', @$valor);?>" required>
                   <label for="valor">Preço</label>
                 </div>
               </div>
