@@ -32,7 +32,20 @@ class VeiculoController extends CI_Controller {
 
     public function loadVisualizaVeiculos(){
         $id = $this->session->userdata('id');
-        $this->PopulaTabelaVeiculo($id);
+        $data['veiculo'] = $this->VeiculoModel->PopulaTabelaVeiculo($id);
+        /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
+        if(!empty($data['veiculo']))
+        {
+            $this->load->view('templates/headerView');
+            $this->load->view('DataTables/VisualizaVeiculoView', $data);
+            $this->load->view('templates/footerView');
+        }else{
+            /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                    - Retorna mensagem para a tela principal                                                   */
+            $data = array("message" => "Nenhum Veiculo cadastrado com esse usuário.", "status" => 3);
+            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/footerView');
+        }
     }
 
 	public function CadastrarVeiculo(){
@@ -64,21 +77,4 @@ class VeiculoController extends CI_Controller {
                 redirect("VeiculoController/loadVisualizaVeiculos");
             }    
       }
-    
-    public function PopulaTabelaVeiculo($id){
-        $data['veiculo'] = $this->VeiculoModel->PopulaTabelaVeiculo($id);
-        /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
-        if(!empty($data['veiculo']))
-        {
-            $this->load->view('templates/headerView');
-            $this->load->view('DataTables/VisualizaVeiculoView', $data);
-            $this->load->view('templates/footerView');
-        }else{
-            /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
-                    - Retorna mensagem para a tela principal                                                   */
-            $data = array("message" => "Nenhum Veiculo cadastrado com esse usuário.", "status" => 3);
-            $this->load->view('templates/headerView', $data);
-            $this->load->view('templates/footerView');
-        }
-    }
 }

@@ -29,7 +29,7 @@ class ServicoController extends CI_Controller {
     public function loadEditaServico(){
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         $idServico = $this->input->get('id');
-        $data = $this->PopulaCamposViewEditar($idServico);
+        $data = $this->PopulaCamposViewEditarServico($idServico);
 
         if(!empty($data))
         {    
@@ -48,10 +48,35 @@ class ServicoController extends CI_Controller {
     }
     
     public function loadVisualizaServico(){	
-        $this->PopulaTabelaServico();
+        $data['servico'] = $this->ServicoModel->PopulaTabelaServico();
+        /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
+        if(!empty($data['servico']))
+        {
+            $this->load->view('templates/headerView');
+            $this->load->view('DataTables/VisualizaServicoView', $data);
+            $this->load->view('templates/footerView');
+        }else{
+            /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                    - Retorna mensagem para a tela principal                                                   */
+            $this->session->set_flashdata('message', 'Nenhum serviço cadastrado');
+            $this->session->set_flashdata('status', 3);
+            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/footerView');
+        }
     }
     
     public function DeletarServico(){
+        $id = $this->input->post('id', TRUE);
+
+        if($this->ServicoModel->DeletarServico($id)){
+            $this->session->set_flashdata('message', 'Serviço deletado com sucesso.');
+            $this->session->set_flashdata('status', 1);
+            redirect("ServicoController/loadVisualizaServico");
+        }else{
+            $this->session->set_flashdata('message', 'Erro ao deletar o serviço.');
+            $this->session->set_flashdata('status', 1);
+            redirect("ServicoController/loadVisualizaServico");
+        }
 
     }
 
@@ -85,9 +110,9 @@ class ServicoController extends CI_Controller {
         *     View Editar Servico
         *
         */
-        public function PopulaCamposViewEditar($id){
+        public function PopulaCamposViewEditarServico($id){
             /*  Faz a busca no banco e coloca em um array */
-            foreach ($this->ServicoModel->PopulaCamposViewEditar($id) as $dados)
+            foreach ($this->ServicoModel->PopulaCamposViewEditarServico($id) as $dados)
             {
                 $id = $dados['id'];
                 $valor = $dados['valor'];
@@ -122,28 +147,5 @@ class ServicoController extends CI_Controller {
                     redirect("ServicoController/loadVisualizaServico");
                 }
         }
-
-        /* 
-        *
-        *     View Visualizar Servico
-        *
-        */
-        public function PopulaTabelaServico(){
-            $data['servico'] = $this->ServicoModel->PopulaTabelaServico();
-            /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
-            if(!empty($data['servico']))
-            {
-                $this->load->view('templates/headerView');
-                $this->load->view('DataTables/VisualizaServicoView', $data);
-                $this->load->view('templates/footerView');
-            }else{
-                /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
-                        - Retorna mensagem para a tela principal                                                   */
-                $this->session->set_flashdata('message', 'Nenhum serviço cadastrado');
-                $this->session->set_flashdata('status', 3);
-                $this->load->view('templates/headerView', $data);
-                $this->load->view('templates/footerView');
-            }
-    }
 }
 

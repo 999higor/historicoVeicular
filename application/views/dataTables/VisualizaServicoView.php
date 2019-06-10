@@ -35,7 +35,7 @@
                         <td>'.$dados['nome'].'</td>
                         <td>'.$dados['valor'].'</td>
                         <td><a href="'.base_url().'index.php/ServicoController/loadEditaServico?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
-                        <td><a href="'.base_url().'" class="dropdown-item" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
+                        <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                       </tr>';
               }
               ?>  
@@ -47,8 +47,6 @@
         </div>
       </div>        
 
-      <!--<a class="dropdown-item" data-toggle="modal" data-target="#deleteModal">Logout</a> -->
-
       <!-- Modal de Deletar Servico-->
       <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -59,10 +57,15 @@
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div class="modal-body">Clique em "Confirmar" para deletar usuário.</div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/ServicoController/DeletarServico?id="">Confirmar</a>
+            <div class="modal-body">
+              <form method="POST" action="<?php echo base_url(); ?>index.php/ServicoController/DeletarServico">
+                  <label>Clique em "Confirmar" para deletar o serviço.</label>
+                  <input type="hidden" id="id" name="id" value="#">
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <input class="btn btn-primary " type="submit" value="Enviar" name="input" class="text-center">   
+                  </div>
+              </form>
             </div>
           </div>
         </div>
@@ -88,9 +91,13 @@
                 })
           });
 
-          function PegarId(){
-            
-          }
+          /* quando o modal é aberto ativa a função */
+          $('#deleteModal').on('show.bs.modal', function(e) {
+              /* pega o valor de ID pela tag data-id no link */
+              var idServico = $(e.relatedTarget).data('id');
+              /* preenche o valor do campo hidden id com o valor idServico obtido anteriormente */ 
+              $(e.currentTarget).find('input[name="id"]').val(idServico);
+          });
       </script>
 
          

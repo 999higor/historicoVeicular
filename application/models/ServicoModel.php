@@ -23,7 +23,7 @@ class ServicoModel extends CI_Model {
             return false;
     }
 
-    public function PopulaCamposViewEditar($id){
+    public function PopulaCamposViewEditarServico($id){
         $this->db->where('id', $id);
         $query = $this->db->get('servico');
 
@@ -31,12 +31,19 @@ class ServicoModel extends CI_Model {
             return $query->result_array();
         }else
             return false;
-
     }
 
     public function EditarServico($dados, $id){
         $this->db->where('id',$id);
         if($this->db->update('servico',$dados)){
+            return true;
+        }else
+            return false;
+    }
+
+    public function DeletarServico($id){
+        //$this->db->where('id', $id);
+        if($this->db->delete('servico', array('id' => $id))){
             return true;
         }else
             return false;

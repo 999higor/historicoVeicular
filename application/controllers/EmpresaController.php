@@ -32,7 +32,20 @@ class EmpresaController extends CI_Controller {
     }
 
     public function loadVisualizaEmpresa(){
-        $this->PopulaTabelaEmpresa();
+        $data['empresa'] = $this->EmpresaModel->PopulaTabelaEmpresa();
+        /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
+        if(!empty($data['empresa']))
+        {
+            $this->load->view('templates/headerView');
+            $this->load->view('DataTables/VisualizaEmpresaView', $data);
+            $this->load->view('templates/footerView');
+        }else{
+            /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
+                    - Retorna mensagem para a tela principal                                                   */
+            $data = array("message" => "Nenhuma empresa cadastrada", "status" => 3);
+            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/footerView');
+        }
     }
 
 	public function CadastrarEmpresa(){
@@ -56,23 +69,6 @@ class EmpresaController extends CI_Controller {
                 $this->session->set_flashdata('message', 'Erro ao cadastrar empresa.');
                 $this->session->set_flashdata('status', 2);
                 redirect("EmpresaController/loadVisualizaEmpresa");
-            }
-    }
-
-    public function PopulaTabelaEmpresa(){
-            $data['empresa'] = $this->EmpresaModel->PopulaTabelaEmpresa();
-            /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
-            if(!empty($data['empresa']))
-            {
-                $this->load->view('templates/headerView');
-                $this->load->view('DataTables/VisualizaEmpresaView', $data);
-                $this->load->view('templates/footerView');
-            }else{
-                /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
-                        - Retorna mensagem para a tela principal                                                   */
-                $data = array("message" => "Nenhuma empresa cadastrada", "status" => 3);
-                $this->load->view('templates/headerView', $data);
-                $this->load->view('templates/footerView');
             }
     }
 }

@@ -22,4 +22,27 @@ class ProdutoModel extends CI_Model {
         }else
             return false;
     }
+
+    public function DeletarProduto($id){
+        $this->db->where('id', $id);
+        if($this->db->delete('produto')){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function PopulaCamposViewEditarProduto($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('produto');
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
+
+    public function EditarProduto($dados){
+        
+    }
 }

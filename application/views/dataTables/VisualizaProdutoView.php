@@ -40,8 +40,8 @@
                                   <td>'.$dados['nome'].'</td>
                                   <td>'.$dados['quantidade'].'</td>
                                   <td>'.$dados['valor'].'</td>
-                                  <td><a href="'.base_url().'index.php/ProdutoController/loadVisualizaProduto"><i class="fa fa-edit"></i></a></td>                              
-                                  <td><a href="'.base_url().'"><i class="fa fa-trash"></i></a></td>
+                                  <td><a href="'.base_url().'index.php/ProdutoController/loadEditarProduto?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
+                                  <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                                 </tr>';
                         }
                     ?>
@@ -51,7 +51,32 @@
                 </div>
                 <div class='card-footer small text-muted'>Atualizado <?php echo date('d/m/Y \à\s H:i:s');?></div>
               </div>
-            </div>           
+            </div>       
+
+            <!-- Modal de Deletar Servico-->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Continuar com a exclusão do registro?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="<?php echo base_url(); ?>index.php/ProdutoController/DeletarProduto">
+                        <label>Clique em "Confirmar" para deletar o serviço.</label>
+                        <input type="hidden" id="id" name="id" value="#">
+                        <div class="modal-footer">
+                          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                          <input class="btn btn-primary " type="submit" value="Enviar" name="input" class="text-center">   
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
             
             <script>
                 $(document).ready(function() {
@@ -72,5 +97,13 @@
                             }
                         }
                       })
+                });
+
+                /* quando o modal é aberto ativa a função */
+                $('#deleteModal').on('show.bs.modal', function(e) {
+                    /* pega o valor de ID pela tag data-id no link */
+                    var idProduto = $(e.relatedTarget).data('id');
+                    /* preenche o valor do campo hidden id com o valor idServico obtido anteriormente */ 
+                    $(e.currentTarget).find('input[name="id"]').val(idProduto);
                 });
             </script>
