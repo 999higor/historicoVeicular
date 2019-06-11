@@ -132,6 +132,17 @@
           </div>
       </li>
 
+      <li class="nav-item active">
+          <a class="nav-link dropdown-toggle" id="dropdownManutencao" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-dolly-flatbed"></i>
+            <span>Manutenção</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownManutencao">
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/..">Visualizar Manutenções</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadCadastraManutencao">Cadastrar Manutenção</a>
+          </div>
+      </li>
+
     </ul>
     <div id="content-wrapper">
       <div class="container-fluid">
