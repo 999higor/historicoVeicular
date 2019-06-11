@@ -41,9 +41,9 @@
                         <td>'.$dados['modelo'].'</td>
                         <td>'.$dados['marca'].'</td>
                         <td>'.$dados['placa'].'</td>
-                        <td>'.$dados['anoModelo'].'</td>
+                        <td>'.$dados['anoModelo'].'/'.$dados['anoFabricacao'].'</td>
                         <td>'.$dados['renavam'].'</td>
-                        <td><a href="'.base_url().'index.php/ProdutoController/loadVisualizaProduto"><i class="fa fa-edit"></i></a></td>                              
+                        <td><a href="'.base_url().'index.php/VeiculoController/loadEditaVeiculo?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
                         <td><a href="'.base_url().'"><i class="fa fa-trash"></i></a></td>
                     </tr>';
             }
