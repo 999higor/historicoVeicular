@@ -1,6 +1,6 @@
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registrar um tipo de Serviço</div>
+      <div class="card-header">Registrar uma Manutenção</div>
       <div class="card-body">
         <form method="POST" action="<?php echo base_url();?>index.php/ServicoController/CadastrarServico">
             <!-- Select Basic -->

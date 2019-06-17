@@ -29,6 +29,14 @@ class VeiculoModel extends CI_Model {
         }else
             return false;
     }
+    public function DeletarVeiculo($id){
+        $this->db->where('id', $id);
+        if($this->db->delete('veiculo')){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public function PopulaTabelaVeiculo($id){
         $this->db->from('veiculo');

@@ -35,3 +35,27 @@
     </div>
   </div>
 </div>
+
+<!-- JQuery Mask -->
+<script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>
+<script>
+      /* Máscaras que definem:
+            - CPF e RG: somente números
+            - Nome e Sobrenome: somente letras
+      */
+      $(document).ready(function(){
+         $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
+      });
+
+      /* Quando o botão enviar é clicado o texto do campo cpfUser e rgUser é copiado
+         para os campos ocultos/hidden sem a mascara e enviados para o controler pelo 
+         método .submit()
+      */
+      $('#btn').click(function(){
+        /* .cleanVal() tira as pontuações de rg e cpf */
+        $('#cnpj').val($('#cnpj').cleanVal()); 
+
+        /* envia o formulário pro controller */
+        $('#btn').submit();
+      });
+</script>

@@ -108,6 +108,20 @@ class VeiculoController extends CI_Controller {
             }
     }
 
+    public function DeletarVeiculo(){
+        $id = $this->input->post('id', true);
+
+        if($this->VeiculoModel->DeletarVeiculo($id)){
+            $this->session->set_flashdata('message', 'Veiculo deletado com sucesso.');
+            $this->session->set_flashdata('status', 1);
+            redirect("VeiculoController/loadVisualizaVeiculos");
+        }else{
+            $this->session->set_flashdata('message', 'Houve um erro ao deletar Veiculo.');
+            $this->session->set_flashdata('status', 1);
+            redirect("VeiculoController/loadVisualizaVeiculos");
+        }
+    } 
+
     public function loadVisualizaVeiculos(){
         $id = $this->session->userdata('id');
         $data['veiculo'] = $this->VeiculoModel->PopulaTabelaVeiculo($id);
