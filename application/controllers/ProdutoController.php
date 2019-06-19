@@ -95,7 +95,9 @@ class ProdutoController extends CI_Controller {
     }
 
     public function loadVisualizaProduto(){
-        $data['produto'] = $this->ProdutoModel->PopulaTabelaProduto();
+        $idEmpresa = $this->session->userdata('emp'); /* pega ID da empresa */
+        $data['nomeEmpresa'] = $this->session->userdata('nomeEmpresa');
+        $data['produto'] = $this->ProdutoModel->PopulaTabelaProduto($idEmpresa);
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         if(!empty($data['produto']))
         {
@@ -111,43 +113,51 @@ class ProdutoController extends CI_Controller {
         }
     }
 
-    public function DeletarProduto(){
+    public function DesabilitarProduto(){
         $id = $this->input->post('id', true);
 
-        if($this->ProdutoModel->DeletarProduto($id)){
-            $this->session->set_flashdata('message', 'Produto deletado com sucesso.');
+        if($this->ProdutoModel->DesabilitarProduto($id)){
+            $this->session->set_flashdata('message', 'Produto desativado com sucesso.');
             $this->session->set_flashdata('status', 1);
             redirect("ProdutoController/loadVisualizaProduto");
         }else{
-            $this->session->set_flashdata('message', 'Houve um erro ao deletar produto.');
+            $this->session->set_flashdata('message', 'Houve um erro ao desativar o produto.');
             $this->session->set_flashdata('status', 1);
             redirect("ProdutoController/loadVisualizaProduto");
         }
     } 
 
 	public function CadastrarProduto(){
-            $nome = $this->input->post('nome', TRUE);
-            $valor = $this->input->post('valor', TRUE);
-            $quantidade = $this->input->post('quantidade', TRUE);
-            if(!empty($this->input->post('marca', TRUE))){
-                $dados['marca'] = $this->input->post('marca', TRUE);
-            }
+        $idEmpresa = $this->session->userdata('emp');
 
-            $dados = array(
-                'nome' => $nome,
-                'valor' => $valor,
-                'quantidade' => $quantidade
-            );  
-        
-            if($this->ProdutoModel->CadastrarProduto($dados)){
+        $nome = $this->input->post('nome', TRUE);
+        $valor = $this->input->post('valor', TRUE);
+        $quantidade = $this->input->post('quantidade', TRUE);
+        $marca = $this->input->post('marca', TRUE);
+
+        $dados = array(
+            'nome' => $nome,
+            'valor' => $valor,
+            'quantidade' => $quantidade,
+            'marca' => $marca
+        );  
+        $idProduto = $this->ProdutoModel->CadastrarProduto($dados); /* Se a inserção estiver OK retorna o valor da id */
+    
+        if($idProduto != FALSE){
+            if($this->ProdutoModel->CadastrarProdutoEmpresa($idProduto, $idEmpresa)){
                 $this->session->set_flashdata('message', 'Produto cadastrado com sucesso.');
                 $this->session->set_flashdata('status', 1);
                 redirect("ProdutoController/loadVisualizaProduto");
             }else{
-                $this->session->set_flashdata('message', 'Erro ao cadastrar Produto.');
+                $this->session->set_flashdata('message', 'Erro ao inserir na tabela produto_empresa.');
                 $this->session->set_flashdata('status', 2);
                 redirect("ProdutoController/loadVisualizaProduto");
-            }    
-        }
+            }
+        }else{
+            $this->session->set_flashdata('message', 'Erro ao cadastrar Produto.');
+            $this->session->set_flashdata('status', 2);
+            redirect("ProdutoController/loadVisualizaProduto");
+        }    
+    }
 }
 

@@ -43,7 +43,6 @@ class LoginController extends CI_Controller {
 					$nome = $dados['nome'];
 					$sobrenome = $dados['sobrenome'];
 					$id = $dados['id'];
-					$email = $dados['email'];
 					$nivelAcesso = $dados['nivelAcesso'];
 				}
 
@@ -51,7 +50,8 @@ class LoginController extends CI_Controller {
 					$nivelAcesso = 'Cliente';
 				}elseif($nivelAcesso == 2){
 					$nivelAcesso = 'Funcionario';
-					$empresa = $this->loginModel->getCodigoEmpresa($id);
+					$idEmpresa = $this->loginModel->getCodigoEmpresa($id);
+					$nomeEmpresa = $this->loginModel->getNomeEmpresa($idEmpresa);
 				}elseif($nivelAcesso == 3){
 					$nivelAcesso = 'Admin';
 				}
@@ -61,9 +61,9 @@ class LoginController extends CI_Controller {
 								  'sobrenome' => $sobrenome,
 								  'id' => $id,
 								  'cpf' => $cpf,
-								  'email' => $email,
 								  'nivelAcesso' => $nivelAcesso,
-								  'emp' => $empresa
+								  'emp' => $idEmpresa,
+								  'nomeEmpresa' => $nomeEmpresa
 								);
 	
 				/*insere o array na sessiona */

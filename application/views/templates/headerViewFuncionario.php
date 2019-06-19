@@ -44,7 +44,6 @@
     </form>
 
     <!-- Navbar -->
-    
     <ul class="navbar-nav ml-auto ml-md-0">
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">     
@@ -58,7 +57,6 @@
         </div>
       </li>
     </ul>
-
   </nav>
 
     <!-- Scroll to Top Button-->

@@ -49,4 +49,16 @@ class LoginModel extends CI_Model {
             return false;
     }
 
+    public function getNomeEmpresa($id){
+        $this->db->select('nomeFantasia');
+        $this->db->from('empresa');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        
+        if($query->num_rows() > 0){
+            return $query->row()->nomeFantasia;
+        }else
+            return false;
+    }
+
 }

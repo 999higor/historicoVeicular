@@ -8,7 +8,7 @@
     ?>   
       <div class='card-header'>
         <i class='fas fa-table'></i>
-        Serviços Cadastrados para a empresa TAL</div>
+        Serviços cadastrados para a empresa <b><?php echo $nomeEmpresa;?></b> (está mostrando somente os ativos)</div>
         <div class='card-body'>
           <div class='table-responsive'>
             <table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>
@@ -30,9 +30,9 @@
               <?php
               foreach($servico as $dados){
                 echo '<tr>
-                        <td>'.$dados['nome'].'</td>
-                        <td><a href="'.base_url().'index.php/ServicoController/loadEditaServico?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
-                        <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
+                        <td>'.$dados['nomeServico'].'</td>
+                        <td><a href="'.base_url().'index.php/ServicoController/loadEditaServico?id='.$dados['idServico'].'"><i class="fa fa-edit"></i></a></td>                              
+                        <td><a href="#" data-id="'.$dados['idServico'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                       </tr>';
               }
               ?>  
@@ -55,7 +55,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form method="POST" action="<?php echo base_url(); ?>index.php/ServicoController/DeletarServico">
+              <form method="POST" action="<?php echo base_url(); ?>index.php/ServicoController/DesabilitarServico">
                   <label>Clique em "Confirmar" para deletar o serviço.</label>
                   <input type="hidden" id="id" name="id" value="#">
                   <div class="modal-footer">

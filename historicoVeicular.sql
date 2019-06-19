@@ -138,14 +138,10 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `nome`, `marca`, `quantidade`, `ativo`, `valor`) VALUES
-(2, 'Óleo', 'OilMaster', 1, 1, 12.33),
-(5, 'Troca de Pneu', 'Nenhuma marca', 1, 1, 12),
-(9, 'teste 4', 'Troca de Óleo', 1, 1, 1.23),
-(10, 'Troca de Pneu 2', 'Nenhuma marca', 1, 1, 12.34),
-(11, 'texte', 'Nenhuma marca', 1, 1, 12.33),
-(13, 'teste', 'teste', 1234, 1, 12.33),
-(14, 'charlan', 'charlan', 1233, 1, 4.44),
-(15, 'Charalan', 'Nenhuma marca', 1233, 1, 12.34);
+(1, 'Óleo', 'OilMaster', 1, 1, 12.33),
+(2, 'Troca de Pneu', 'Pirelli', 1, 1, 12),
+(3, 'Mão de obra', 'Nenhuma marca', 1, 1, 12);
+
 
 -- --------------------------------------------------------
 
@@ -154,11 +150,25 @@ INSERT INTO `produto` (`id`, `nome`, `marca`, `quantidade`, `ativo`, `valor`) VA
 --
 
 CREATE TABLE `produto_manutencao` (
+  `id` int(11) NOT NULL,
   `idmanutencao` int(11) NOT NULL,
   `idproduto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
+--
+-- Estrutura da tabela `produto_empresa`
+--
+
+CREATE TABLE `produto_empresa` (
+  `id` int(11) NOT NULL,
+  `idempresa` int(11) NOT NULL,
+  `idproduto` int(11) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+
 
 --
 -- Estrutura da tabela `servico`
@@ -175,7 +185,10 @@ CREATE TABLE `servico` (
 --
 
 INSERT INTO `servico` (`id`, `ativo`, `nome`) VALUES
-(12, 1, 'Geometria');
+(1, 1, 'Geometria'),
+(2, 1, 'Configuração de som'),
+(3, 1, 'Balanceamento'),
+(4, 1, 'Lavagem');
 
 -- --------------------------------------------------------
 
@@ -194,8 +207,11 @@ CREATE TABLE `servico_empresa` (
 --
 
 INSERT INTO `servico_empresa` (`id`, `idservico`, `idempresa`) VALUES
-(2, 12, 3);
-
+(1, 1, 1),
+(2, 2, 1),
+(3, 1, 2),
+(4, 3, 1),
+(5, 4, 2);
 -- --------------------------------------------------------
 
 --
@@ -203,6 +219,7 @@ INSERT INTO `servico_empresa` (`id`, `idservico`, `idempresa`) VALUES
 --
 
 CREATE TABLE `servico_manutencao` (
+  `id` int(11) NOT NULL,
   `idmanutencao` int(11) NOT NULL,
   `idservico` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -275,6 +292,14 @@ ALTER TABLE `produto`
 ALTER TABLE `produto_manutencao`
   ADD KEY `fk_manutencaoProduto` (`idmanutencao`),
   ADD KEY `fk_produtoManutencao` (`idproduto`);
+  
+--
+-- Índices para tabela `servico_empresa`
+--
+ALTER TABLE `produto_empresa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_produtoEmpresa` (`idempresa`),
+  ADD KEY `fk_empresaProduto` (`idproduto`);
 
 --
 -- Índices para tabela `servico`
@@ -314,37 +339,43 @@ ALTER TABLE `veiculo`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `manutencao`
 --
 ALTER TABLE `manutencao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `servico_empresa`
 --
 ALTER TABLE `servico_empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+  --
+-- AUTO_INCREMENT de tabela `servico_empresa`
+--
+ALTER TABLE `produto_empresa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `veiculo`
@@ -376,7 +407,14 @@ ALTER TABLE `manutencao`
 ALTER TABLE `produto_manutencao`
   ADD CONSTRAINT `fk_manutencaoProduto` FOREIGN KEY (`idmanutencao`) REFERENCES `manutencao` (`id`),
   ADD CONSTRAINT `fk_produtoManutencao` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`);
-
+  
+--
+-- Limitadores para a tabela `produto_empresa`
+--
+ALTER TABLE `produto_empresa`
+  ADD CONSTRAINT `fk_produtoEmpresa` FOREIGN KEY (`idempresa`) REFERENCES `empresa` (`id`),
+  ADD CONSTRAINT `fk_empresaProduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`);
+  
 --
 -- Limitadores para a tabela `servico_empresa`
 --

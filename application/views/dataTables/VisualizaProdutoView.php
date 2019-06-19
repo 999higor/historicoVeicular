@@ -8,14 +8,14 @@
         ?>    
           <div class='card-header'>
             <i class='fas fa-table'></i>
-            Veículos cadastrados</div>
+            Produtos cadastrados para a empresa <b><?php echo $nomeEmpresa;?></b> (mostrando somente produtos ativos)</div>
               <div class='card-body'>
                 <div class='table-responsive'>
                   <table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>
                     <thead>
                       <tr>
-                        <th>Marca</th>
                         <th>Nome</th>
+                        <th>Marca</th>
                         <th>Quantidade</th>     
                         <th>Valor</th>
                         <th></th>                           
@@ -24,8 +24,8 @@
                     </thead>
                     <tfoot>
                       <tr>
-                        <th>Marca</th>
                         <th>Nome</th>
+                        <th>Marca</th>
                         <th>Quantidade</th>     
                         <th>Valor</th>     
                         <th></th>                           
@@ -36,8 +36,8 @@
                     <?php
                         foreach($produto as $dados){
                           echo '<tr>
-                                  <td>'.$dados['marca'].'</td>
                                   <td>'.$dados['nome'].'</td>
+                                  <td>'.$dados['marca'].'</td>
                                   <td>'.$dados['quantidade'].'</td>
                                   <td>'.$dados['valor'].'</td>
                                   <td><a href="'.base_url().'index.php/ProdutoController/loadEditarProduto?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
@@ -58,14 +58,14 @@
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Continuar com a exclusão do registro?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Continuar desativando o registro?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">×</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form method="POST" action="<?php echo base_url(); ?>index.php/ProdutoController/DeletarProduto">
-                        <label>Clique em "Confirmar" para deletar o produto.</label>
+                    <form method="POST" action="<?php echo base_url(); ?>index.php/ProdutoController/DesabilitarProduto">
+                        <label>Clique em "Confirmar" para desativar o produto.</label>
                         <input type="hidden" id="id" name="id" value="#">
                         <div class="modal-footer">
                           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>

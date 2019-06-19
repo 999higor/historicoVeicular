@@ -10,7 +10,6 @@ class ServicoController extends CI_Controller {
         $this->load->model('ServicoModel');
         $this->load->library('form_validation');
         $this->VerificaSessao();  
-       
     }
 
     public function VerificaSessao(){
@@ -45,13 +44,13 @@ class ServicoController extends CI_Controller {
             $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
-
     }
     
     public function loadVisualizaServico(){	
         $empresaId = $this->session->userdata('emp'); /* seleciona a ID da Empresa */
+        $data['nomeEmpresa'] = $this->session->userdata('nomeEmpresa'); /* pega o nome da empresa pra mostrar na tela inicial */
+        $data['servico'] = $this->ServicoModel->PopulaTabelaServico($empresaId); /* recebe os campos da tabela servico */
 
-        $data['servico'] = $this->ServicoModel->PopulaTabelaServico($empresaId);
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         if(!empty($data['servico']))
         {
@@ -68,10 +67,10 @@ class ServicoController extends CI_Controller {
         }
     }
     
-    public function DeletarServico(){
+    public function DesabilitarServico(){
         $id = $this->input->post('id', TRUE);
 
-        if($this->ServicoModel->DeletarServico($id)){
+        if($this->ServicoModel->DesabilitarServico($id)){
             $this->session->set_flashdata('message', 'Serviço deletado com sucesso.');
             $this->session->set_flashdata('status', 1);
             redirect("ServicoController/loadVisualizaServico");
@@ -80,7 +79,6 @@ class ServicoController extends CI_Controller {
             $this->session->set_flashdata('status', 1);
             redirect("ServicoController/loadVisualizaServico");
         }
-
     }
 
     /* 
@@ -90,21 +88,24 @@ class ServicoController extends CI_Controller {
     */
 	public function CadastrarServico(){
             $empresaId = $this->session->userdata('emp'); /* seleciona a ID da Empresa */
-            $nome = $this->input->post('nome', TRUE);
+            $nome = $this->input->post('nome', TRUE); /* recebe os valores do form */
             $dados = array(
                 'nome' => $nome,
             );  
             
-            $servicoId = $this->ServicoModel->CadastrarServico($dados);
+            /* cadastra o serviço no banco e recebe o ID cadastrado como retorno -> servicoID*/
+            $servicoId = $this->ServicoModel->CadastrarServico($dados); 
 
+            /* Verifica o valor recebido é FALSE */
             if($servicoId != FALSE){
-                $this->session->set_flashdata('message', 'Serviço criado com sucesso.');
-                $this->session->set_flashdata('status', 1);
 
+                /* Insere os valores na tabela servico_empresa */
                 if($this->ServicoModel->CadastrarServicoEmpresa($servicoId, $empresaId)){
+                    $this->session->set_flashdata('message', 'Serviço criado com sucesso.');
+                    $this->session->set_flashdata('status', 1);
                     redirect("ServicoController/loadVisualizaServico");
                 }else{
-                    $this->session->set_flashdata('message', 'Erro ao cadastrar servico_empresa.');
+                    $this->session->set_flashdata('message', 'Erro ao cadastrar na tabela servico_empresa.');
                     $this->session->set_flashdata('status', 2);
                     redirect("ServicoController/loadVisualizaServico");
                 }                
@@ -131,7 +132,6 @@ class ServicoController extends CI_Controller {
             $data = array('id' => $id, 
                           'nome' => $nome
                           );
- 
             return $data;
         }
 

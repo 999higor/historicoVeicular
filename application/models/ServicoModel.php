@@ -13,19 +13,19 @@ class ServicoModel extends CI_Model {
             return FALSE;
     }
 
-    //PAREI AQUI
     public function PopulaTabelaServico($empresaId){
+        $this->db->select('servico.id as idServico, servico.nome as nomeServico');
         $this->db->from('servico');
         $this->db->join('servico_empresa', 'servico_empresa.idservico = servico.id');
+        $this->db->where('servico.ativo', 1);
         $this->db->where('servico_empresa.idempresa', $empresaId);
         $query = $this->db->get();
 
         if($query->num_rows() > 0){
-            return $query->result_array();
+           return $query->result_array();
         }else
             return false;
     }
-
 
     public function PopulaCamposViewEditarServico($id){
         $this->db->where('id', $id);
@@ -52,12 +52,22 @@ class ServicoModel extends CI_Model {
         }else
             return FALSE;
     }
-
+    
+    public function DesabilitarServico($id){
+        $this->db->where('id', $id);
+        if($this->db->update('servico', array('ativo' => 0))){
+            return true;
+        }else
+            return false;
+    }
+    
+    /*
     public function DeletarServico($id){
-        //$this->db->where('id', $id);
+        $this->db->where('id', $id);
         if($this->db->delete('servico', array('id' => $id))){
             return true;
         }else
             return false;
     }
+    */
 }

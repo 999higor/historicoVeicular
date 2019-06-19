@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <div class="form-label-group">
-                  <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca">
+                  <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" value="Não definida">
                   <label for="marca">Marca</label>
                 </div>
               </div>
