@@ -31,16 +31,8 @@
       <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Navbar Search -->
+    <!-- Navbar Funcionario -->
     <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <!-- <div class="input-group">
-        <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div> -->
       <label style="color: white"><b>Funcionário</b></label>
     </div>
 
@@ -119,7 +111,7 @@
       </li>
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownServicos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-dolly-flatbed"></i>
+            <i class="fas fa-tools"></i>
             <span>Serviços</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownServicos">
@@ -129,7 +121,7 @@
       </li>
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownManutencao" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-dolly-flatbed"></i>
+            <i class="fas fa-cogs"></i>
             <span>Manutenção</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownManutencao">

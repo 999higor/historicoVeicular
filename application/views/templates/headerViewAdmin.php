@@ -121,7 +121,7 @@
 
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownServicos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-dolly-flatbed"></i>
+            <i class="fas fa-tools"></i>
             <span>Serviços</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownServicos">
@@ -132,7 +132,7 @@
 
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownManutencao" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-dolly-flatbed"></i>
+            <i class="fas fa-cogs"></i>
             <span>Manutenção</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownManutencao">
