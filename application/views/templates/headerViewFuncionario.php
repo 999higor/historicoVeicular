@@ -26,22 +26,23 @@
 </head>
 <body id="page-top">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/MainController">Nome do Software</a>
+    <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/MainController"><b>Software</b> .Admin</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
     <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
+    <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <!-- <div class="input-group">
         <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button">
             <i class="fas fa-search"></i>
           </button>
         </div>
-      </div>
-    </form>
+      </div> -->
+      <label style="color: white"><b>Funcionário</b></label>
+    </div>
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
@@ -59,7 +60,7 @@
     </ul>
   </nav>
 
-    <!-- Scroll to Top Button-->
+  <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
@@ -96,7 +97,6 @@
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/VeiculoController/loadCadastraVeiculo">Cadastrar Veiculo</a>
           </div>
       </li>
-
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownEmpresas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-building"></i>
@@ -107,7 +107,6 @@
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/EmpresaController/loadCadastraEmpresa">Cadastrar Empresa</a>
           </div>
       </li>
-
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownProduto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-dolly-flatbed"></i>
@@ -118,7 +117,6 @@
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ProdutoController/loadCadastraProduto">Cadastrar Produto</a>
           </div>
       </li>
-
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownServicos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-dolly-flatbed"></i>
@@ -129,7 +127,6 @@
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ServicoController/loadCadastraServico">Cadastrar Serviço</a>
           </div>
       </li>
-
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownManutencao" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-dolly-flatbed"></i>
@@ -140,11 +137,10 @@
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadCadastraManutencao">Cadastrar Manutenção</a>
           </div>
       </li>
-
     </ul>
+
     <div id="content-wrapper">
       <div class="container-fluid">
-
       <?php
             if(empty($message)){
               $message = $this->session->flashdata('message');
