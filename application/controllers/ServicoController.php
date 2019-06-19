@@ -129,7 +129,7 @@ class ServicoController extends CI_Controller {
             }
  
             $data = array('id' => $id, 
-                          'nome' => $nome , 
+                          'nome' => $nome
                           );
  
             return $data;

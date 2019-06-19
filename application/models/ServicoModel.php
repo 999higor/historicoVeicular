@@ -13,11 +13,11 @@ class ServicoModel extends CI_Model {
             return FALSE;
     }
 
+    //PAREI AQUI
     public function PopulaTabelaServico($empresaId){
-        $this->db->select('*');
         $this->db->from('servico');
-        $this->db->join('servico_empresa', 'servico_empresa.idEmpresa = servico.id');
-        $this->db->where('servico_empresa.empresaId', $empresaId);
+        $this->db->join('servico_empresa', 'servico_empresa.idservico = servico.id');
+        $this->db->where('servico_empresa.idempresa', $empresaId);
         $query = $this->db->get();
 
         if($query->num_rows() > 0){
@@ -25,17 +25,6 @@ class ServicoModel extends CI_Model {
         }else
             return false;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     public function PopulaCamposViewEditarServico($id){
