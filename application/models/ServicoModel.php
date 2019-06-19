@@ -17,11 +17,11 @@ class ServicoModel extends CI_Model {
         $this->db->select('*');
         $this->db->from('servico');
         $this->db->join('servico_empresa', 'servico_empresa.idEmpresa = servico.id');
-        $this->db->where('servico_empresa.idEmpresa', $empresaId);
+        $this->db->where('servico_empresa.empresaId', $empresaId);
         $query = $this->db->get();
 
         if($query->num_rows() > 0){
-            return $query->last_query();//$query->result_array();
+            return $query->result_array();
         }else
             return false;
     }
