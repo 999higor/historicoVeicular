@@ -21,8 +21,7 @@ class EmpresaController extends CI_Controller {
     }
     
     public function loadCadastraEmpresa(){
-        //$this->load->view('cadEmpresaView');
-        $this->load->view('templates/headerView');
+        $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
         $this->load->view('cadEmpresaView');
         $this->load->view('templates/footerView');
     }
@@ -35,7 +34,7 @@ class EmpresaController extends CI_Controller {
 
         if(!empty($data))
         {    
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('editaEmpresaView', $data);
             $this->load->view('templates/footerView');
         }else
@@ -43,7 +42,7 @@ class EmpresaController extends CI_Controller {
             /* Se o renavam retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal      */
             $data = array("message" => "Erro ao encontrar serviço.", "status" => 2);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }
@@ -57,8 +56,7 @@ class EmpresaController extends CI_Controller {
             $razaoSocial = $dados['razaoSocial'];
             $nomeFantasia = $dados['nomeFantasia'];
             $cnpj = $dados['cnpj'];
-            $email = $dados['email'];
-            
+            $email = $dados['email'];         
         }
 
         $data = array(
@@ -78,8 +76,6 @@ class EmpresaController extends CI_Controller {
         $nomeFantasia = $this->input->post('nomeFantasia');
         $cnpj = $this->input->post('cnpj');
         $email = $this->input->post('email');
-        
-
 
         $dados = array(
             'razaoSocial' => $razaoSocial ,
@@ -100,18 +96,20 @@ class EmpresaController extends CI_Controller {
     }
 
     public function loadVisualizaEmpresa(){
-        $data['empresa'] = $this->EmpresaModel->PopulaTabelaEmpresa();
+        $codEmpresa = $this->session->userdata('emp');
+
+        $data['empresa'] = $this->EmpresaModel->PopulaTabelaEmpresa($codEmpresa);
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         if(!empty($data['empresa']))
         {
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('DataTables/VisualizaEmpresaView', $data);
             $this->load->view('templates/footerView');
         }else{
             /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal                                                   */
             $data = array("message" => "Nenhuma empresa cadastrada", "status" => 3);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }

@@ -44,6 +44,16 @@ class LoginController extends CI_Controller {
 					$sobrenome = $dados['sobrenome'];
 					$id = $dados['id'];
 					$email = $dados['email'];
+					$nivelAcesso = $dados['nivelAcesso'];
+				}
+
+				if($nivelAcesso == 1){
+					$nivelAcesso = 'Cliente';
+				}elseif($nivelAcesso == 2){
+					$nivelAcesso = 'Funcionario';
+					$empresa = $this->loginModel->getCodigoEmpresa($id);
+				}elseif($nivelAcesso == 3){
+					$nivelAcesso = 'Admin';
 				}
 
 				/* cria um array chamado SESSION para colocar os dados */
@@ -51,7 +61,9 @@ class LoginController extends CI_Controller {
 								  'sobrenome' => $sobrenome,
 								  'id' => $id,
 								  'cpf' => $cpf,
-								  'email' => $email
+								  'email' => $email,
+								  'nivelAcesso' => $nivelAcesso,
+								  'emp' => $empresa
 								);
 	
 				/*insere o array na sessiona */
@@ -61,6 +73,8 @@ class LoginController extends CI_Controller {
 				redirect(base_url() . 'index.php/LoginController/login');
 			}else{
 				/* redireciona pra pagina de login com as mensagens */
+				$this->session->set_flashdata('message', 'Usuário ou senha incorretos.');
+				$this->session->set_flashdata('status', 2);
 				redirect(base_url() . 'index.php/LoginController/login');
 			}
 		}
@@ -68,7 +82,7 @@ class LoginController extends CI_Controller {
 	function login(){
 		if($this->session->userdata('cpf') != ''){
 			//redirect(base_url().'index.php/MainController');
-			$this->load->view('templates/headerView');
+			$this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
 			$this->load->view('templates/footerView');
 		}else{
 			/* se der erro retorna uma mensagem com erro na autenticação */

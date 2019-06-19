@@ -10,6 +10,7 @@ class ServicoController extends CI_Controller {
         $this->load->model('ServicoModel');
         $this->load->library('form_validation');
         $this->VerificaSessao();  
+       
     }
 
     public function VerificaSessao(){
@@ -21,7 +22,7 @@ class ServicoController extends CI_Controller {
     }
     
 	public function loadCadastraServico(){	
-        $this->load->view('templates/headerView');
+        $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
 		$this->load->view('cadServicoView');
         $this->load->view('templates/footerView');
     }
@@ -33,7 +34,7 @@ class ServicoController extends CI_Controller {
 
         if(!empty($data))
         {    
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('editaServicoView', $data);
             $this->load->view('templates/footerView');
         }else
@@ -41,18 +42,20 @@ class ServicoController extends CI_Controller {
             /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal      */
             $data = array("message" => "Erro ao encontrar serviço.", "status" => 2);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
 
     }
     
     public function loadVisualizaServico(){	
-        $data['servico'] = $this->ServicoModel->PopulaTabelaServico();
+        $empresaId = $this->session->userdata('emp'); /* seleciona a ID da Empresa */
+
+        $data['servico'] = $this->ServicoModel->PopulaTabelaServico($empresaId);
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         if(!empty($data['servico']))
         {
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('DataTables/VisualizaServicoView', $data);
             $this->load->view('templates/footerView');
         }else{
@@ -60,7 +63,7 @@ class ServicoController extends CI_Controller {
                     - Retorna mensagem para a tela principal                                                   */
             $this->session->set_flashdata('message', 'Nenhum serviço cadastrado');
             $this->session->set_flashdata('status', 3);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }
@@ -86,18 +89,25 @@ class ServicoController extends CI_Controller {
     *
     */
 	public function CadastrarServico(){
+            $empresaId = $this->session->userdata('emp'); /* seleciona a ID da Empresa */
             $nome = $this->input->post('nome', TRUE);
-            $valor = $this->input->post('valor', TRUE);
-
             $dados = array(
                 'nome' => $nome,
-                'valor' => $valor,  
             );  
+            
+            $servicoId = $this->ServicoModel->CadastrarServico($dados);
 
-            if($this->ServicoModel->CadastrarServico($dados)){
+            if($servicoId != FALSE){
                 $this->session->set_flashdata('message', 'Serviço criado com sucesso.');
                 $this->session->set_flashdata('status', 1);
-                redirect("ServicoController/loadVisualizaServico");
+
+                if($this->ServicoModel->CadastrarServicoEmpresa($servicoId, $empresaId)){
+                    redirect("ServicoController/loadVisualizaServico");
+                }else{
+                    $this->session->set_flashdata('message', 'Erro ao cadastrar servico_empresa.');
+                    $this->session->set_flashdata('status', 2);
+                    redirect("ServicoController/loadVisualizaServico");
+                }                
             }else{
                 $this->session->set_flashdata('message', 'Erro ao criar o Serviço.');
                 $this->session->set_flashdata('status', 2);
@@ -115,12 +125,10 @@ class ServicoController extends CI_Controller {
             foreach ($this->ServicoModel->PopulaCamposViewEditarServico($id) as $dados)
             {
                 $id = $dados['id'];
-                $valor = $dados['valor'];
                 $nome = $dados['nome'];
             }
  
             $data = array('id' => $id, 
-                          'valor' => $valor ,
                           'nome' => $nome , 
                           );
  
@@ -130,11 +138,9 @@ class ServicoController extends CI_Controller {
         public function EditarServico(){
             $id = $this->input->post('id');
             $nome = $this->input->post('nome');
-            $valor = $this->input->post('valor');
 
             $dados = array(
                           'nome' => $nome,
-                          'valor' => $valor
             );
 
             if($this->ServicoModel->EditarServico($dados, $id)){

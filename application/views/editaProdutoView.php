@@ -5,22 +5,22 @@
         <form method="POST" action="<?php echo base_url();?>index.php/ProdutoController/EditarProduto">   
           <div class="form-group">
           <input value="<?php echo set_value('id', @$id);?>" name="id" hidden>
-            <div class="form-label-group">
-              <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" value="<?php echo set_value('marca', @$marca);?>" required>
-              <label for="marca">Marca</label>
-            </div>
-          </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="nome" class="form-control" placeholder="Nome" name="nome" value="<?php echo set_value('nome', @$nome);?>" required>
+              <input type="text" id="nome" class="form-control" placeholder="Nome" name="nome" value="<?php echo set_value('nome', @$nome);?>" autofocus required>
               <label for="nome">Nome</label>
             </div>            
+        </div>
+        <div class="form-label-group">
+              <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" value="<?php echo set_value('marca', @$marca);?>">
+              <label for="marca">Marca</label>
+            </div>
         </div>
         <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="quantidade" class="form-control" placeholder="Quantidade" value="<?php echo set_value('quantidade', @$quantidade);?>" name="quantidade" autofocus="autofocus" required>
+                  <input type="number" id="quantidade" class="form-control" placeholder="Quantidade" value="<?php echo set_value('quantidade', @$quantidade);?>" name="quantidade" required>
                   <label for="quantidade">Quantidade</label>
                 </div>
               </div>

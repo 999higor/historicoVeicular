@@ -21,7 +21,7 @@ class VeiculoController extends CI_Controller {
     }
     
     public function loadCadastraVeiculo(){
-        $this->load->view('templates/headerView');
+        $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
         $this->load->view('cadVeiculoView');
         $this->load->view('templates/footerView');
     }
@@ -34,7 +34,7 @@ class VeiculoController extends CI_Controller {
 
         if(!empty($data))
         {    
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('editaVeiculoView', $data);
             $this->load->view('templates/footerView');
         }else
@@ -42,7 +42,7 @@ class VeiculoController extends CI_Controller {
             /* Se o renavam retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal      */
             $data = array("message" => "Erro ao encontrar serviço.", "status" => 2);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }
@@ -128,14 +128,14 @@ class VeiculoController extends CI_Controller {
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         if(!empty($data['veiculo']))
         {
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('DataTables/VisualizaVeiculoView', $data);
             $this->load->view('templates/footerView');
         }else{
             /* Se o renavam retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal                                                   */
             $data = array("message" => "Nenhum Veiculo cadastrado com esse usuário.", "status" => 3);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }

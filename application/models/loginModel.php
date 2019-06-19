@@ -24,15 +24,15 @@ class LoginModel extends CI_Model {
             return false;
     }
 
-    public function getID($cpf){
-        $this->db->select('id', 'nome', 'sobrenome');
-        $this->db->from('cliente');
-        $this->db->where('cpf', $cpf);
+    public function getCodigoEmpresa($id){
+        $this->db->select('idempresa');
+        $this->db->from('funcionario');
+        $this->db->where('idusuario', $id);
         $query = $this->db->get();
 /*      SELECT id FROM cliente WHERE cpf = $cpf;        */
 
         if($query->num_rows()>0) {
-            $value = $query->row()->id;
+            $value = $query->row()->idempresa;
             return $value;
         }else            
             return false;

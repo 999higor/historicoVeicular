@@ -23,7 +23,7 @@ class ManutencaoController extends CI_Controller {
         $data['veiculo']= $this->CarregaCBVeiculo();
         $data['servico'] = $this->CarregaCBServico();
 
-        $this->load->view('templates/headerView');
+        $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
         $this->load->view('cadManutencaoView', $data);
         $this->load->view('templates/footerView');
     }

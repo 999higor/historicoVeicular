@@ -38,8 +38,9 @@ class EmpresaModel extends CI_Model {
             return false;
     }
 
-    public function PopulaTabelaEmpresa(){
+    public function PopulaTabelaEmpresa($emp){
         $this->db->from('empresa');
+        $this->db->where('id', $emp);
         $query = $this->db->get();
 
         if($query->num_rows() > 0){

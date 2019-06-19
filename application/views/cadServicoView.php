@@ -9,12 +9,7 @@
                     <label for="nome">Nome do Serviço</label>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="form-label-group">
-                    <input type="text" id="valor" class="form-control" placeholder="Valor" name="valor" required>
-                    <label for="valor">Valor</label>
-                </div>            
-            </div>
+            <hr>
             <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="input" class="text-center">   
         </form>
        <div class="text-center">
@@ -26,12 +21,8 @@
 <!-- JQuery Mask -->
 <script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>
   <script>
-      /* Máscaras que definem:
-            - CPF e RG: somente números
-            - Nome e Sobrenome: somente letras
-      */
-      $(document).ready(function(){
-         $('#valor').mask("###0.00", {reverse: true});
-      });
+      // $(document).ready(function(){
+      //    $('#valor').mask("###0.00", {reverse: true});
+      // });
 
     </script>

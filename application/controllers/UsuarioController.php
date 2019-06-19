@@ -30,7 +30,7 @@
            
             if(!empty($data))
             {    
-                $this->load->view('templates/HeaderView');
+                $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
                 $this->load->view('editarUsuarioView', $data);
                 $this->load->view('templates/FooterView');    
             }else
@@ -38,8 +38,7 @@
                 /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                         - Retorna mensagem para a tela principal      */
                 $data = array("message" => "Erro ao encontrar usuario.", "status" => 2);
-                echo("<script>console.log('PHP: ".$id."');</script>");
-                $this->load->view('templates/headerView', $data);
+                $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
                 $this->load->view('templates/footerView');
             }
         }

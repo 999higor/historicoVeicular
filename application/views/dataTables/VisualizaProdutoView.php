@@ -81,7 +81,7 @@
             <script>
                 $(document).ready(function() {
                       $('#dataTable').dataTable({   
-                        searching: false,                           
+                        searching: true,                           
                         oLanguage: {
                           sLengthMenu: "Mostrar _MENU_ registros por página",
                           sZeroRecords: "Nenhum registro encontrado",

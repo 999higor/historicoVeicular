@@ -15,15 +15,13 @@
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>Valor</th>   
                   <th></th>                           
                   <th></th>              
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Nome</th>
-                  <th>Valor</th>   
+                  <th>Nome</th>   
                   <th></th>                           
                   <th></th>  
                 </tr>
@@ -33,7 +31,6 @@
               foreach($servico as $dados){
                 echo '<tr>
                         <td>'.$dados['nome'].'</td>
-                        <td>'.$dados['valor'].'</td>
                         <td><a href="'.base_url().'index.php/ServicoController/loadEditaServico?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
                         <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                       </tr>';

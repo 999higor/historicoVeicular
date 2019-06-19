@@ -21,7 +21,7 @@ class ProdutoController extends CI_Controller {
     }
     
     public function loadCadastraProduto(){
-        $this->load->view('templates/headerView');
+        $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
         $this->load->view('cadProdutoView');
         $this->load->view('templates/footerView');
     }
@@ -32,7 +32,7 @@ class ProdutoController extends CI_Controller {
  
         if(!empty($data))
         {    
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('editaProdutoView', $data);
             $this->load->view('templates/footerView');
         }else
@@ -40,7 +40,7 @@ class ProdutoController extends CI_Controller {
             /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal      */
             $data = array("message" => "Erro ao encontrar produto.", "status" => 2);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }
@@ -69,14 +69,16 @@ class ProdutoController extends CI_Controller {
     public function EditarProduto(){
         $id = $this->input->post('id', TRUE);
         $nome = $this->input->post('nome', TRUE);
-        $quantidade = $this->input->post('quantidade', TRUE);
-        $marca = $this->input->post('marca', TRUE);
         $valor = $this->input->post('valor', TRUE);
+        $quantidade = $this->input->post('quantidade', TRUE);
+        if(!empty($this->input->post('marca', TRUE))){
+            $dados['marca'] = $this->input->post('marca', TRUE);
+        }
 
-        $dados = array('marca' => $marca ,
-                       'nome' => $nome,
-                       'quantidade' => $quantidade,
-                       'valor' => $valor,        
+        $dados = array(
+            'nome' => $nome,
+            'valor' => $valor,
+            'quantidade' => $quantidade
         );  
 
         if($this->ProdutoModel->EditarProduto($dados, $id)){
@@ -97,14 +99,14 @@ class ProdutoController extends CI_Controller {
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
         if(!empty($data['produto']))
         {
-            $this->load->view('templates/headerView');
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('DataTables/VisualizaProdutoView', $data);
             $this->load->view('templates/footerView');
         }else{
             /* Se o valor retornado do model for vazio significa que não existe nenhum registro para este usuário
                     - Retorna mensagem para a tela principal                                                   */
             $data = array("message" => "Nenhum produto cadastrado", "status" => 3);
-            $this->load->view('templates/headerView', $data);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }
@@ -124,18 +126,19 @@ class ProdutoController extends CI_Controller {
     } 
 
 	public function CadastrarProduto(){
-			$marca = $this->input->post('marca', TRUE);
             $nome = $this->input->post('nome', TRUE);
-            $quantidade = $this->input->post('quantidade', TRUE);
             $valor = $this->input->post('valor', TRUE);
-            
+            $quantidade = $this->input->post('quantidade', TRUE);
+            if(!empty($this->input->post('marca', TRUE))){
+                $dados['marca'] = $this->input->post('marca', TRUE);
+            }
+
             $dados = array(
-                'marca' => $marca ,
                 'nome' => $nome,
-                'quantidade' => $quantidade,
-                'valor' => $valor,        
+                'valor' => $valor,
+                'quantidade' => $quantidade
             );  
-            
+        
             if($this->ProdutoModel->CadastrarProduto($dados)){
                 $this->session->set_flashdata('message', 'Produto cadastrado com sucesso.');
                 $this->session->set_flashdata('status', 1);
