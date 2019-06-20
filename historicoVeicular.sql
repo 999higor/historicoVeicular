@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Jun-2019 às 05:55
+-- Tempo de geração: 21-Jun-2019 às 00:55
 -- Versão do servidor: 10.3.15-MariaDB
 -- versão do PHP: 7.3.6
 
@@ -47,7 +47,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nome`, `sobrenome`, `email`, `rg`, `cpf`, `senha`, `nivelAcesso`, `ativo`) VALUES
-(1, 'Charlan ', 'Matter', 'charlan.matter@ibiruba.ifrs.edu.br', '1122334455', '04224478030', 'coxinha121', 2, 1),
+(1, 'Charlan ', 'Oliveira Matter', 'charlan.matter@ibiruba.ifrs.edu.br', '1122334455', '04224478030', 'coxinha12', 2, 1),
 (2, 'Andrei ', 'Matter', 'andrei@teste', '1234', '123', '123', 2, 1),
 (3, 'Solange', 'Matter', 'teeste@gggg', '123445', '111', '111', 2, 1);
 
@@ -140,8 +140,31 @@ CREATE TABLE `produto` (
 INSERT INTO `produto` (`id`, `nome`, `marca`, `quantidade`, `ativo`, `valor`) VALUES
 (1, 'Óleo', 'OilMaster', 1, 1, 12.33),
 (2, 'Troca de Pneu', 'Pirelli', 1, 1, 12),
-(3, 'Mão de obra', 'Nenhuma marca', 1, 1, 12);
+(3, 'Mão de obra', 'Nenhuma marca', 1, 1, 12),
+(4, 'Pneu 175/70R14', 'BRIDGESTONE', 4, 1, 245.99),
+(5, 'Biela', 'Não definida', 2, 1, 12.02),
+(6, 'Auto Falante 140q', 'JBL', 1, 1, 400.33);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `produto_empresa`
+--
+
+CREATE TABLE `produto_empresa` (
+  `id` int(11) NOT NULL,
+  `idempresa` int(11) NOT NULL,
+  `idproduto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `produto_empresa`
+--
+
+INSERT INTO `produto_empresa` (`id`, `idempresa`, `idproduto`) VALUES
+(1, 1, 4),
+(2, 1, 5),
+(3, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -156,19 +179,6 @@ CREATE TABLE `produto_manutencao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
---
--- Estrutura da tabela `produto_empresa`
---
-
-CREATE TABLE `produto_empresa` (
-  `id` int(11) NOT NULL,
-  `idempresa` int(11) NOT NULL,
-  `idproduto` int(11) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
-
 
 --
 -- Estrutura da tabela `servico`
@@ -188,7 +198,8 @@ INSERT INTO `servico` (`id`, `ativo`, `nome`) VALUES
 (1, 1, 'Geometria'),
 (2, 1, 'Configuração de som'),
 (3, 1, 'Balanceamento'),
-(4, 1, 'Lavagem');
+(4, 1, 'Lavagem'),
+(5, 1, 'Troca de Oleo');
 
 -- --------------------------------------------------------
 
@@ -211,7 +222,9 @@ INSERT INTO `servico_empresa` (`id`, `idservico`, `idempresa`) VALUES
 (2, 2, 1),
 (3, 1, 2),
 (4, 3, 1),
-(5, 4, 2);
+(5, 4, 2),
+(6, 5, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -287,19 +300,19 @@ ALTER TABLE `produto`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `produto_manutencao`
---
-ALTER TABLE `produto_manutencao`
-  ADD KEY `fk_manutencaoProduto` (`idmanutencao`),
-  ADD KEY `fk_produtoManutencao` (`idproduto`);
-  
---
--- Índices para tabela `servico_empresa`
+-- Índices para tabela `produto_empresa`
 --
 ALTER TABLE `produto_empresa`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_produtoEmpresa` (`idempresa`),
   ADD KEY `fk_empresaProduto` (`idproduto`);
+
+--
+-- Índices para tabela `produto_manutencao`
+--
+ALTER TABLE `produto_manutencao`
+  ADD KEY `fk_manutencaoProduto` (`idmanutencao`),
+  ADD KEY `fk_produtoManutencao` (`idproduto`);
 
 --
 -- Índices para tabela `servico`
@@ -360,6 +373,12 @@ ALTER TABLE `produto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `produto_empresa`
+--
+ALTER TABLE `produto_empresa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
@@ -370,18 +389,12 @@ ALTER TABLE `servico`
 --
 ALTER TABLE `servico_empresa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-  
-  --
--- AUTO_INCREMENT de tabela `servico_empresa`
---
-ALTER TABLE `produto_empresa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `veiculo`
 --
 ALTER TABLE `veiculo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
@@ -402,19 +415,19 @@ ALTER TABLE `manutencao`
   ADD CONSTRAINT `fk_manutencaoveiculo` FOREIGN KEY (`idveiculo`) REFERENCES `veiculo` (`id`);
 
 --
+-- Limitadores para a tabela `produto_empresa`
+--
+ALTER TABLE `produto_empresa`
+  ADD CONSTRAINT `fk_empresaProduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`),
+  ADD CONSTRAINT `fk_produtoEmpresa` FOREIGN KEY (`idempresa`) REFERENCES `empresa` (`id`);
+
+--
 -- Limitadores para a tabela `produto_manutencao`
 --
 ALTER TABLE `produto_manutencao`
   ADD CONSTRAINT `fk_manutencaoProduto` FOREIGN KEY (`idmanutencao`) REFERENCES `manutencao` (`id`),
   ADD CONSTRAINT `fk_produtoManutencao` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`);
-  
---
--- Limitadores para a tabela `produto_empresa`
---
-ALTER TABLE `produto_empresa`
-  ADD CONSTRAINT `fk_produtoEmpresa` FOREIGN KEY (`idempresa`) REFERENCES `empresa` (`id`),
-  ADD CONSTRAINT `fk_empresaProduto` FOREIGN KEY (`idproduto`) REFERENCES `produto` (`id`);
-  
+
 --
 -- Limitadores para a tabela `servico_empresa`
 --
