@@ -44,6 +44,7 @@ class LoginController extends CI_Controller {
 					$sobrenome = $dados['sobrenome'];
 					$id = $dados['id'];
 					$nivelAcesso = $dados['nivelAcesso'];
+					$email = $dados['email'];
 				}
 
 				if($nivelAcesso == 1){
@@ -63,7 +64,8 @@ class LoginController extends CI_Controller {
 								  'cpf' => $cpf,
 								  'nivelAcesso' => $nivelAcesso,
 								  'emp' => $idEmpresa,
-								  'nomeEmpresa' => $nomeEmpresa
+								  'nomeEmpresa' => $nomeEmpresa,
+								  'email' => $email
 								);
 	
 				/*insere o array na sessiona */

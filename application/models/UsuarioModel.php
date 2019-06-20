@@ -33,6 +33,18 @@ class UsuarioModel extends CI_Model {
             return false;
     }
 
+    public function VerificaSenha($senha, $id){
+        $this->db->where('senha', $senha);
+        $this->db->where('id', $id);
+        $query = $this->db->get('cliente');
+
+        if($query->num_rows() > 0){
+            /* Maior que 0 significa que a senha está correta, portanto  retorna TRUE */
+            return true;
+        }else
+            return false;
+    }
+
     public function VerificaEmail($email){
         $this->db->where('email', $email);
         $query = $this->db->get('cliente');
@@ -50,6 +62,23 @@ class UsuarioModel extends CI_Model {
 
         if($query->num_rows() > 0){
             return $query->result_array();
+        }else
+            return false;
+    }
+
+    public function EditarUsuario($dados, $id){
+        $this->db->where('id', $id);
+        if($this->db->update('cliente', $dados)){
+            return true;
+        }else
+            return false;
+    }
+
+    public function AlterarSenha($novaSenha, $id){
+        $this->db->where('id', $id);
+        $this->db->set('senha', $novaSenha);
+        if($this->db->update('cliente')){
+            return true;
         }else
             return false;
     }

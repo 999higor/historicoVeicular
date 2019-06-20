@@ -46,6 +46,7 @@
           <h1 style="color:gray" class="dropdown-header">Você está logado como <b><?php echo $this->session->userdata('nome').' '.$this->session->userdata('sobrenome');?></b>.</h1>
           <div class="dropdown-divider"></div>      
           <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/UsuarioController/loadEditaUsuario" >Editar conta</a>
+          <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/UsuarioController/loadAlteraSenhaUsuario" >Alterar senha</a>
           <a class="dropdown-item" href="<?php echo base_url(); ?>index.php/LoginController/logout" data-toggle="modal" data-target="#logoutModal">Logout</a>
         </div>
       </li>

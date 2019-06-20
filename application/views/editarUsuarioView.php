@@ -2,9 +2,10 @@
         <div class="card card-register mx-auto mt-5">
         <div class="card-header">Registrar um Usuário</div>
         <div class="card-body">
-            <form method="POST" action="<?php echo base_url();?>index.php/UsuarioController/CadastrarUsuario">
+            <form method="POST" action="<?php echo base_url();?>index.php/UsuarioController/EditarUsuario">
             <div class="form-group">
                 <input hidden id="id" value="<?php echo set_value('id', @$id);?>" name="id">
+                <input hidden id="emailAnterior" value="<?php echo $this->session->userdata('email');?>" name="emailAnterior">
                 <div class="form-row">
                 <div class="col-md-6">
                     <div class="form-label-group">
@@ -20,22 +21,7 @@
                 </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="form-row">
-                <div class="col-md-6">
-                    <div class="form-label-group">
-                    <input type="text" id="cpfUser" class="form-control" placeholder="CPF" name="cpfUser" autofocus="autofocus" value="<?php echo set_value('cpfUser', @$cpf); ?>" disabled required>
-                    <label for="cpfUser">CPF</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-label-group">
-                    <input type="text" id="rgUser" class="form-control" placeholder="RG" name="rgUser" value="<?php echo set_value('rgUser', @$rg); ?>" disabled required>
-                    <label for="rgUser">RG</label>
-                    </div>
-                </div>
-                </div>
-            </div>
+ 
             <div class="form-group">
                 <div class="form-label-group">
                 <input type="email" id="email" class="form-control" placeholder="Endereço de e-mail" name="email" value="<?php echo set_value('email', @$email); ?>" required>
@@ -81,8 +67,8 @@
         $(document).ready(function(){
             $('#cpfUser').mask('000.000.000-00', {reverse: true});
             $('#rgUser').mask('00.000.000-0', {reverse: true});
-            $('#nome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
-            $('#sobrenome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}});
+            $('#nome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/ , recursive: true}}});
+            $('#sobrenome').mask('Z',{translation:  {'Z': {pattern: /[a-zA-Z ]/, recursive: true}}}); 
             $('#btn').prop('disabled', true);
 
             $('#cbConfirma').prop('checked', false);
@@ -90,9 +76,18 @@
             $('#confirmPassword').prop('disabled', true);
         });
 
-        $('#cbConfirma').click(function(){
-
-        })
+        $(document).ready(function(){
+            $('#cbConfirma').click(function(){
+                if($(this).prop("checked") == true){
+                    $('#password').prop('disabled', false);
+                    $('#confirmPassword').prop('disabled', false);
+                }
+                else if($(this).prop("checked") == false){
+                    $('#password').prop('disabled', true);
+                    $('#confirmPassword').prop('disabled', true);
+                }
+            });
+        });
 
         /* Quando o botão enviar é clicado o texto do campo cpfUser e rgUser é copiado
             para os campos ocultos/hidden sem a mascara e enviados para o controler pelo 

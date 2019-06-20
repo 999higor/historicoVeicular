@@ -21,8 +21,3 @@
 
 <!-- JQuery Mask -->
 <script src="<?php echo base_url()?>assets/vendor/validator/jquery.mask.min.js"></script>
-<script>
-    // $(document).ready(function(){
-    //     $('#valor').mask("###0.00", {reverse: true});
-    // });
-  </script>
