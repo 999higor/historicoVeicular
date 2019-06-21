@@ -16,9 +16,13 @@
 
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url()?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<?php echo base_url()?>assets/vendor/datepicker/css/bootstrap-datepicker.min.css"  rel="stylesheet">
+
+
 
   <!-- Page level plugin CSS-->
   <link href="<?php echo base_url()?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet"> 
@@ -183,6 +187,8 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url()?>assets/js/sb-admin.min.js"></script>
+
+  <script src="<?php echo base_url()?>assets/vendor/datepicker/js/bootstrap-datepicker.min.js"></script>
 
   <!-- Demo scripts for this page-->
   <!-- <script src="<?php //echo base_url()?>assets/js/demo/datatables-demo.js"></script> -->
