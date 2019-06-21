@@ -146,7 +146,6 @@
     </ul>
     <div id="content-wrapper">
       <div class="container-fluid">
-
       <?php
             if(empty($message)){
               $message = $this->session->flashdata('message');

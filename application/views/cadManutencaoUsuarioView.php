@@ -1,15 +1,23 @@
 <link href="<?php echo base_url()?>assets/vendor/datepicker/css/daterangepicker.css" rel="stylesheet">
 <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Registrar uma Manutenção</div>
+      <div class="card-header">Solicitar uma Manutenção</div>
       <div class="card-body">
-        <form method="get" action="<?php echo base_url();?>index.php/ServicoController/CadastrarServico">
+        <form method="get" action="<?php echo base_url();?>">             
             <div class="form-group">
-                <label class="control-label" for="date">Data estimada</label>
-                <input type="text" class="daterange form-control"  value="" name="datas" />
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="control-label" for="date">Data estimada (Inicio)</label>
+                        <input type="text" class=" form-control"  value="" id="dataInicio" name="dataInicio" /> 
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label" for="date">Data estimada (Final)</label>
+                        <input type="text" class=" form-control"  value="" id="dataFim" name="dataFim" /> 
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-            <label class="col-md-12 control-label" for="selectbasic">Empresa</label>
+                <label class="col-md-12 control-label" for="selectbasic">Empresa</label>
                 <div class="col-md-12 ">
                     <select id="selectbasic" name="selectbasic" class="form-control">
                     <?php
@@ -20,9 +28,8 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-group">
-            <label class="col-md-12 control-label" for="selectbasic">Veiculo</label>
+                <label class="col-md-12 control-label" for="selectbasic">Veiculo</label>
                 <div class="col-md-12 ">
                     <select id="selectbasic" name="selectbasic" class="form-control">
                     <?php
@@ -33,7 +40,6 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-group">
             <label class="col-md-12 control-label" for="selectbasic">Serviço</label>
                 <div class="col-md-12 ">
@@ -53,22 +59,21 @@
     </div>
   </div>
 </div>
-
 <script>
-    $(function() {           
-        $('.daterange').daterangepicker({
-            "autoApply": true,
-            "maxSpan": {
-                "days": 20
-            },
-            "singleDatePicker": false,
+    $(function() {          
+        $('#dataInicio , #dataFim').daterangepicker({
+            "singleDatePicker": true,
+            "startDate": new Date(),
+            "endDate": new Date(),
+            "minDate": new Date(),
+            "opens": "left",
             "locale": {
-                "format": "MM/DD/YYYY",
+                "format": "DD/MM/YYYY",
                 "separator": " - ",
                 "applyLabel": "Aplicar",
                 "cancelLabel": "Cancelar",
-                "fromLabel": "Para",
-                "toLabel": "De",
+                "fromLabel": "De",
+                "toLabel": "Até",
                 "customRangeLabel": "Customizar",
                 "weekLabel": "Sem",
                 "daysOfWeek": [
@@ -93,16 +98,12 @@
                     "Outubro",
                     "Novembro",
                     "Dezembro"
-                ],
-                "firstDay": 1
+                ]
             },
-            "startDate": "06/15/2019",
-            "endDate": "06/21/2019"
         }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
         });
     });
-
 </script>
 
 <script src="<?php echo base_url()?>assets/vendor/datepicker/js/moment.min.js"></script>

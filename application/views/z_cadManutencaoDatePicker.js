@@ -47,7 +47,6 @@
         });
     });
 
-
     /* UM CALENDARIO (DATEPICKER RANGE) */
     $('#demo').daterangepicker({
         "singleDatePicker": true,

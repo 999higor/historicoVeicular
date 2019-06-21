@@ -80,7 +80,7 @@
             
             <script>
                 $(document).ready(function() {
-                      $('#dataTable').dataTable({   
+                      $('#dataTable').dataTable({
                         searching: true,                           
                         oLanguage: {
                           sLengthMenu: "Mostrar _MENU_ registros por página",
