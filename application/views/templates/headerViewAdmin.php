@@ -22,6 +22,7 @@
 
   <!-- Page level plugin CSS-->
   <link href="<?php echo base_url()?>assets/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  
 
 
   <!-- Custom styles for this template-->
