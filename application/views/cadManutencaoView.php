@@ -103,14 +103,6 @@
         });
     });
 
-    function getDataAtual() {
-        var d = new Date();
-        var day = addZero(d.getDate());
-        var month = addZero(d.getMonth()+1);
-        var year = addZero(d.getFullYear());
-        return day + ". " + month + ". " + year + " (" + h + ":" + m + ")";
-    }
-
 </script>
 
 <script src="<?php echo base_url()?>assets/vendor/datepicker/js/moment.min.js"></script>

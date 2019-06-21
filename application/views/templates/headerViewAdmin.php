@@ -23,7 +23,6 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url()?>assets/css/sb-admin.css" rel="stylesheet"> 
-  <link href="<?php echo base_url()?>assets/vendor/datepicker/css/daterangepicker.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
