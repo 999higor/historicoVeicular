@@ -33,7 +33,7 @@ class ProdutoModel extends CI_Model {
 */
 	
     public function PopulaTabelaProduto($idEmpresa){
-        $this->db->select('produto.id as id, produto.nome as nome, produto.marca as marca, produto.quantidade as quantidade, produto.valor as valor');
+        $this->db->select('produto.id as id, produto.nome as nome, produto.marca as marca');
         $this->db->from('produto');
         $this->db->join('produto_empresa', 'produto_empresa.idproduto = produto.id');
         $this->db->where('produto.ativo', 1);

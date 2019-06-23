@@ -51,34 +51,26 @@ class ProdutoController extends CI_Controller {
         {
             $id = $dados['id'];
             $nome = $dados['nome'];
-            $quantidade = $dados['quantidade'];
             $marca = $dados['marca'];
-            $valor = $dados['valor'];
         }
 
         $data = array('id' => $id,
                       'marca' => $marca ,
-                      'nome' => $nome,
-                      'quantidade' => $quantidade,
-                      'valor' => $valor     
+                      'nome' => $nome,  
                       );
-
         return $data;
     }
 
     public function EditarProduto(){
         $id = $this->input->post('id', TRUE);
         $nome = $this->input->post('nome', TRUE);
-        $valor = $this->input->post('valor', TRUE);
-        $quantidade = $this->input->post('quantidade', TRUE);
         if(!empty($this->input->post('marca', TRUE))){
             $dados['marca'] = $this->input->post('marca', TRUE);
         }
 
         $dados = array(
             'nome' => $nome,
-            'valor' => $valor,
-            'quantidade' => $quantidade
+            'valor' => $valor
         );  
 
         if($this->ProdutoModel->EditarProduto($dados, $id)){
@@ -90,8 +82,6 @@ class ProdutoController extends CI_Controller {
             $this->session->set_flashdata('status', 2);
             redirect("ProdutoController/loadVisualizaProduto");
         }    
-
-
     }
 
     public function loadVisualizaProduto(){
@@ -131,14 +121,10 @@ class ProdutoController extends CI_Controller {
         $idEmpresa = $this->session->userdata('emp');
 
         $nome = $this->input->post('nome', TRUE);
-        $valor = $this->input->post('valor', TRUE);
-        $quantidade = $this->input->post('quantidade', TRUE);
         $marca = $this->input->post('marca', TRUE);
 
         $dados = array(
             'nome' => $nome,
-            'valor' => $valor,
-            'quantidade' => $quantidade,
             'marca' => $marca
         );  
         $idProduto = $this->ProdutoModel->CadastrarProduto($dados); /* Se a inserção estiver OK retorna o valor da id */

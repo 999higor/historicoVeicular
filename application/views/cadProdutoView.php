@@ -2,38 +2,22 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Registrar um Produto</div>
       <div class="card-body">
-        <form method="POST" action="<?php echo base_url();?>index.php/ProdutoController/CadastrarProduto">   
-            <div class="form-group">
-                <div class="form-label-group">
-                  <input type="text" id="nome" class="form-control" placeholder="Nome" name="nome" autofocus required>
-                  <label for="nome">Nome</label>
-                </div>            
-            </div>
-            <div class="form-group">
-                <div class="form-label-group">
-                  <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" value="Não definida">
-                  <label for="marca">Marca</label>
-                </div>
-              </div>
-            <div class="form-group">
-                <div class="form-row">
-                  <div class="col-md-6">
+            <form method="POST" action="<?php echo base_url();?>index.php/ProdutoController/CadastrarProduto">   
+                <div class="form-group">
                     <div class="form-label-group">
-                      <input type="number" id="quantidade" class="form-control" placeholder="Quantidade" value="1" name="quantidade" required>
-                      <label for="quantidade">Quantidade</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-label-group">
-                      <input type="text" id="valor" class="form-control" placeholder="Preço" name="valor" required>
-                      <label for="valor">Preço</label>
-                    </div>
-                  </div>
+                      <input type="text" id="nome" class="form-control" placeholder="Nome" name="nome" autofocus required>
+                      <label for="nome">Nome</label>
+                    </div>            
                 </div>
-              </div>         
-            <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="input" class="text-center">   
-        </form>
-        <div class="text-center">
+                <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" id="marca" class="form-control" placeholder="Marca" name="marca" value="Não definida">
+                      <label for="marca">Marca</label>
+                    </div>
+                </div>        
+              <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="input" class="text-center">   
+            </form>
+          <div class="text-center">
         </div>
       </div>
     </div>

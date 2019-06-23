@@ -24,7 +24,7 @@ class ManutencaoController extends CI_Controller {
         $data['servico'] = $this->CarregaCBServico();
 
         $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
-        $this->load->view('cadManutencaoView', $data);
+        $this->load->view('cadManutencaoUsuarioView', $data);
         $this->load->view('templates/footerView');
     }
 
@@ -51,5 +51,15 @@ class ManutencaoController extends CI_Controller {
             return $data;
         }else
             return false;
+    }
+
+    public function CadastraManutencaoUsuario(){
+        $idEmpresa = $this->session->userdata('emp');
+
+        $nome = $this->input->post('nome', TRUE);
+        $valor = $this->input->post('valor', TRUE);
+        $quantidade = $this->input->post('quantidade', TRUE);
+        $marca = $this->input->post('marca', TRUE);
+
     }
 }

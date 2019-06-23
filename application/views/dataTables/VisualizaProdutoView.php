@@ -16,8 +16,6 @@
                       <tr>
                         <th>Nome</th>
                         <th>Marca</th>
-                        <th>Quantidade</th>     
-                        <th>Valor</th>
                         <th></th>                           
                         <th></th>                                  
                       </tr>
@@ -25,9 +23,7 @@
                     <tfoot>
                       <tr>
                         <th>Nome</th>
-                        <th>Marca</th>
-                        <th>Quantidade</th>     
-                        <th>Valor</th>     
+                        <th>Marca</th> 
                         <th></th>                           
                         <th></th>    
                       </tr>
@@ -38,8 +34,6 @@
                           echo '<tr>
                                   <td>'.$dados['nome'].'</td>
                                   <td>'.$dados['marca'].'</td>
-                                  <td>'.$dados['quantidade'].'</td>
-                                  <td>'.$dados['valor'].'</td>
                                   <td><a href="'.base_url().'index.php/ProdutoController/loadEditarProduto?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
                                   <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                                 </tr>';

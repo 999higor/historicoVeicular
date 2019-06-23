@@ -1,4 +1,5 @@
 <link href="<?php echo base_url()?>assets/vendor/datepicker/css/daterangepicker.css" rel="stylesheet">
+
 <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Solicitar uma Manutenção</div>
@@ -8,11 +9,11 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <label class="control-label" for="date">Data estimada (Inicio)</label>
-                        <input type="text" class=" form-control"  value="" id="dataInicio" name="dataInicio" /> 
+                        <input type="text" class="form-control"  id="dataInicio" name="dataInicio"/> 
                     </div>
                     <div class="col-md-6">
                         <label class="control-label" for="date">Data estimada (Final)</label>
-                        <input type="text" class=" form-control"  value="" id="dataFim" name="dataFim" /> 
+                        <input type="text" class="form-control" id="dataFim" name="dataFim"/> 
                     </div>
                 </div>
             </div>
@@ -34,7 +35,7 @@
                     <select id="selectbasic" name="selectbasic" class="form-control">
                     <?php
                         foreach($veiculo as $dados){
-                            echo '<option value="'.$dados['id'].'">'.$dados['modelo'].' ___ PLACA: ' .$dados['placa'].'</option>';
+                            echo '<option value="'.$dados['id'].'">'.$dados['modelo'].' | PLACA: ' .$dados['placa'].'</option>';
                         }
                      ?>   
                     </select>
@@ -59,8 +60,12 @@
     </div>
   </div>
 </div>
+
+<!-- Arquivos js necessários para o datePicker e a configuração -->
+<script src="<?php echo base_url()?>assets/vendor/datepicker/js/moment.min.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/datepicker/js/datepicker.js"></script>
 <script>
-    $(function() {          
+    $(function(){          
         $('#dataInicio , #dataFim').daterangepicker({
             "singleDatePicker": true,
             "startDate": new Date(),
@@ -99,12 +104,10 @@
                     "Novembro",
                     "Dezembro"
                 ]
-            },
+            }
         }, function(start, end, label) {
         console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
         });
     });
 </script>
 
-<script src="<?php echo base_url()?>assets/vendor/datepicker/js/moment.min.js"></script>
-<script src="<?php echo base_url()?>assets/vendor/datepicker/js/daterangepicker.js"></script>
