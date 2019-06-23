@@ -36,4 +36,45 @@ class ManutencaoModel extends CI_Model {
         }else
             return false;
     }
+
+    public function CadastrarManutencao($dados){
+        if($this->db->insert('manutencao',$dados)){
+            return $this->db->insert_id();
+        }else
+            return false;
+    }
+
+    public function InsereServicoManutencao($idManutencao, $idServico){
+        $dados = array('idmanutencao' => $idManutencao, 'idservico' => $idServico);
+        if($this->db->insert('servico_manutencao',$dados)){
+            return true;
+        }else
+            return false;
+    }
+
+    public function PopulaTabelaManutencaoUsuario($idUsuario){
+        $this->db->select('manutencao.*,ifnull(manutencao.dthrConfirmacao, "Não definida") as dataConfirmacao,ifnull(manutencao.dataAtribuida, "Não definida") as dataAgendada,if(realizado=0,"Pendente", "Em Avaliação / Iniciado") as status, veiculo.modelo as modeloVeiculo, veiculo.placa as placaVeiculo, empresa.nomeFantasia as nomeEmpresa');
+        $this->db->from('manutencao');
+        $this->db->join('veiculo', 'veiculo.id = manutencao.idveiculo');
+        $this->db->join('empresa', 'empresa.id = manutencao.idempresa');
+        $this->db->where('manutencao.idusuario', $idUsuario);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
+    
+//         id 
+// idveiculo -- veiculo.modelo, veiculo.placa
+// idempresa -- empresa nomefantasia
+// dthrSolicitacao 
+// dthrConfirmacao if null = nao definida
+// dthrUltimaModificacao 
+// dataInicial
+// dataFinal
+// dataAtribuida if null = nao definida
+// realizado if 0 = Em avaliação
+        
 }

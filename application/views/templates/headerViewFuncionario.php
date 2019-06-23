@@ -126,7 +126,7 @@
             <span>Manutenção</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownManutencao">
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/..">Visualizar Manutenções</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadVizualizaManutencaoUsuario">Visualizar Manutenções</a>
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadCadastraManutencao">Cadastrar Manutenção</a>
           </div>
       </li>
