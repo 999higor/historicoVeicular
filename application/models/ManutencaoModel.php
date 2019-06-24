@@ -108,9 +108,17 @@ class ManutencaoModel extends CI_Model {
 
     }
 
-    public function UpdateManutencaoFuncionario($idManutencao, $dados){
+    public function UpdateManutencaoFuncionario($dados, $idManutencao){
         $this->db->where('id',$idManutencao);
-        if($this->db->update('servico',$dados)){
+        $this->db->set('dthrConfirmacao', 'NOW()', FALSE);
+        if($this->db->update('manutencao',$dados)){
+            return true;
+        }else
+            return false;
+    }
+
+    public function InsereManutencaoProdutoFuncionario($idManutencao, $idProduto){
+        if($this->db->insert('produto_manutencao', array('idmanutencao' => $idManutencao, 'idProduto' => $idProduto))){
             return true;
         }else
             return false;

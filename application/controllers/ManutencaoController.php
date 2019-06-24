@@ -185,33 +185,35 @@ class ManutencaoController extends CI_Controller {
 
     public function EditarManutencaoFuncionario(){
         $idFuncionario = $this->session->userdata('id');
-        $contagem = $this->input->post('contagem', TRUE);
+        $contagem = $this->input->post('hiddenCount', TRUE);
         $idManutencao = $this->input->post('idManutencao', TRUE);
         $dataAtribuida = $this->input->post('dataAtribuida', TRUE);
+        /* */ $dataAtribuida = date("Y-m-d", strtotime($dataAtribuida)); /* converte pro formato yyyy-mm-dd */
         $dados = array('dataAtribuida' => $dataAtribuida,
-                       'status' => 1,
+                       'realizado' => 1,
                        'idFuncionario' => $idFuncionario
         );
 
         if($contagem != 0){    
-            for($i=1; $i < $contagem;$i++){
+            for($i=1; $i <= $contagem;$i++){
                 ${'selectProduto'.$i} = $this->input->post('selectProduto'.$i, TRUE);            
             }
         }
         
-        if($this->ManutencaoModel->UpdateManutencaoFuncionario($dados, $id)){
+        if($this->ManutencaoModel->UpdateManutencaoFuncionario($dados, $idManutencao)){
             if($contagem != 0){    
                 for($i = 1; $i <= $contagem; $i++){
-                        if($idManutencao = $this->ManutencaoModel->ManutencaoInsereProdutoFuncionario($idManutencao, ${'selectServico'.$i})){
-                            $this->session->set_flashdata('message', 'Manutenção atualizada com sucesso.');
-                            $this->session->set_flashdata('status', 1);
-                            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                        if($idManutencao = $this->ManutencaoModel->InsereManutencaoProdutoFuncionario($idManutencao, ${'selectProduto'.$i})){
+                            //Inserido com sucesso
                         }else{
                             $data = array("message" => "Houve algum erro ao inserir o produto a esta manutenção.", "status" => 3);
                             $this->session->set_flashdata('status', 2);
                             redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
                         }
                     }
+                    $this->session->set_flashdata('message', 'Manutenção atualizada com sucesso.');
+                    $this->session->set_flashdata('status', 1);
+                    redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
             }
         }else{
             $data = array("message" => "Houve algum erro ao alterar a manutenção.", "status" => 3);

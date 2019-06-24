@@ -3,10 +3,10 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Alterar Manutenção</div>
       <div class="card-body">
-      <form method="get" action="#">
+      <form method="post" action="<?php echo base_url();?>index.php/ManutencaoController/EditarManutencaoFuncionario">
         <input hidden name="hiddenCount" id="hiddenCount" value="#">
         <input hidden name="dtInicio" id="dtInicio" value="<?php echo $dados['dataInicial'];?>">
-        <input hidden name="dtFinal" id="dtFinal" value="<?php echo $dados['dataFinal'];?>">idManutencao
+        <input hidden name="dtFinal" id="dtFinal" value="<?php echo $dados['dataFinal'];?>">
         <input hidden name="idManutencao" id="idManutencao" value="<?php echo $dados['idManutencao'];?>">
         <div class="form-group">
             <div class="row">
