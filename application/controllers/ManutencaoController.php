@@ -31,6 +31,8 @@ class ManutencaoController extends CI_Controller {
     public function loadEditaManutencaoFuncionario(){
         $idManutencao = $this->input->get('id');
         $data['produto'] = $this->CarregaCBProduto();
+        $data['servico']= $this->ManutencaoModel->PopulaServicoEditarManutencao($idManutencao);
+        $data['produtosCadastrados'] =$this->ManutencaoModel->PopulaProdutoEditarManutencao($idManutencao);
 
         /*  Faz a busca no banco e coloca em um array */        
         foreach ($this->ManutencaoModel->PopulaEditarManutencaoFunc($idManutencao) as $dados)
@@ -89,7 +91,6 @@ class ManutencaoController extends CI_Controller {
     }
 
     public function loadVisualizaManutencaoFuncionario(){
-
         $idEmpresa = $this->session->userdata('emp');
         $data['manutencao'] = $this->ManutencaoModel->PopulaTabelaManutencaoFuncionario($idEmpresa);
         /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
@@ -152,7 +153,7 @@ class ManutencaoController extends CI_Controller {
         $selectEmpresa = $this->input->post('selectEmpresa', TRUE);
         $selectVeiculo = $this->input->post('selectVeiculo', TRUE);
         
-        for($i=0; $i < $contagem;$i++){
+        for($i=0; $i <= $contagem;$i++){
             ${'selectServico'.$i} = $this->input->post('selectServico'.$i, TRUE);            
         }
 
@@ -193,32 +194,30 @@ class ManutencaoController extends CI_Controller {
                        'realizado' => 1,
                        'idFuncionario' => $idFuncionario
         );
-
         if($contagem != 0){    
             for($i=1; $i <= $contagem;$i++){
                 ${'selectProduto'.$i} = $this->input->post('selectProduto'.$i, TRUE);            
             }
-        }
-        
+        }    
         if($this->ManutencaoModel->UpdateManutencaoFuncionario($dados, $idManutencao)){
             if($contagem != 0){    
                 for($i = 1; $i <= $contagem; $i++){
-                        if($idManutencao = $this->ManutencaoModel->InsereManutencaoProdutoFuncionario($idManutencao, ${'selectProduto'.$i})){
+                        if($this->ManutencaoModel->InsereManutencaoProdutoFuncionario($idManutencao, ${'selectProduto'.$i})){
                             //Inserido com sucesso
                         }else{
                             $data = array("message" => "Houve algum erro ao inserir o produto a esta manutenção.", "status" => 3);
                             $this->session->set_flashdata('status', 2);
-                            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                            redirect("ManutencaoController/loadVisualizaManutencaoFuncionario");
                         }
                     }
                     $this->session->set_flashdata('message', 'Manutenção atualizada com sucesso.');
                     $this->session->set_flashdata('status', 1);
-                    redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                    redirect("ManutencaoController/loadVisualizaManutencaoFuncionario");
             }
         }else{
             $data = array("message" => "Houve algum erro ao alterar a manutenção.", "status" => 3);
             $this->session->set_flashdata('status', 2);
-            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+            redirect("ManutencaoController/loadVisualizaManutencaoFuncionario");
         }
     }
 }

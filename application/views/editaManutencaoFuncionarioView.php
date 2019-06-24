@@ -1,3 +1,4 @@
+<?php $ultimaAlteração = date("d/m/Y H:i:s", strtotime($dados['ultimaModificacao']));?>
 <link href="<?php echo base_url()?>assets/vendor/datepicker/css/daterangepicker.css" rel="stylesheet">
 <div class="container">
     <div class="card card-register mx-auto mt-5">
@@ -45,6 +46,50 @@
                 </div>
             </div>
 
+            <!-- Data Table Serviço -->
+            <!-- <div class="form-group servicoHidden" style="display:none">
+                <table id="servico" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome do Serviço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        // foreach($servico as $dados){
+                        //     echo '<tr>
+                        //               <td>'.$dados['id'].'</td>
+                        //               <td>'.$dados['nome'].'</td>
+                        //           <tr>';
+                        // }
+                    ?>
+                    </tbody>
+                </table>
+            </div> -->
+            <!-- Data Table Serviço
+            <div class="form-group">
+                <table id="servico" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome do Produto</th>
+                            <th>Marca do Produto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        // foreach($produtosCadastrados as $dados){
+                        //     echo '<tr>
+                        //               <td>'.$dados['id'].'</td>
+                        //               <td>'.$dados['nome'].'</td>
+                        //           <tr>';
+                        // }
+                    ?>
+                    </tbody>
+                </table>
+            </div> -->
+
             <!-- Elemento que será clonado -->
             <div class="elemento-clonado form-group" style="display:none">
                 <b><label for="cbproduto">Selecione um produto</label></b>
@@ -52,7 +97,7 @@
                     <div class="col-md-11">
                             <select id="selectProduto" name="#" class="browser-default custom-select">
                             <?php
-                                $ult = $dados['ultimaModificacao'];
+                                
                                 foreach($produto as $dados){
                                     echo '<option value="'.$dados['id'].'">'.$dados['nome'].'</option>';
                                 }
@@ -74,12 +119,12 @@
                 </div>  
             </div>
             <div class="text-center">
-                <input class="btn btn-primary" type="submit" name="submit">
+                <input class="btn btn-secondary" value="Alterar Manutenção" type="submit" name="submit">
             </div>
         </form>
        <div class="text-center">
        <hr>
-       <label>Última modificação feita em: <b><?php echo $ult;?></b></label>
+       <label>Última modificação feita em: <b><?php echo $ultimaAlteração;?></b></label>
       </div>
     </div>
   </div>
@@ -151,10 +196,6 @@
         $('.elemento-clonado').first().clone().appendTo('.impressao-clonagem').show(); /* clona a div */
         $('select').last().attr('name', 'selectProduto'+count); /* no ultimo select o valor vai ser alterado utilizando a contagem */
         $('.remove-paragrafo').hide();
-    }); 
+    });
 });
-
-
-
-
 </script>

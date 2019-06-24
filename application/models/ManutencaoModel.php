@@ -94,6 +94,32 @@ class ManutencaoModel extends CI_Model {
             return false;
     }
 
+    public function PopulaServicoEditarManutencao($idManutencao){
+        $this->db->select('servico.nome, servico.id');
+        $this->db->from('servico');
+        $this->db->join('servico_manutencao', 'servico_manutencao.idservico = servico.id');
+        $this->db->where('servico_manutencao.idmanutencao', $idManutencao);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
+
+    public function PopulaProdutoEditarManutencao($idManutencao){
+        $this->db->select('produto.nome, produto.id, produto.marca, produto_manutencao.valor');
+        $this->db->from('produto');
+        $this->db->join('produto_manutencao', 'produto_manutencao.idproduto = produto.id');
+        $this->db->where('produto_manutencao.idmanutencao', $idManutencao);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
+
     public function CarregaCBProduto($idEmpresa){
         $this->db->select('*');
         $this->db->from('produto');
