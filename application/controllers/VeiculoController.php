@@ -59,7 +59,7 @@ class VeiculoController extends CI_Controller {
             $modelo = $dados['modelo'];
             $anoModelo = $dados['anoModelo'];
             $ano = $dados['anoFabricacao'];
-            $idCliente = $dados['idCliente'];
+            $cliente = $dados['idcliente'];
         }
 
         $data = array(
@@ -70,7 +70,7 @@ class VeiculoController extends CI_Controller {
             'modelo' => $modelo,
             'anoModelo' => $anoModelo,
             'anoFabricacao' => $ano,
-            'idCliente' => $idCliente
+            'idCliente' => $cliente
             );
 
         return $data;
@@ -84,8 +84,6 @@ class VeiculoController extends CI_Controller {
         $anoModelo = $this->input->post('anoModelo');
         $modelo = $this->input->post('modelo');
         $ano = $this->input->post('anoFabricacao');
-        
-
 
         $dados = array(
             'placa' => $placa,

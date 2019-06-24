@@ -22,6 +22,7 @@ class VeiculoModel extends CI_Model {
         }else
             return false;
     }
+    
     public function EditarVeiculo($dados, $id){
         $this->db->where('id',$id);
         if($this->db->update('veiculo',$dados)){
