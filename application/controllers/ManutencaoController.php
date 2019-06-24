@@ -168,15 +168,18 @@ class ManutencaoController extends CI_Controller {
         if($idManutencao != FALSE){
             for($i=0; $i < $contagem;$i++){
                 if($this->ManutencaoModel->InsereServicoManutencao($idManutencao, ${'selectServico'.$i})){
-                    $this->session->set_flashdata('message', 'Manutenção cadastrada com sucesso.');
-                    $this->session->set_flashdata('status', 1);
-                    redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                    // $this->session->set_flashdata('message', 'Manutenção cadastrada com sucesso.');
+                    // $this->session->set_flashdata('status', 1);
+                    // redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
                 }else{
                     $data = array("message" => "Houve algum erro ao cadastrar a manutenção.", "status" => 3);
                     $this->session->set_flashdata('status', 2);
                     redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
                 }
              }
+              $this->session->set_flashdata('message', 'Manutenção cadastrada com sucesso.');
+              $this->session->set_flashdata('status', 1);
+              redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
         }else{
             $data = array("message" => "Houve algum erro ao cadastrar a manutenção.", "status" => 3);
             $this->session->set_flashdata('status', 2);

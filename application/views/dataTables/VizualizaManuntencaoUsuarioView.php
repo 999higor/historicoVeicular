@@ -36,8 +36,8 @@
                         <td>'.$dados['dataAgendada'].'</td>
                         <td>'.$dados['dthrUltimaModificacao'].'</td>
                         <td>'.$dados['status'].'</td>
-                        <td><a href="'.base_url().'index.php/ManutencaoController/loadVisualizaManutencoes?id='.$dados['id'].'"><i class="fa fa-eye"></i></a></td>                              
-                        <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
+                        <td></td>                              
+                        <td></td>
                     </tr>';
             }
             ?> 
@@ -65,7 +65,7 @@
                 <input type="hidden" id="id" name="id" value="#">
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input class="btn btn-primary " type="submit" value="Enviar" name="input" class="text-center">   
+                    <input  class=" btn btn-primary" type="submit" value="Enviar" name="input" class="text-center" disable>   
                 </div>
             </form>
             </div>
@@ -96,9 +96,9 @@
 
       /* quando o modal é aberto ativa a função */
       $('#deleteModal').on('show.bs.modal', function(e) {
-                    /* pega o valor de ID pela tag data-id no link */
-                    var idProduto = $(e.relatedTarget).data('id');
-                    /* preenche o valor do campo hidden id com o valor idServico obtido anteriormente */ 
-                    $(e.currentTarget).find('input[name="id"]').val(idProduto);
-                });
+          /* pega o valor de ID pela tag data-id no link */
+          var idProduto = $(e.relatedTarget).data('id');
+          /* preenche o valor do campo hidden id com o valor idServico obtido anteriormente */ 
+          $(e.currentTarget).find('input[name="id"]').val(idProduto);
+      });
   </script>
