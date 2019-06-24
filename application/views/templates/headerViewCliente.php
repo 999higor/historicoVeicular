@@ -26,22 +26,15 @@
 </head>
 <body id="page-top">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/MainController">Nome do Software</a>
+    <a class="navbar-brand mr-1" href="#"><b>SisVar</b> .Admin</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
     <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+    <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <label style="color: white"><b>Cliente</b></label>
+    </div>
 
     <!-- Navbar -->
     
@@ -134,14 +127,15 @@
 
       <li class="nav-item active">
           <a class="nav-link dropdown-toggle" id="dropdownManutencao" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-dolly-flatbed"></i>
+            <i class="fas fa-cogs"></i>
             <span>Manutenção</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownManutencao">
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/..">Visualizar Manutenções</a>
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadCadastraManutencao">Cadastrar Manutenção</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadVizualizaManutencaoUsuario">Visualizar Manutenções</a>
+            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadCadastraManutencaoUsuario">Cadastrar Manutenção</a>
           </div>
       </li>
+    </ul>
 
     </ul>
     <div id="content-wrapper">

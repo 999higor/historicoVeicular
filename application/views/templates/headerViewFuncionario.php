@@ -26,7 +26,7 @@
 </head>
 <body id="page-top">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="<?php echo base_url();?>index.php/MainController"><b>Software</b> .Admin</a>
+    <a class="navbar-brand mr-1" href="#"><b>SisVar</b> .Admin</a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
@@ -126,8 +126,8 @@
             <span>Manutenção</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownManutencao">
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadVizualizaManutencaoUsuario">Visualizar Manutenções</a>
-            <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadCadastraManutencaoUsuario">Cadastrar Manutenção</a>
+            <!-- <a class="dropdown-item" href="<?php //echo base_url();?>index.php/ManutencaoController/loadVizualizaManutencaoUsuario">Visualizar Manutenções</a>
+            <a class="dropdown-item" href="<?php //echo base_url();?>index.php/ManutencaoController/loadCadastraManutencaoUsuario">Cadastrar Manutenção</a> -->
             <a class="dropdown-item" href="<?php echo base_url();?>index.php/ManutencaoController/loadVisualizaManutencaoFuncionario">Visualiza Manutenção Func</a>
           </div>
       </li>

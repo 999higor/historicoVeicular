@@ -58,6 +58,7 @@ class ManutencaoModel extends CI_Model {
         $this->db->join('veiculo', 'veiculo.id = manutencao.idveiculo');
         $this->db->join('empresa', 'empresa.id = manutencao.idempresa');
         $this->db->where('manutencao.idusuario', $idUsuario);
+        $this->db->order_by("manutencao.dthrSolicitacao", "ASC");
         $query = $this->db->get();
 
         if($query->num_rows() > 0){
@@ -72,6 +73,7 @@ class ManutencaoModel extends CI_Model {
         $this->db->join('veiculo', 'veiculo.id = manutencao.idveiculo');
         $this->db->join('empresa', 'empresa.id = manutencao.idempresa');
         $this->db->where('manutencao.idEmpresa', $idEmpresa);
+        $this->db->order_by("manutencao.dthrSolicitacao", "ASC");
         $query = $this->db->get();
 
         if($query->num_rows() > 0){

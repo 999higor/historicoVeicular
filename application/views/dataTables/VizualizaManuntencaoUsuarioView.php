@@ -8,7 +8,7 @@
 ?>   
 <div class='card-header'>
   <i class='fas fa-table'></i>
-  Manutenções cadastradas para seus veículos<b><?php echo $this->session->userdata('nome');?></b> </div>
+  Manutenções cadastradas para o usuário <b><?php echo $this->session->userdata('nome')."".$this->session->userdata('sobrenome');?></b> </div>
     <div class='card-body'>
       <div class='table-responsive'>
         <table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>

@@ -36,7 +36,7 @@
                         <td>'.$dados['dataAgendada'].'</td>
                         <td>'.$dados['dthrUltimaModificacao'].'</td>
                         <td>'.$dados['status'].'</td>
-                        <td><a href="'.base_url().'index.php/ManutencaoController/loadEditaManutencaoFuncionario?id='.$dados['id'].'"><i class="fa fa-eye"></i></a></td>                              
+                        <td><a href="'.base_url().'index.php/ManutencaoController/loadEditaManutencaoFuncionario?id='.$dados['id'].'"><i class="fa fa-edit"></i></a></td>                              
                         <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                     </tr>';
             }
