@@ -108,6 +108,14 @@ class ManutencaoModel extends CI_Model {
 
     }
 
+    public function UpdateManutencaoFuncionario($idManutencao, $dados){
+        $this->db->where('id',$idManutencao);
+        if($this->db->update('servico',$dados)){
+            return true;
+        }else
+            return false;
+    }
+
     
 //         id 
 // idveiculo -- veiculo.modelo, veiculo.placa

@@ -35,6 +35,7 @@ class ManutencaoController extends CI_Controller {
         /*  Faz a busca no banco e coloca em um array */        
         foreach ($this->ManutencaoModel->PopulaEditarManutencaoFunc($idManutencao) as $dados)
         {
+            $idManutencao = $dados['id'];
             $modeloVeiculo =  $dados['modeloVeiculo'];
             $placaVeiculo = $dados['placaVeiculo'];
             $dthrSolicitacao = $dados['dthrSolicitacao'];
@@ -45,11 +46,12 @@ class ManutencaoController extends CI_Controller {
             $realizado = $dados['status'];
             $nome = $dados['nome'];
             $sobrenome= $dados['sobrenome'];
-            $statusid = $dados['status'];
             $ultimaModificacao = $dados['dthrUltimaModificacao'];
         }
 
-        $data['dados'] = array( 'dataInicial' => $dataInicial,
+        $data['dados'] = array( 
+                        'idManutencao' => $idManutencao,
+                        'dataInicial' => $dataInicial,
                         'dataFinal' => $dataFinal,
                         'modeloVeiculo' => $modeloVeiculo,
                         'placaVeiculo' => $placaVeiculo,
@@ -65,7 +67,7 @@ class ManutencaoController extends CI_Controller {
         $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
         $this->load->view('editaManutencaoFuncionarioView', $data);
         $this->load->view('templates/footerView');
-        }
+    }
 
     public function loadVizualizaManutencaoUsuario(){
         $id = $this->session->userdata('id');
@@ -176,6 +178,43 @@ class ManutencaoController extends CI_Controller {
              }
         }else{
             $data = array("message" => "Houve algum erro ao cadastrar a manutenção.", "status" => 3);
+            $this->session->set_flashdata('status', 2);
+            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+        }
+    }
+
+    public function EditarManutencaoFuncionario(){
+        $idFuncionario = $this->session->userdata('id');
+        $contagem = $this->input->post('contagem', TRUE);
+        $idManutencao = $this->input->post('idManutencao', TRUE);
+        $dataAtribuida = $this->input->post('dataAtribuida', TRUE);
+        $dados = array('dataAtribuida' => $dataAtribuida,
+                       'status' => 1,
+                       'idFuncionario' => $idFuncionario
+        );
+
+        if($contagem != 0){    
+            for($i=1; $i < $contagem;$i++){
+                ${'selectProduto'.$i} = $this->input->post('selectProduto'.$i, TRUE);            
+            }
+        }
+        
+        if($this->ManutencaoModel->UpdateManutencaoFuncionario($dados, $id)){
+            if($contagem != 0){    
+                for($i = 1; $i <= $contagem; $i++){
+                        if($idManutencao = $this->ManutencaoModel->ManutencaoInsereProdutoFuncionario($idManutencao, ${'selectServico'.$i})){
+                            $this->session->set_flashdata('message', 'Manutenção atualizada com sucesso.');
+                            $this->session->set_flashdata('status', 1);
+                            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                        }else{
+                            $data = array("message" => "Houve algum erro ao inserir o produto a esta manutenção.", "status" => 3);
+                            $this->session->set_flashdata('status', 2);
+                            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                        }
+                    }
+            }
+        }else{
+            $data = array("message" => "Houve algum erro ao alterar a manutenção.", "status" => 3);
             $this->session->set_flashdata('status', 2);
             redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
         }
