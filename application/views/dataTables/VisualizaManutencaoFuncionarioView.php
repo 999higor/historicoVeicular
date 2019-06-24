@@ -8,7 +8,7 @@
 ?>   
 <div class='card-header'>
   <i class='fas fa-table'></i>
-  Manutenções cadastradas para seus veículos<b><?php echo $this->session->userdata('nome');?></b> </div>
+  Manutenções cadastradas para a empresa <b><?php echo $this->session->userdata('nomeEmpresa');?></b> </div>
     <div class='card-body'>
       <div class='table-responsive'>
         <table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>
@@ -36,7 +36,7 @@
                         <td>'.$dados['dataAgendada'].'</td>
                         <td>'.$dados['dthrUltimaModificacao'].'</td>
                         <td>'.$dados['status'].'</td>
-                        <td><a href="'.base_url().'index.php/ManutencaoController/loadVisualizaManutencoes?id='.$dados['id'].'"><i class="fa fa-eye"></i></a></td>                              
+                        <td><a href="'.base_url().'index.php/ManutencaoController/loadEditaManutencaoFuncionario?id='.$dados['id'].'"><i class="fa fa-eye"></i></a></td>                              
                         <td><a href="#" data-id="'.$dados['id'].'" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a></td>
                     </tr>';
             }

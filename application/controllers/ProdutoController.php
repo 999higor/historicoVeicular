@@ -45,7 +45,7 @@ class ProdutoController extends CI_Controller {
         }
     }
 
-    public function PopulaCamposViewEditarProduto($idProduto){
+    public function loadEditaManutencaoFuncionario($idProduto){
         /*  Faz a busca no banco e coloca em um array */
         foreach ($this->ProdutoModel->PopulaCamposViewEditarProduto($idProduto) as $dados)
         {

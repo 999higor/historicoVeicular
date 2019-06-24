@@ -65,6 +65,49 @@ class ManutencaoModel extends CI_Model {
         }else
             return false;
     }
+
+    public function PopulaTabelaManutencaoFuncionario($idEmpresa){
+        $this->db->select('manutencao.*,ifnull(manutencao.dthrConfirmacao, "Não definida") as dataConfirmacao,ifnull(manutencao.dataAtribuida, "Não definida") as dataAgendada,if(realizado=0,"Pendente", "Em Avaliação / Iniciado") as status, veiculo.modelo as modeloVeiculo, veiculo.placa as placaVeiculo, empresa.nomeFantasia as nomeEmpresa');
+        $this->db->from('manutencao');
+        $this->db->join('veiculo', 'veiculo.id = manutencao.idveiculo');
+        $this->db->join('empresa', 'empresa.id = manutencao.idempresa');
+        $this->db->where('manutencao.idEmpresa', $idEmpresa);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
+
+    public function PopulaEditarManutencaoFunc($idManutencao){
+        $this->db->select('manutencao.*,ifnull(manutencao.dthrConfirmacao, "Não definida") as dataConfirmacao,ifnull(manutencao.dataAtribuida, "Não definida") as dataAgendada,if(realizado=0,"Pendente", "Em Avaliação / Iniciado") as status,cliente.nome,cliente.sobrenome, veiculo.modelo as modeloVeiculo, veiculo.placa as placaVeiculo');
+        $this->db->from('manutencao');
+        $this->db->join('veiculo', 'veiculo.id = manutencao.idveiculo');
+        $this->db->join('cliente', 'cliente.id = manutencao.idusuario');
+        $this->db->where('manutencao.id', $idManutencao);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+    }
+
+    public function CarregaCBProduto($idEmpresa){
+        $this->db->select('*');
+        $this->db->from('produto');
+        $this->db->join('produto_empresa', 'produto_empresa.idproduto = produto.id');
+        $this->db->where('produto_empresa.idempresa', $idEmpresa);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            return $query->result_array();
+        }else
+            return false;
+
+    }
+
     
 //         id 
 // idveiculo -- veiculo.modelo, veiculo.placa

@@ -18,7 +18,7 @@ class ManutencaoController extends CI_Controller {
         }
     }
 
-    public function loadCadastraManutencao(){
+    public function loadCadastraManutencaoUsuario(){
         $data['empresa'] = $this->CarregaCBEmpresa();
         $data['veiculo']= $this->CarregaCBVeiculo();
         $data['servico'] = $this->CarregaCBServico();
@@ -27,6 +27,45 @@ class ManutencaoController extends CI_Controller {
         $this->load->view('cadManutencaoUsuarioView', $data);
         $this->load->view('templates/footerView');
     }
+
+    public function loadEditaManutencaoFuncionario(){
+        $idManutencao = $this->input->get('id');
+        $data['produto'] = $this->CarregaCBProduto();
+
+        /*  Faz a busca no banco e coloca em um array */        
+        foreach ($this->ManutencaoModel->PopulaEditarManutencaoFunc($idManutencao) as $dados)
+        {
+            $modeloVeiculo =  $dados['modeloVeiculo'];
+            $placaVeiculo = $dados['placaVeiculo'];
+            $dthrSolicitacao = $dados['dthrSolicitacao'];
+            $dthrConfirmacao = $dados['dataConfirmacao'];
+            $dataInicial = $dados['dataInicial'];
+            $dataFinal = $dados['dataFinal'];
+            $dataAtribuida = $dados['dataAgendada'];
+            $realizado = $dados['status'];
+            $nome = $dados['nome'];
+            $sobrenome= $dados['sobrenome'];
+            $statusid = $dados['status'];
+            $ultimaModificacao = $dados['dthrUltimaModificacao'];
+        }
+
+        $data['dados'] = array( 'dataInicial' => $dataInicial,
+                        'dataFinal' => $dataFinal,
+                        'modeloVeiculo' => $modeloVeiculo,
+                        'placaVeiculo' => $placaVeiculo,
+                        'dthrSolicitacao' => $dthrSolicitacao,
+                        'dthrConfirmacao' => $dthrSolicitacao,
+                        'dataAtribuida' => $dataAtribuida,
+                        'realizado' => $realizado,
+                        'nomeSolicitante' => $nome,
+                        'sobrenomeSolicitante' => $sobrenome ,
+                        'ultimaModificacao' => $ultimaModificacao  
+                        );
+
+        $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
+        $this->load->view('editaManutencaoFuncionarioView', $data);
+        $this->load->view('templates/footerView');
+        }
 
     public function loadVizualizaManutencaoUsuario(){
         $id = $this->session->userdata('id');
@@ -42,12 +81,42 @@ class ManutencaoController extends CI_Controller {
                     - Retorna mensagem para a tela principal                                                   */
             $data = array("message" => "Nenhuma manutenção cadastrado por esse usuário.", "status" => 3);
             $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
+            $this->load->view('DataTables/VizualizaManuntencaoUsuarioView');
+            $this->load->view('templates/footerView');
+        }
+    }
+
+    public function loadVisualizaManutencaoFuncionario(){
+
+        $idEmpresa = $this->session->userdata('emp');
+        $data['manutencao'] = $this->ManutencaoModel->PopulaTabelaManutencaoFuncionario($idEmpresa);
+        /* Chama o método populaTabela no Model, caso o retorno não for vazio carrega a tela principal com a tabela */
+        if(!empty($data['manutencao']))
+        {
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
+            $this->load->view('DataTables/VisualizaManutencaoFuncionarioView', $data);
+            $this->load->view('templates/footerView');
+        }else{
+            /* Se o renavam retornado do model for vazio significa que não existe nenhum registro para este usuário
+                    - Retorna mensagem para a tela principal                                                   */
+            $data = array("message" => "Nenhuma manutenção cadastrado por esse usuário.", "status" => 3);
+            $this->load->view('templates/headerView'.$this->session->userdata('nivelAcesso'));
             $this->load->view('templates/footerView');
         }
     }
 
     public function CarregaCBEmpresa(){
+        
         $data = $this->ManutencaoModel->CarregaCBEmpresa();
+        if(!empty($data)){
+            return $data;
+        }else
+            return false;
+    }
+
+    public function CarregaCBProduto(){
+        $idEmpresa = $this->session->userdata('emp');
+        $data = $this->ManutencaoModel->CarregaCBProduto($idEmpresa);
         if(!empty($data)){
             return $data;
         }else
@@ -73,11 +142,7 @@ class ManutencaoController extends CI_Controller {
 
     public function CadastraManutencaoUsuario(){
         $idUsuario = $this->session->userdata('id');
-        // $idEmpresa = $this->session->userdata('emp');
         $contagem = $this->input->post('contagem', TRUE);
-
-        echo $contagem;
-
         $dataInicio = $this->input->post('dataInicio', TRUE);
         /* */ $dataInicio = date("Y-m-d", strtotime($dataInicio)); /* converte pro formato yyyy-mm-dd */
         $dataFim = $this->input->post('dataFim', TRUE);
@@ -97,16 +162,22 @@ class ManutencaoController extends CI_Controller {
         );
 
         $idManutencao = $this->ManutencaoModel->CadastrarManutencao($dados); /* Se a inserção estiver OK retorna o valor da id */
-    
         if($idManutencao != FALSE){
-            echo 'inserido manutencao';
             for($i=0; $i < $contagem;$i++){
                 if($this->ManutencaoModel->InsereServicoManutencao($idManutencao, ${'selectServico'.$i})){
-                    echo 'servico manutencao inserido '.$i;
-                }else
-                    echo 'houve algum erro';      
+                    $this->session->set_flashdata('message', 'Manutenção cadastrada com sucesso.');
+                    $this->session->set_flashdata('status', 1);
+                    redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                }else{
+                    $data = array("message" => "Houve algum erro ao cadastrar a manutenção.", "status" => 3);
+                    $this->session->set_flashdata('status', 2);
+                    redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
+                }
+             }
+        }else{
+            $data = array("message" => "Houve algum erro ao cadastrar a manutenção.", "status" => 3);
+            $this->session->set_flashdata('status', 2);
+            redirect("ManutencaoController/loadVizualizaManutencaoUsuario");
         }
-    }else
-        echo 'deu algum erro';
     }
 }
